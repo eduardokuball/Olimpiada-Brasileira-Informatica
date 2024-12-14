@@ -1,0 +1,1 @@
+esse readme serve para fazer anotações sobre as questões
