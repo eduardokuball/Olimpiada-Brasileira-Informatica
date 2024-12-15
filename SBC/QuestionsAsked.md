@@ -1,15 +1,15 @@
-esse readme serve para guardar as questões feitas, em ordem cronológica
+esse readme serve para listar as questões que já foram resolvidas
+em ordem cronológica
+ano/título 8 questões feitas
+1996/círculos de chamada 
+2020/donuts sem número inteiro
+2021/kiara é um acrônimo recursivo 
+2022/viagen diárias 
+2022/quadrads vazios 
+2023/jogo do quadrado negro 
+2023/corrida de doces 
+2023/decifrando o wordwhiz 
 
-````js
 
-const questoes = [
-  { ano: 1996, titulo: "círculos de chamada" },
-  { ano: 2021, titulo: "kiara é um acrônimo recursivo" },
-  { ano: 2022, titulo: "viagens diárias" },
-  { ano: 2022, titulo: "quadrados vazios" },
-  { ano: 2023, titulo: "jogo do quadrado negro" },
-  { ano: 2023, titulo: "corrida de doces" },
-  { ano: 2023, titulo: "decifrando o wordwhiz" }
-];
 
 
