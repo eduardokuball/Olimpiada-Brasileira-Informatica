@@ -1,45 +1,46 @@
-let numberPlayers = Number(prompt('Digite a quantidade de jogadores'));
-let favouredPlayer = Number(prompt('Digite o jogador que começará com dois búzios'));
+Array.prototype.normalizeIndex = function(i) {
+    const normalized = i % this.length;
+    console.log(normalized);
+    
+    return normalized;
+};
 
-let buziosPlayers = Array(numberPlayers).fill(1); 
-buziosPlayers[favouredPlayer - 1] = 2; 
+Array.prototype.incrementRight = function(i, x=1) {
+    this[this.normalizeIndex(i)] -= x;
+    this[this.normalizeIndex(i+1)] += x;
+    console.log(this);
+};
 
-let turn = 1;
-let rounds = 0;
-let condition = true;
+const players = parseInt(prompt());
+const favPlayer = parseInt(prompt());
 
-while (condition) {
-    for (let i = 0; i < buziosPlayers.length; i++) {
-        if (buziosPlayers[i] <= 0) continue; 
+const buzios = Array(players).fill(1) || [];
+buzios[favPlayer-1]++;
 
-        let nextPlayer = (i + 1) % buziosPlayers.length; 
+let turns = 0;
 
-        if (turn % 2 !== 0) {
-            buziosPlayers[i] -= 1;
-            buziosPlayers[nextPlayer] += 1;
-        } else { 
-            if (buziosPlayers[i] > 1) {
-                buziosPlayers[i] -= 2;
-                buziosPlayers[nextPlayer] += 2;
-            } else {
-                buziosPlayers[i] -= 1;
-                buziosPlayers[nextPlayer] += 1;
-            }
+// [1, 2, 3, 4, 5]
+const playersInGame = Array.from({ length: players }, (_, i) => i + 1);
+
+function buziosLoop() {
+    for (let i = 0; i < buzios.length; i++) {
+        const playerBuzios = buzios[i];
+        const nextPlayerBuzios = buzios[i+1];
+
+        if (playerBuzios <= 0) continue;
+        if (nextPlayerBuzios <= 0) continue;
+        
+        if ((turns+1) % 2 === 0) {
+            buzios.incrementRight(i, 2);
+            turns++;
+            continue;
         }
-        turn++;
-        rounds++;
 
-        let activePlayers = buziosPlayers.filter(b => b > 0).length;
-        if (activePlayers === 1) {
-            condition = false;
-            break;
-        }
+        buzios.incrementRight(i);
+        turns++;
     }
 }
 
-let winner = buziosPlayers.findIndex(b => b > 0) + 1;
+buziosLoop();
 
-
-console.log(`turnos: ${rounds}`);
-console.log(`vencedor: ${winner}`);
-
+console.log(buzios);
