@@ -25,6 +25,7 @@ ano/fase/título 34 questões feitas
 2005/primeira fase/bafo
 2005/primeira fase/transmissão de energia
 2005/primeira fase/vivo ou morto
+20006/primeira fase/escada perfeita
 2021/primeira fase/torneio de tênis
 2021/primeira fase/zero para cancelar
 2021/primeira fase/tempo de resposta
