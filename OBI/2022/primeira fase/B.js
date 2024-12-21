@@ -4,7 +4,10 @@ let search = Number(prompt('número que esta procurando'));
 let results = [];
 
 for(let i = start; i <= end; i++){
-    let array = i.toString().split('').map(Number);
+    let array = i
+    .toString()
+    .split('')
+    .map(Number);
     let sum = array.reduce((a, b) => a + b, 0);
     if(sum == search){
         results.push(i);

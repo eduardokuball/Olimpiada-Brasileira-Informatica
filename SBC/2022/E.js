@@ -1,4 +1,6 @@
-let [width,pieceWidth,emptyCells] = prompt('largura do tabuleiro, largura da peça e quadrados vazios a esquerda').split(" ").map(Number);
+let [width,pieceWidth,emptyCells] = prompt('largura do tabuleiro, largura da peça e quadrados vazios a esquerda')
+.split(" ")
+.map(Number);
 
 let pieces = [];
 

@@ -3,7 +3,9 @@ let report = [];
 
 for(let i = 0; i < quantity; i++){
     let player = prompt(`nome do jogador ${i + 1}`);
-    let results = prompt('digite os resultados').split(' ').map(Number);
+    let results = prompt('digite os resultados')
+    .split(' ')
+    .map(Number);
     results.sort((a,b) => a - b);
     results.shift();
     results.pop();

@@ -1,5 +1,7 @@
 let piles = Number(prompt('digite a quantidade de pilhas'));
-let rocks = prompt('digite quantas pedras há em cada pilha').split(' ').map(Number);
+let rocks = prompt('digite quantas pedras há em cada pilha')
+.split(' ')
+.map(Number);
 let perfectStair = [];
 
 for(let i = 0; i < piles; i++){

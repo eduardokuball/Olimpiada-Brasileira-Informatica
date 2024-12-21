@@ -1,3 +1,14 @@
+let quantitywords = Number(prompt('quantidade de palavras'));
+let words = [];
+for(let i = 0; i < quantitywords; i++){
+    let word = prompt(`digite a ${i+1} palavra'`);
+    words.push(word.toLowerCase());
+};
+
+let quantityGuess = Number(prompt('digite a quantidade de tentativas'));
+
+let guess = [];
+
 function encodeString(main, string){
     let encoded = '';
     for(let i = 0; i < main.length; i++){
@@ -11,18 +22,6 @@ function encodeString(main, string){
     }
     return encoded;
 }
-
-let quantitywords = Number(prompt('quantidade de palavras'));
-let words = [];
-for(let i = 0; i < quantitywords; i++){
-    let word = prompt(`digite a ${i+1} palavra'`);
-    words.push(word.toLowerCase());
-};
-
-let quantityGuess = Number(prompt('digite a quantidade de tentativas'));
-
-let guess = [];
-
 for(let i = 0; i < quantityGuess; i++){
     let guessWord = prompt(`digite a ${i+1} tentativa'`);
     guess.push(guessWord.toUpperCase());

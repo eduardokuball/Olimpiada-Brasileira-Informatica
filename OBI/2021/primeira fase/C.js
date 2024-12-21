@@ -4,7 +4,8 @@ let registers = [];
 let friends = [];
 
 for(let i = 0; i < quantity; i++){
-    let register = prompt('tipo de registro e pessoa/tempo').split(' ');
+    let register = prompt('tipo de registro e pessoa/tempo')
+    .split(' ');
     let typeRegister = register[0].toUpperCase();
     let personOrTime = register[1];
     registers.push({

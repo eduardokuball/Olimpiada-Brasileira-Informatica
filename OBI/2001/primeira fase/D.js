@@ -1,8 +1,12 @@
-let [meters, iceCreamMaker] = prompt('Digite o tamanho da praia e o número de sorveteiros').split(' ').map(Number);
+let [meters, iceCreamMaker] = prompt('Digite o tamanho da praia e o número de sorveteiros')
+.split(' ')
+.map(Number);
 let occupations = [];
 
 for (let i = 0; i < iceCreamMaker; i++) {
-    let [start, end] = prompt("Digite a metragem do começo e do fim do sorveteiro").split(" ").map(Number);
+    let [start, end] = prompt("Digite a metragem do começo e do fim do sorveteiro")
+    .split(" ")
+    .map(Number);
     occupations.push({ start, end });
 }
 

@@ -1,4 +1,6 @@
-let [kg, priceTrain, kgTrain, priceTruck, kgTruck] = prompt('kg, preço por kg trem, kg trem, preço por kg caminhão, kg caminhão').split(' ').map(parseFloat);
+let [kg, priceTrain, kgTrain, priceTruck, kgTruck] = prompt('kg, preço por kg trem, kg trem, preço por kg caminhão, kg caminhão')
+.split(' ')
+.map(parseFloat);
 
 
 let totalTrain = (priceTrain + (kgTrain * kg)).toFixed(2);

@@ -1,6 +1,8 @@
 let quantity = Number(prompt('quantidade:')) * 3;
 let input = prompt(' números do quadro');
-let numbers = input.split(' ').map(Number);
+let numbers = input
+.split(' ')
+.map(Number);
 numbers.sort((a, b) => b + a);
 
 function plays(numbers) {

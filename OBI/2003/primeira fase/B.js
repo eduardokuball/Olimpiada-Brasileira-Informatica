@@ -3,7 +3,9 @@ let report = [];
 let notes = [];
 
 for(let i = 0; i < students; i++){
-    let [student,note] = prompt('código do aluno e sua nota').split(' ').map(Number);
+    let [student,note] = prompt('código do aluno e sua nota')
+    .split(' ')
+    .map(Number);
     report.push({
         student: student,
         note: note,

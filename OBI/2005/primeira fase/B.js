@@ -1,8 +1,12 @@
-let [stations, transmissionLines] = prompt('estações e linhas de transmição').split(' ').map(Number);
+let [stations, transmissionLines] = prompt('estações e linhas de transmição')
+.split(' ')
+.map(Number);
 let connections = [];
 
 for(let i = 0; i < transmissionLines; i++){
-    let[x,y] = prompt('digite as estações ligadas').split(' ').map(Number);
+    let[x,y] = prompt('digite as estações ligadas')
+    .split(' ')
+    .map(Number);
     connections.push(x);
     connections.push(y);
 };

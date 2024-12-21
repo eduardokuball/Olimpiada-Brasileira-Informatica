@@ -7,7 +7,9 @@ for(let i = 1; i <= dimension * dimension; i++){
 }
 
 for(let i = 0; i < dimension; i++){
-    let line = prompt('digite os valores da linha').split(' ').map(Number);
+    let line = prompt('digite os valores da linha')
+    .split(' ')
+    .map(Number);
     line.forEach((l) => {
         square.push(l);
     })

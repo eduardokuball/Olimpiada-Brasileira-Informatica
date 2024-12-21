@@ -1,4 +1,6 @@
-let [cityOfOrigin, destinationCity] = prompt('cidade de saída e destino').split(" ").map(Number);
+let [cityOfOrigin, destinationCity] = prompt('cidade de saída e destino')
+.split(" ")
+.map(Number);
 
 
 let road = [];

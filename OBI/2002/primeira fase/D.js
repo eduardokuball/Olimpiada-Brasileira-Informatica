@@ -1,10 +1,14 @@
-let [airports, flights] = prompt('aeroportos e voos').split(' ').map(Number);
+let [airports, flights] = prompt('aeroportos e voos')
+.split(' ')
+.map(Number);
 
 
 let connections = [];
 
 for(let i = 0; i < flights; i++){
-    let flight = prompt(`digite o voo ${i+1}: aeroporto de origem, aeroporto de destino`).split(' ').map(Number);
+    let flight = prompt(`digite o voo ${i+1}: aeroporto de origem, aeroporto de destino`)
+    .split(' ')
+    .map(Number);
     connections.push(flight[0]);
     connections.push(flight[1]);
 };

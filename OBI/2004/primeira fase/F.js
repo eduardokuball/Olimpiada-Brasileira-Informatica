@@ -1,6 +1,7 @@
 let quantity = prompt('Digite a quantidade de amigos');
 
-let friends = prompt('Digite os nomes dos amigos separados por espaço').split(' ');
+let friends = prompt('Digite os nomes dos amigos separados por espaço')
+.split(' ');
 
 let obj = [];
 let friendshipsMade = [];
@@ -8,7 +9,8 @@ let friendshipsMade = [];
 for (let i = 0; i < friends.length; i++) {
     let requirement = Number(prompt('Digite o número de exigências de ' + friends[i] + ": "));
     if (requirement > 0) {
-        let requirements = prompt('Digite as exigências separadas por espaço').split(' ');
+        let requirements = prompt('Digite as exigências separadas por espaço')
+        .split(' ');
         obj.push({
             name: friends[i],
             requirements: requirements

@@ -1,8 +1,12 @@
-let [lines,columns] = prompt('digite o número de linhas e colunas da tabela').split(' ').map(Number);
+let [lines,columns] = prompt('digite o número de linhas e colunas da tabela')
+.split(' ')
+.map(Number);
 var matrix = [];
 
 for(let i = 0; i < lines; i++){
-    let line = prompt(`digite os números da ${i + 1}`).split(' ').map(Number);
+    let line = prompt(`digite os números da ${i + 1}`)
+    .split(' ')
+    .map(Number);
     matrix.push(line);
 };
 
@@ -55,7 +59,9 @@ function scrollDown() {
 
 
 while(true){
-    let [x,y] = prompt("digite o deslocamento horizontal e vertical").split(" ").map(Number);
+    let [x,y] = prompt("digite o deslocamento horizontal e vertical")
+    .split(" ")
+    .map(Number);
     if(x == 0 && y == 0){
         console.log(matrix);
         break;

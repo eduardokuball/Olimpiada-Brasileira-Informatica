@@ -1,4 +1,3 @@
-// Seta um novo método de array
 Array.prototype.allIndexesOf = function(el) {
     let indexes = [];
 
@@ -11,7 +10,6 @@ Array.prototype.allIndexesOf = function(el) {
     return indexes;
 };
 
-// Seta um novo método de array
 Array.prototype.isSubsequenceOf = function(arr) {
     if (arr.length < this.length) return false;
 

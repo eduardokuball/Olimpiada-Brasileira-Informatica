@@ -1,4 +1,6 @@
-let [quantity,calls] = prompt(' Númeor de pessoas e chamadas').split(' ').map(Number);
+let [quantity,calls] = prompt(' Númeor de pessoas e chamadas')
+.split(' ')
+.map(Number);
 
 let peoples = [];
 

@@ -1,5 +1,7 @@
 let guests = prompt("digite o numero de convidados");
-let firstcome = prompt('').split(' ').map(Number);
+let firstcome = prompt('')
+.split(' ')
+.map(Number);
 
 function draw(){
     let sorted = 0;

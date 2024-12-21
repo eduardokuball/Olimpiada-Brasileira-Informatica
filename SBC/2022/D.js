@@ -1,10 +1,14 @@
-let [days,homeUmbrella,serviceUmbrella] = prompt("dias,guarda chuvas em casa, guarda chuvas no serviço").split(" ").map(Number);
+let [days,homeUmbrella,serviceUmbrella] = prompt("dias,guarda chuvas em casa, guarda chuvas no serviço")
+.split(" ")
+.map(Number);
 
 
 let reports = [];
 
 for(let i = 0; i < days; i++) {
-    let [go, back] = prompt('Clima na ida e na volta').split(' ').map((str) => str.toUpperCase());
+    let [go, back] = prompt('Clima na ida e na volta')
+    .split(' ')
+    .map((str) => str.toUpperCase());
     let hasUmbrellaInHome = homeUmbrella > 0;
     let hasUmbrellaInService = serviceUmbrella > 0;
 

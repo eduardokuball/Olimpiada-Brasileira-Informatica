@@ -1,6 +1,10 @@
 let persons = Number(prompt('Pessoas'));
-let timeEntrance = prompt('horário da entrada').split(' ').map(Number);
-let timeOut = prompt('horário da saída').split(' ').map(Number);
+let timeEntrance = prompt('horário da entrada')
+.split(' ')
+.map(Number);
+let timeOut = prompt('horário da saída')
+.split(' ')
+.map(Number);
 
 let simultaneousPeople = 0;
 

@@ -1,3 +1,5 @@
+let word = prompt();
+
 function isPalindrome(word) {
     let letters = word.split('');
     let finalLetterIndex = word.length - 1;
@@ -34,8 +36,6 @@ function getPalindromeSubstrings(word='') {
 
     return palindromeSubstrings;
 };
-
-let word = prompt();
 
 let palindromeSubstrings = getPalindromeSubstrings(word);
 

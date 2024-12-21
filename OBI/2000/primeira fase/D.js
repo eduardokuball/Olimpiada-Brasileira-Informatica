@@ -5,7 +5,9 @@ let golsAgainst = [];
 let positiveBalanceGames = [];
 
 for (let i = 0; i < quantityGames; i++) {
-    let game = window.prompt("digite o placar do jogo : " + (i + 1) + "").split(" ").map(Number);
+    let game = prompt("digite o placar do jogo : " + (i + 1) + "")
+    .split(" ")
+    .map(Number);
     golsFor.push(game[0]);
     golsAgainst.push(game[1]);
 };
