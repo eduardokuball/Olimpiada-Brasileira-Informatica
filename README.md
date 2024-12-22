@@ -5,7 +5,7 @@ Este projeto é organizado para facilitar a navegação, compreensão e resoluç
 ## Estrutura Geral
 
 - **Pastas de Maratonas**:  
-  Cada maratona é representada por uma pasta nomeada com o título correspondente à maratona (ex.: `OBI`, `Maratona Brasileira`, etc.).
+  Cada maratona é representada por uma pasta nomeada com o título correspondente à maratona (ex.: `OBI`, `SBC`, etc.).
 
 - **Pastas por Ano**:  
   Dentro de cada pasta de maratona, há subpastas nomeadas com o ano da edição (ex.: `2023`, `2006`).
