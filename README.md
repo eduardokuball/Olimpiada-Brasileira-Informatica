@@ -1,17 +1,41 @@
-• primeiramente, cada basta é nomeada com o nome da respectiva maratona.
+# Estrutura do Projeto de Resolução de Maratonas
 
-• cada pasta é composta por várias pastas nomeadas com o ano da edição que esta sendo resolvida.
+Este projeto é organizado para facilitar a navegação, compreensão e resolução de questões de diversas maratonas de programação. Abaixo está a descrição detalhada da estrutura e finalidade de cada componente do projeto.
 
-• dentro de cada pasta ano, existe pastas com o nome da fase daquele ano.
+## Estrutura Geral
 
-• dentro de cada pasta fase, existe um pdf com as questões, e as questões que consegui resolver.
+- **Pastas de Maratonas**:  
+  Cada maratona é representada por uma pasta nomeada com o título correspondente à maratona (ex.: `OBI`, `Maratona Brasileira`, etc.).
 
-• as questões são nomeadas com letras do alfabeto, na ordem que estão no pdf, ou seja,a primeira questão do pdf é nomeada como "A.js", a quarta como "D.js",assim em diante.
+- **Pastas por Ano**:  
+  Dentro de cada pasta de maratona, há subpastas nomeadas com o ano da edição (ex.: `2023`, `2006`).
 
-• cada pasta maratona também possui um arquivo html chamado tester, que é nele onde testamos as questões.
+- **Pastas de Fases**:  
+  Dentro das pastas de ano, há subpastas correspondentes às fases daquele ano (ex.: `Primeira Fase`, `Segunda Fase`).
 
-• cada pasta maratona possui um arquivo chama Developmentofthequestions, que serve para fazer anotações sobre a lógica da questão que está sendo resolvida no momento.
+## Conteúdo de Cada Pasta de Fase
 
-• cada pasta maratona possui um arquivo chama QuestionsAsked, que serve para guardar as questões que já forma resolvidas, no formato ano/fase/título, em ordem cronológica.
+- **PDF das Questões**:  
+  Contém um arquivo PDF com todas as questões da respectiva fase.
 
-• cada pasta maratona possui um arquivo chamado readme, que basicamente serve para dizer se alguma questão está incompleta, se falta pouco para ser concluída.
+- **Arquivos de Questões**:  
+  Cada questão resolvida é salva como um arquivo individual, nomeado com letras do alfabeto em ordem sequencial conforme o PDF:  
+  - A primeira questão do PDF é nomeada como `A.js`.  
+  - A quarta questão do PDF é nomeada como `D.js`.  
+  - E assim por diante.
+
+## Arquivos Complementares em Cada Pasta de Maratona
+
+1. **`tester.html`**:  
+   - Um arquivo HTML usado para testar as soluções das questões.
+
+2. **`Developmentofthequestions`**:  
+   - Arquivo destinado a anotações sobre a lógica e o raciocínio usados na resolução de questões.  
+   - Útil para documentar o progresso e as ideias ao resolver problemas.
+
+3. **`QuestionsAsked`**:  
+   - Lista cronológica das questões já resolvidas, seguindo o formato:  
+     `ano/fase/nome-da-questão`.
+
+4. **`readme`**:  
+   - Um arquivo que contém observações sobre questões incompletas ou em progresso, detalhando o que falta para finalizá-las.
