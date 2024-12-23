@@ -27,6 +27,8 @@ ano/fase/título 34 questões feitas
 2005/primeira fase/vivo ou morto
 2006/primeira fase/truco
 2006/primeira fase/escada perfeita
+2007/primeira fase/chocolate
+2007/primeira fase/repositórios
 2021/primeira fase/torneio de tênis
 2021/primeira fase/zero para cancelar
 2021/primeira fase/tempo de resposta
