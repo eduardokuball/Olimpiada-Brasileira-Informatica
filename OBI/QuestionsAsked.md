@@ -29,6 +29,9 @@ ano/fase/título 34 questões feitas
 2006/primeira fase/escada perfeita
 2007/primeira fase/chocolate
 2007/primeira fase/repositórios
+2020/primeira fase/irmãos
+2020/primeira fase/garamana
+2020/primeira fase/camisetas da olimpíada
 2021/primeira fase/torneio de tênis
 2021/primeira fase/zero para cancelar
 2021/primeira fase/tempo de resposta
