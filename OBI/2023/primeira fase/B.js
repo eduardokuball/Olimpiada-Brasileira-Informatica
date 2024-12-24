@@ -1,66 +1,66 @@
-let lineStr = prompt();
-let typesAndSizes = lineStr
+const lineStr = prompt();
+const typesAndSizes = lineStr
     .split(' ')
     .slice(0, 2)
     .map(e => parseInt(e));
 
-    function generateStock(types, sizes) {
-        let stock = [];
-    
-        for (let i = 1; i <= types; i++) {
-            let sizesString = prompt();
-            let sizesList = sizesString
-                .split(' ')
-                .slice(0, sizes)
-                .map(e => parseInt(e));
-    
-            stock.push(sizesList);
-        };
-    
-        return stock;
-    };
-    
-    function generateOrders(num) {
-        let orders = [];
-    
-        for (let i = 1; i <= num; i++) {
-            let lineStr = prompt();
-            let typeAndSize = lineStr
-                .split(' ')
-                .slice(0, 2)
-                .map(e => parseInt(e));
-    
-            let order = {
-                type: typeAndSize[0],
-                size: typeAndSize[1]
-            };
-    
-            orders.push(order);
-        };
-    
-        return orders;
-    };
-    
-    function makePurchaseOfOrders(stock, orders) {
-        let successfulPurchases = 0;
-    
-        for (let order of orders) {
-            let { type, size } = order;
-    
-            if (!(stock?.[type-1]?.[size-1])) continue;
-            if (stock[type-1][size-1] <= 0) continue;
-    
-            stock[type-1][size-1]--;
-            successfulPurchases++;
-        };
-    
-        return successfulPurchases;
-    };
+function generateStock(types, sizes) {
+    const stock = [];
 
-let stock = generateStock(...typesAndSizes);
+    for (let i = 1; i <= types; i++) {
+        const sizesString = prompt();
+        const sizesList = sizesString
+            .split(' ')
+            .slice(0, sizes)
+            .map(e => parseInt(e));
 
-let ordersNum = parseInt(prompt());
-let orders = generateOrders(ordersNum);
+        stock.push(sizesList);
+    }
 
-let successfulPurchases = makePurchaseOfOrders(stock, orders);
+    return stock;
+}
+
+function generateOrders(num) {
+    const orders = [];
+
+    for (let i = 1; i <= num; i++) {
+        const lineStr = prompt();
+        const typeAndSize = lineStr
+            .split(' ')
+            .slice(0, 2)
+            .map(e => parseInt(e));
+
+        const order = {
+            type: typeAndSize[0],
+            size: typeAndSize[1]
+        };
+
+        orders.push(order);
+    }
+
+    return orders;
+}
+
+function makePurchaseOfOrders(stock, orders) {
+    let successfulPurchases = 0;
+
+    for (const order of orders) {
+        const { type, size } = order;
+
+        if (!(stock?.[type-1]?.[size-1])) continue;
+        if (stock[type-1][size-1] <= 0) continue;
+
+        stock[type-1][size-1]--;
+        successfulPurchases++;
+    }
+
+    return successfulPurchases;
+}
+
+const stock = generateStock(...typesAndSizes);
+
+const ordersNum = parseInt(prompt());
+const orders = generateOrders(ordersNum);
+
+const successfulPurchases = makePurchaseOfOrders(stock, orders);
 console.log(successfulPurchases);

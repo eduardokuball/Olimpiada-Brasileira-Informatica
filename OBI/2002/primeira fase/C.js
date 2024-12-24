@@ -1,4 +1,4 @@
-let foldingD = Number(prompt("Numero de vezes que a dobradura d foi feita"))
+const foldingD = Number(prompt("Numero de vezes que a dobradura d foi feita"))
 
 function calculateValue(n) {
     if(n == 0) return 4;

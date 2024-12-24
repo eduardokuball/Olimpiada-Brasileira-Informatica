@@ -1,57 +1,56 @@
-let [lenghtString,lenghtSubString] = prompt('tamanho da subcadeia e cadeia')
-.split(' ')
-.map(Number);
-let substring = prompt('subcadeia').toUpperCase();
-let string = prompt('cadeia').toUpperCase();
+const [lenghtString, lenghtSubString] = prompt('tamanho da subcadeia e cadeia')
+    .split(' ')
+    .map(Number);
+const substring = prompt('subcadeia').toUpperCase();
+const string = prompt('cadeia').toUpperCase();
 
 let stringHelperSubs = string;
-let foundedSubstringsPositions = [];
+const foundedSubstringsPositions = [];
 
 function invertSubstring(substring) {
-    let correspondentChars = {
+    const correspondentChars = {
         'A': 'T',
         'T': 'A',
         'G': 'C',
         'C': 'G',
     };
 
-    let substringArray = substring.split('');
+    const substringArray = substring.split('');
 
-    let invertedSubstring = substringArray.map((e, i, arr) => {
+    const invertedSubstring = substringArray.map((e) => {
         return correspondentChars[e];
     });
 
     return invertedSubstring.join('');
-};
+}
 
 while (true) {
-    let substringFounded = stringHelperSubs.indexOf(substring);
+    const substringFounded = stringHelperSubs.indexOf(substring);
 
     if (substringFounded === -1) {
         break;
-    }; 
+    }
 
-    let xChars = 'x'.repeat(substring.length);
+    const xChars = 'x'.repeat(substring.length);
     stringHelperSubs = stringHelperSubs.replace(substring, xChars);
-    foundedSubstringsPositions.push(substringFounded+1);
-};
+    foundedSubstringsPositions.push(substringFounded + 1);
+}
 
 let stringHelpersInverts = string;
-let foundedInvertedsPositions = [];
+const foundedInvertedsPositions = [];
 
 while (true) {
-    let invertedSubstring = invertSubstring(substring).split('').reverse().join('');
-    let substringFounded = stringHelpersInverts.indexOf(invertedSubstring);
+    const invertedSubstring = invertSubstring(substring).split('').reverse().join('');
+    const substringFounded = stringHelpersInverts.indexOf(invertedSubstring);
 
     if (substringFounded === -1) {
         break;
-    }; 
+    }
 
-    let xChars = 'x'.repeat(invertedSubstring.length);
+    const xChars = 'x'.repeat(invertedSubstring.length);
     stringHelpersInverts = stringHelpersInverts.replace(invertedSubstring, xChars);
-    foundedInvertedsPositions.push(substringFounded+1);
-};
-
+    foundedInvertedsPositions.push(substringFounded + 1);
+}
 
 function formatOccurrences() {
     if (foundedSubstringsPositions.length === 0) {
