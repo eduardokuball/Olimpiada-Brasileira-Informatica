@@ -29,6 +29,8 @@ ano/fase/título 34 questões feitas
 2006/primeira fase/escada perfeita
 2007/primeira fase/chocolate
 2007/primeira fase/repositórios
+2008/primeira fase/OBI
+2008/primeira fase/telefone
 2020/primeira fase/irmãos
 2020/primeira fase/garamana
 2020/primeira fase/camisetas da olimpíada
