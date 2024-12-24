@@ -2,7 +2,7 @@ const quantity = parseInt(prompt());
 const words = [];
 
 for (let i = 0; i < quantity; i++) {
-    let word = prompt();
+    const word = prompt();
     words.push(word.toUpperCase());
 }
 
@@ -17,7 +17,7 @@ words.forEach(word => {
 function isAcronym(word) {
     const letters = word.split('');
 
-    for (let letter of letters) {
+    for (const letter of letters) {
         if (!initials.includes(letter)) return false;
     }
 
@@ -26,7 +26,7 @@ function isAcronym(word) {
 
 let someathingAcronym = false;
 
-for (let word of words) {
+for (const word of words) {
     if (isAcronym(word)) {
         someathingAcronym = true;
         break;

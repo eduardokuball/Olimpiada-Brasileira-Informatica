@@ -1,24 +1,23 @@
-let [days,homeUmbrella,serviceUmbrella] = prompt("dias,guarda chuvas em casa, guarda chuvas no serviço")
+const [days, homeUmbrella, serviceUmbrella] = prompt("dias, guarda chuvas em casa, guarda chuvas no serviço")
 .split(" ")
 .map(Number);
 
+const reports = [];
 
-let reports = [];
-
-for(let i = 0; i < days; i++) {
-    let [go, back] = prompt('Clima na ida e na volta')
+for (let i = 0; i < days; i++) {
+    const [go, back] = prompt('Clima na ida e na volta')
     .split(' ')
     .map((str) => str.toUpperCase());
-    let hasUmbrellaInHome = homeUmbrella > 0;
-    let hasUmbrellaInService = serviceUmbrella > 0;
+    const hasUmbrellaInHome = homeUmbrella > 0;
+    const hasUmbrellaInService = serviceUmbrella > 0;
 
-    let report = {
+    const report = {
         go: "",
         back: ""
     }
 
-    if(go == "N"){
-        if(hasUmbrellaInService){
+    if (go == "N") {
+        if (hasUmbrellaInService) {
             report.go = "N";
         } else {
             report.go = "Y";
@@ -27,20 +26,20 @@ for(let i = 0; i < days; i++) {
         }
     }
 
-    if(go == "Y"){
-        report.go = "Y"
+    if (go == "Y") {
+        report.go = "Y";
         homeUmbrella--;
         serviceUmbrella++;
     }
 
-    if(back == "Y"){
+    if (back == "Y") {
         report.back = "Y";
         homeUmbrella++;
         serviceUmbrella--;
     }
 
-    if(back == "N"){
-        if(hasUmbrellaInHome){
+    if (back == "N") {
+        if (hasUmbrellaInHome) {
             report.back = "N";
         } else {
             report.back = "Y";
@@ -50,8 +49,8 @@ for(let i = 0; i < days; i++) {
     }
 
     reports.push(report);
-    
-};
+}
+
 reports.forEach((r) => {
-   console.log(`${r.go} ${r.back}`);
+    console.log(`${r.go} ${r.back}`);
 });
