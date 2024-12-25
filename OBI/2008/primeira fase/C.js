@@ -1,12 +1,12 @@
 let [lines, column, start, position] = prompt('linhas,colunas,começo,posição')
 .split(' ')
 .map(Number);
-start = (lines * (start - 1)) + 1
+start = (column * (start - 1)) + 1
 
 const columns = [];
 for (let i = 0; i < column; i++) {
     columns.push(String.fromCharCode(97 + i));
-}
+};
 let count = 0;
 let seat = "";
 let positionSeat = 0;
@@ -17,16 +17,18 @@ for (let i = 0; i < lines; i++) {
         count++;
         if(count >= start){
             positionSeat++;
+            if(positionSeat == position){
+                seat = `${i + 1} ${columns[j].toUpperCase()}`;
+            }
         };
         row.push(`${i + 1}${columns[j]}`);
-        if(positionSeat == position){
-            seat = `${i + 1}${columns[j]}`;
-        }
     }
     rows.push(row);
 }
 
-console.log(rows);
-console.log(start);
-console.log(seat);
+if(positionSeat > position){
+    console.log(seat);
+} else {
+    console.log('PROXIMO VOO');
+};
 
