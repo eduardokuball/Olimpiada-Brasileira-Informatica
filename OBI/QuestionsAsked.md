@@ -1,6 +1,6 @@
 esse readme serve para listar as questões que já foram resolvidas
 em ordem cronológica
-ano/fase/título 34 questões feitas
+ano/fase/título 55 questões feitas
 1999/primeira fase/projeto genoma
 1999/primeira fase/trem ou caminhão?
 1999/segunda fase/restaurante
@@ -36,6 +36,8 @@ ano/fase/título 34 questões feitas
 2009/primeira fase/notas da prova
 2009/primeira fase/caçadores de mitos
 2009/primeira fase/o fugitivo
+2009/segunda fase/olimpíadas
+2009/segunda fase/simulador
 2020/primeira fase/irmãos
 2020/primeira fase/garamana
 2020/primeira fase/camisetas da olimpíada
