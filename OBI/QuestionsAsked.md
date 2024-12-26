@@ -31,6 +31,11 @@ ano/fase/título 34 questões feitas
 2007/primeira fase/repositórios
 2008/primeira fase/OBI
 2008/primeira fase/telefone
+2008/primeira fase/avião
+2008/segunda fase/auto estrada
+2009/primeira fase/notas da prova
+2009/primeira fase/caçadores de mitos
+2009/primeira fase/o fugitivo
 2020/primeira fase/irmãos
 2020/primeira fase/garamana
 2020/primeira fase/camisetas da olimpíada
