@@ -1,15 +1,15 @@
-let quantity = prompt('Digite a quantidade de amigos');
+const quantity = prompt('Digite a quantidade de amigos');
 
-let friends = prompt('Digite os nomes dos amigos separados por espaço')
+const friends = prompt('Digite os nomes dos amigos separados por espaço')
 .split(' ');
 
-let obj = [];
-let friendshipsMade = [];
+const obj = [];
+const friendshipsMade = [];
 
 for (let i = 0; i < friends.length; i++) {
-    let requirement = Number(prompt('Digite o número de exigências de ' + friends[i] + ": "));
+    const requirement = Number(prompt('Digite o número de exigências de ' + friends[i] + ": "));
     if (requirement > 0) {
-        let requirements = prompt('Digite as exigências separadas por espaço')
+        const requirements = prompt('Digite as exigências separadas por espaço')
         .split(' ');
         obj.push({
             name: friends[i],
@@ -22,7 +22,7 @@ for (let i = 0; i < friends.length; i++) {
 
 for (let j = 0; j < quantity; j++) {
     obj.forEach((o, index) => {
-        let allRequirementsMet = o.requirements.every(r => friendshipsMade.includes(r));
+        const allRequirementsMet = o.requirements.every(r => friendshipsMade.includes(r));
 
         if (allRequirementsMet) {
             friendshipsMade.push(o.name);
@@ -31,7 +31,7 @@ for (let j = 0; j < quantity; j++) {
     });
 }
 
-if(friendshipsMade.length < quantity){
+if (friendshipsMade.length < quantity) {
     console.log('impossivel');
 } else {
     console.log(friendshipsMade.join(' '));

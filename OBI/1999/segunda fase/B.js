@@ -1,8 +1,8 @@
-let persons = Number(prompt('Pessoas'));
-let timeEntrance = prompt('horário da entrada')
+const persons = Number(prompt('Pessoas'));
+const timeEntrance = prompt('horário da entrada')
 .split(' ')
 .map(Number);
-let timeOut = prompt('horário da saída')
+const timeOut = prompt('horário da saída')
 .split(' ')
 .map(Number);
 
@@ -17,7 +17,5 @@ for (let i = 0; i < persons; i++) {
 }
 
 simultaneousPeople = (simultaneousPeople - persons) / (persons - 1);
-
-
 
 console.log(simultaneousPeople);

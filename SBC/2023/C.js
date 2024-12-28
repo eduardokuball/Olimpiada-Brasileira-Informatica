@@ -1,11 +1,11 @@
-let lineInput = prompt('Linha 1')
+const lineInput = prompt('Linha 1')
   .split(' ', 2)
   .map(e => parseInt(e));
 
-let [numCandies, familyMembers] = lineInput;
+const [numCandies, familyMembers] = lineInput;
 
 function getMaxCandies(numCandies, familyMembers, candies) {
-  let candyCount = Array(familyMembers + 1).fill(0); 
+  const candyCount = Array(familyMembers + 1).fill(0); 
   let maxCandies = 0;
 
   let left = 0;
@@ -32,20 +32,20 @@ function getMaxCandies(numCandies, familyMembers, candies) {
 }
 
 function isUniform(candyCount, familyMembers) {
-  let counts = candyCount
-    .slice(1, familyMembers+1)
+  const counts = candyCount
+    .slice(1, familyMembers + 1)
     .filter(count => count > 0);
 
   if (counts.length !== familyMembers) return false;
 
-  for (let count of counts) {
+  for (const count of counts) {
       if (count !== counts[0]) return false;
-  };
+  }
 
   return true;
 }
 
-let candies = prompt('Linha 2')
+const candies = prompt('Linha 2')
   .split(' ', numCandies)
   .map(e => parseInt(e));
 

@@ -1,19 +1,18 @@
-let [airports, flights] = prompt('aeroportos e voos')
+const [airports, flights] = prompt('aeroportos e voos')
 .split(' ')
 .map(Number);
 
+const connections = [];
 
-let connections = [];
-
-for(let i = 0; i < flights; i++){
-    let flight = prompt(`digite o voo ${i+1}: aeroporto de origem, aeroporto de destino`)
+for (let i = 0; i < flights; i++) {
+    const flight = prompt(`digite o voo ${i + 1}: aeroporto de origem, aeroporto de destino`)
     .split(' ')
     .map(Number);
     connections.push(flight[0]);
     connections.push(flight[1]);
-};
+}
 
-let ocurrences = [];
+const ocurrences = [];
 let most = 0;
 
 connections.forEach((v) => {
@@ -22,18 +21,16 @@ connections.forEach((v) => {
         quantity: connections.filter(item => item === v).length
     });
     ocurrences.forEach((v) => {
-        if(v.quantity > most) most = v.quantity;
+        if (v.quantity > most) most = v.quantity;
     });
 });
 
-let mostVisitedAirpost = [];
+const mostVisitedAirpost = [];
 
 ocurrences.forEach((v) => {
-    if(v.quantity == most && !mostVisitedAirpost.includes(v.airport)) {
+    if (v.quantity == most && !mostVisitedAirpost.includes(v.airport)) {
         mostVisitedAirpost.push(v.airport);
     }
 });
 
 console.log(mostVisitedAirpost.join(' '));
-
-

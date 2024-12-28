@@ -1,36 +1,35 @@
-let [lines,columns] = prompt('digite o número de linhas e colunas da tabela')
+const [lines, columns] = prompt('digite o número de linhas e colunas da tabela')
 .split(' ')
 .map(Number);
-var matrix = [];
+let matrix = [];
 
-for(let i = 0; i < lines; i++){
-    let line = prompt(`digite os números da ${i + 1}`)
+for (let i = 0; i < lines; i++) {
+    const line = prompt(`digite os números da ${i + 1}`)
     .split(' ')
     .map(Number);
     matrix.push(line);
-};
+}
 
-function scrollRight(){
-    let newMatrix = [];
-    for(let i = 0; i < lines; i++){
+function scrollRight() {
+    const newMatrix = [];
+    for (let i = 0; i < lines; i++) {
         newMatrix[i] = matrix[i].slice(-1).concat(matrix[i].slice(0, -1));
     }
     matrix = newMatrix;
     return newMatrix;
-};
+}
 
-function scrollLeft(){
-    let newMatrix = [];
-    for(let i = 0; i < lines; i++){
+function scrollLeft() {
+    const newMatrix = [];
+    for (let i = 0; i < lines; i++) {
         newMatrix[i] = matrix[i].slice(1).concat(matrix[i].slice(0, 1));
     }
     matrix = newMatrix;
     return newMatrix;
 }
 
-
 function scrollUp() {
-    let newMatrix = [];
+    const newMatrix = [];
     for (let j = 0; j < columns; j++) {
         let column = matrix.map(row => row[j]);
         column = column.slice(1).concat(column[0]); 
@@ -44,7 +43,7 @@ function scrollUp() {
 }
 
 function scrollDown() {
-    let newMatrix = [];
+    const newMatrix = [];
     for (let j = 0; j < columns; j++) {
         let column = matrix.map(row => row[j]);
         column = [column[column.length - 1]].concat(column.slice(0, -1)); 
@@ -57,36 +56,30 @@ function scrollDown() {
     return newMatrix;
 }
 
-
-while(true){
-    let [x,y] = prompt("digite o deslocamento horizontal e vertical")
+while (true) {
+    const [x, y] = prompt("digite o deslocamento horizontal e vertical")
     .split(" ")
     .map(Number);
-    if(x == 0 && y == 0){
+    if (x == 0 && y == 0) {
         console.log(matrix);
         break;
     }
-    if(x > 0){
-        for(let i = 0; i < x; i++){
+    if (x > 0) {
+        for (let i = 0; i < x; i++) {
             matrix = scrollRight();
         }
-    } else if(x < 0) {
-        for(let i = 0; i < x * -1; i++){
+    } else if (x < 0) {
+        for (let i = 0; i < x * -1; i++) {
             matrix = scrollLeft();
         }
     }
-    if(y > 0){
-        for(let i = 0; i < y; i++){
+    if (y > 0) {
+        for (let i = 0; i < y; i++) {
             matrix = scrollUp();
         }
-    } else if(y < 0) {
-        for(let i = 0; i < y * -1; i++){
+    } else if (y < 0) {
+        for (let i = 0; i < y * -1; i++) {
             matrix = scrollDown();
         }
     }
-
 }
-
-
-
-

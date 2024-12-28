@@ -1,18 +1,18 @@
 function generatePyramid(size) {
-    let pyramid = [];
+    const pyramid = [];
 
     for (let i = 1; i <= size; i++) {
         pyramid.push([]);
 
         for (let j = 1; j <= size; j++) {
-            let paddings = {
+            const paddings = {
                 top: i,
                 right: size - j + 1,
                 bottom: size - i + 1,
                 left: j,
             };
 
-            let squareValue = Math.min(
+            const squareValue = Math.min(
                 paddings.top,
                 paddings.right,
                 paddings.bottom,
@@ -26,7 +26,7 @@ function generatePyramid(size) {
     return pyramid;
 }
 
-let pyramidSize = parseInt(prompt());
-let pyramid = generatePyramid(pyramidSize);
+const pyramidSize = parseInt(prompt());
+const pyramid = generatePyramid(pyramidSize);
 
 console.table(pyramid);

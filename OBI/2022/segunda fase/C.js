@@ -1,47 +1,46 @@
-let word = prompt();
+const word = prompt();
 
 function isPalindrome(word) {
-    let letters = word.split('');
-    let finalLetterIndex = word.length - 1;
+    const letters = word.split('');
+    const finalLetterIndex = word.length - 1;
 
     let wordIsPalindrome = true;
 
     letters.forEach((letter, i) => {
-        let inverseLetterIndex = finalLetterIndex - i;
-        let inverseLetter = letters[inverseLetterIndex];
+        const inverseLetterIndex = finalLetterIndex - i;
+        const inverseLetter = letters[inverseLetterIndex];
 
         if (letter !== inverseLetter) wordIsPalindrome = false;
     });
 
     return wordIsPalindrome;
-};
+}
 
 function getPalindromeSubstrings(word='') {
-    let wordSize = word.length;
+    const wordSize = word.length;
 
-    let palindromeSubstrings = [];
+    const palindromeSubstrings = [];
 
     for (let i = 0; i <= wordSize; i++) {
         for (let j = 0; j <= wordSize; j++) {
             if (i >= j) continue;
 
-            let substring = word.substring(i, j);
+            const substring = word.substring(i, j);
 
             if (!isPalindrome(substring)) continue;
             if (palindromeSubstrings.includes(substring)) continue;
 
             palindromeSubstrings.push(substring);
-        };
-    };
+        }
+    }
 
     return palindromeSubstrings;
-};
+}
 
-let palindromeSubstrings = getPalindromeSubstrings(word);
+const palindromeSubstrings = getPalindromeSubstrings(word);
 
-let substringsLength = palindromeSubstrings.map(e => e.length);
+const substringsLength = palindromeSubstrings.map(e => e.length);
 
+const largestSubstringLength = Math.max(...substringsLength); 
 
-let largestSubstringLength = Math.max(...substringsLength); 
-
-console.log(largestSubstringLength)
+console.log(largestSubstringLength);

@@ -1,9 +1,9 @@
-let students = Number(prompt('digite a quantidade de alunos'));
-let report = [];
-let notes = [];
+const students = Number(prompt('digite a quantidade de alunos'));
+const report = [];
+const notes = [];
 
-for(let i = 0; i < students; i++){
-    let [student,note] = prompt('código do aluno e sua nota')
+for (let i = 0; i < students; i++) {
+    const [student, note] = prompt('código do aluno e sua nota')
     .split(' ')
     .map(Number);
     report.push({
@@ -11,11 +11,11 @@ for(let i = 0; i < students; i++){
         note: note,
     });
     notes.push(note);
-};
+}
 
-let mostNote = Math.max(... notes);
+const mostNote = Math.max(...notes);
 
-let studentsWithMostNote = report.filter(e => e.note === mostNote);
+const studentsWithMostNote = report.filter(e => e.note === mostNote);
 
 let studentsReturn = "";
 
@@ -23,4 +23,4 @@ studentsWithMostNote.forEach((s) => {
     studentsReturn += `${s.student} `;
 })
 
-console.log(studentsReturn);;
+console.log(studentsReturn);

@@ -1,10 +1,10 @@
-const people = parseInt(prompt());
-const shirtSizes = prompt()
+const people = parseInt(prompt('quantidade de premiados'));
+const shirtSizes = prompt('tamanhos escolhidos')
     .split(' ', people)
     .map(e => parseInt(e));
 
-const smallShirtsQuantity = parseInt(prompt());
-const mediumShirtsQuantity = parseInt(prompt());
+const smallShirtsQuantity = parseInt(prompt('camisas p produzidas'));
+const mediumShirtsQuantity = parseInt(prompt('camisas m produzidas'));
 
 let smallShirts = 0;
 let mediumShirts = 0;

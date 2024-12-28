@@ -13,6 +13,9 @@ Este projeto é organizado para facilitar a navegação, compreensão e resoluç
 - **Pastas de Fases**:  
   Dentro das pastas de ano, há subpastas correspondentes às fases daquele ano (ex.: `Primeira Fase`, `Segunda Fase`).
 
+  - **methods.md**:
+  arquivo com todos os métodos de Strings,Numbers e Arrays
+
 ## Conteúdo de Cada Pasta de Fase
 
 - **PDF das Questões**:  
