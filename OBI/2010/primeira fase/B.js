@@ -22,3 +22,4 @@ for(let i = 0; i < commands; i++){
 }
 
 console.log(shipsHit);
+
