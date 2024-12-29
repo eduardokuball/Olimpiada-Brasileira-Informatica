@@ -9,7 +9,6 @@ function promptFriendPreference() {
 const everyoneSatisfied = (friendsArr=[], music) => friendsArr
     .every(({ hated }) => hated !== music);
 
-// Checa se é possível que todos fiquem agradados com a música
 function infiniteCycle() {
     const hateds = [];
 
@@ -17,13 +16,13 @@ function infiniteCycle() {
     return friends.every(({ beloved }) => hateds.includes(beloved));
 }
 
-// Gerando os dados
 const inputLine = prompt()
     .split(' ', 3)
     .map(e => parseInt(e));
 
 const [ friendsQuantity, musics ] = inputLine;
-let [,,selectedMusic] = inputLine; // Pula os 2 primeiros itens do array
+let [,,selectedMusic] = inputLine;
+
 
 const friends = [];
 
@@ -32,7 +31,6 @@ for (let i = 0; i < friendsQuantity; i++) {
     friends.push(friend);
 }
 
-// Lógica do programa
 let changes = 0;
 
 while (true) {
