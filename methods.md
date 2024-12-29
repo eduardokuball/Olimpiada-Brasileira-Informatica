@@ -337,6 +337,11 @@ console.log(array5.every(isBelowThreshold)); // true
 
 // Array.fill
 // O método fill preenche todos os elementos de um array do índice inicial a um índice final com um valor estático.
+
+// fill decente
+const numbers = Array(squareSide ** 2).fill()
+    .map((_, i) => i + 1);
+
 let array6 = [1, 2, 3, 4];
 console.log(array6.fill(0, 2, 4)); // [1, 2, 0, 0]
 
