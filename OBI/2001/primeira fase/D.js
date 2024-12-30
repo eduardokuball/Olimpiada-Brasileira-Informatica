@@ -1,33 +1,46 @@
-const [meters, iceCreamMaker] = prompt('Digite o tamanho da praia e o número de sorveteiros')
-.split(' ')
-.map(Number);
-const occupations = [];
-
-for (let i = 0; i < iceCreamMaker; i++) {
-    const [start, end] = prompt("Digite a metragem do começo e do fim do sorveteiro")
-    .split(" ")
-    .map(Number);
-    occupations.push({ start, end });
+function getOccupations(iceCreamMaker) {
+    const occupations = [];
+    for (let i = 0; i < iceCreamMaker; i++) {
+        const [start, end] = prompt()
+        .split(" ")
+        .map(e => parseInt(e));
+        occupations.push({ start, end });
+    }
+    return occupations;
 }
 
-occupations.sort((a, b) => a.start - b.start);
+function mergeOccupations(occupations) {
+    occupations.sort((a, b) => a.start - b.start);
 
-const stretchesWithIceCreamMan = [];
-
-occupations.forEach((o) => {
-    if (stretchesWithIceCreamMan.length === 0) {
-        stretchesWithIceCreamMan.push(o);
-    } else {
-        const last = stretchesWithIceCreamMan[stretchesWithIceCreamMan.length - 1];
-
-        if (last.end >= o.start) {
-            last.end = Math.max(last.end, o.end);
+    const merged = [];
+    occupations.forEach((o) => {
+        if (merged.length === 0) {
+            merged.push(o);
         } else {
-            stretchesWithIceCreamMan.push(o);
-        }
-    }
-});
+            const last = merged[merged.length - 1];
 
-stretchesWithIceCreamMan.forEach((s) => {
-    console.log(`${s.start}  ${s.end}`);
-});
+            if (last.end >= o.start) {
+                last.end = Math.max(last.end, o.end);
+            } else {
+                merged.push(o);
+            }
+        }
+    });
+    return merged;
+}
+
+function displayResult(stretches) {
+    stretches.forEach((s) => {
+        console.log(`${s.start}  ${s.end}`);
+    });
+}
+
+const [meters, iceCreamMaker] = prompt()
+    .split(' ')
+    .map(e => parseInt(e));
+
+let occupations = getOccupations(iceCreamMaker);
+
+let stretchesWithIceCreamMan = mergeOccupations(occupations);
+
+displayResult(stretchesWithIceCreamMan);

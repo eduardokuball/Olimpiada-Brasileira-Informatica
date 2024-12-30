@@ -8,14 +8,16 @@ function longestTunnel() {
     return Math.max(...maxTunnelHeight);
 }
 
-const [cityOfOrigin, destinationCity] = prompt('cidade de saída e destino')
+const [cityOfOrigin, destinationCity] = prompt()
     .split(" ")
     .map(e => parseInt(e));
 
 const road = [];
 
 while (true) {
-    const input = prompt('cidade onde a estrada inicia, a cidade onde a estrada termina e a altura do viaduto ou túnel mais baixo no trajeto').split(" ").map(Number);
+    const input = prompt()
+    .split(" ")
+    .map(e => parseInt(e));
     const cityOfStart = input[0];
     const cityOfEnd = input[1];
     const tunnelHeight = input[2];
