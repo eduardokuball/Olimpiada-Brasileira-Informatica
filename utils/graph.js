@@ -1,0 +1,139 @@
+class Graph {
+    constructor(weighted = false) {
+        this.weighted = weighted;
+        this.graph = new Map();
+    }
+    
+    // Gerar grafo:
+    addVertexes(...vertexes) {
+        vertexes.forEach(vertex => {
+            if (!this.graph.has(vertex)) this.graph.set(vertex, []);
+        });
+    }
+    
+    addEdge(vertexA, vertexB, weight=null) {
+        if (this.weighted && !weight) {
+            console.error('weight is not defined');
+            throw new Error('weight is not defined');
+        }
+        if (!this.graph.has(vertexA)) {
+            console.error('vertexA is not defined');
+            throw new Error('vertexA is not defined');
+        }
+        if (!this.graph.has(vertexB)) {
+            console.error('vertexB is not defined');
+            throw new Error('vertexB is not defined');
+        }
+      
+        const edgesA = this.graph.get(vertexA);
+        const edgesB = this.graph.get(vertexB);
+        const edgeA = this.weighted ? { vertex: vertexB, weight } : vertexB;
+        const edgeB = this.weighted ? { vertex: vertexA, weight } : vertexA;
+        
+        // Adiciona uma nova aresta aos vértices
+        const hasEdgeA = edgesA
+            .some(e => this.weighted ? e.vertex === edgeA.vertex : e === edgeA);
+        
+        if (!hasEdgeA) {
+            edgesA.push(edgeA);
+            this.graph.set(vertexA, edgesA);
+        }
+
+        const hasEdgeB = edgesB
+            .some(e => this.weighted ? e.vertex === edgeB.vertex : e === edgeB);
+
+        if (!hasEdgeB) {
+            edgesB.push(edgeB);
+            this.graph.set(vertexB, edgesB);
+        }
+    }
+    
+    // Pegar informações do grafo:
+    hasVertex(vertex) {
+        return this.graph.has(vertex);
+    }
+    
+    hasEdge(vertexA, vertexB) {
+        if (!this.hasVertex(vertexA)) {
+            console.error(`${vertexA} not exists`);
+            throw new Error(`${vertexA} not exists`);
+        }
+        if (!this.hasVertex(vertexB)) {
+            console.error(`${vertexB} not exists`);
+            throw new Error(`${vertexB} not exists`);
+        }
+        
+        const edgesA = this.getVertexEdges(vertexA);
+        
+        if (this.weighted)
+            return edgesA.some(e => e.vertex === vertexB);
+
+        return edgesA.includes(vertexB);
+    }
+    
+    getEdgeWeight(vertexA, vertexB) {
+        if (!this.weighted) {
+            console.error('graph is not weighted');
+            throw new Error('graph is not weighted');
+        }
+        if (!this.hasEdge(vertexA, vertexB)) {
+            console.error('edge not exists');
+            throw new Error('edge not exists');
+        }
+        
+        const edgesA = this.getVertexEdges(vertexA);
+        const { weight } = edgesA.find(e => e.vertex === vertexB);
+        
+        return weight;
+    }
+    
+    getVertexEdges(vertex) {
+        if (!this.graph.has(vertex)) {
+            console.error(`vertex ${vertex} not exists`);
+            throw new Error(`vertex ${vertex} not exists`);
+        }
+        return this.graph.get(vertex);
+    }
+    
+    showGraph() {
+        const links = [];
+        
+        for (let [vertex, edges] of this.graph) {
+            edges.forEach(edge => {
+                const [first, last] = [vertex, this.weighted ? edge.vertex : edge].toSorted();
+                
+                const link = this.weighted
+                    ? `${first} <-${edge.weight}-> ${last}`
+                    : `${first} <-> ${last}`;
+
+                links.push(link);
+            });
+        }
+
+        links.sort();
+        const filteredLinks = links.filter((e, i) => links.indexOf(e) === i);
+        filteredLinks.forEach(link => console.log(link));
+    }
+}
+
+export default Graph;
+
+// const meuGrafo = new Graph(true); // Cria um grafo ponderado (true)
+// meuGrafo.addVertexes('A', 'B', 'C', 'D');  // Adiciona os pontos A, B, C e D
+// // Cria Ligações, cada uma com seus pontos e pesos
+// meuGrafo.addEdge('A', 'B', 10);
+// meuGrafo.addEdge('B', 'C', 20);
+// meuGrafo.addEdge('C', 'D', 30);
+// meuGrafo.addEdge('D', 'A', 40);
+
+// Pegar todas as ligações de um ponto:
+  // console.log(meuGrafo.getVertexEdges('A'));
+// Pegar o peso de uma ligação:
+  // console.log(meuGrafo.getEdgeWeight('A', 'B'));
+// Descobrir se o ponto existe:
+  // console.log(meuGrafo.hasVertex('A'));
+  // console.log(meuGrafo.hasVertex('V'));
+// Descobrir se a ligação existe:
+  // console.log(meuGrafo.hasEdge('A', 'B'));
+  // console.log(meuGrafo.hasEdge('A', 'C'));
+// meuGrafo.showGraph(); // Exibir uma visualização do grafo.
