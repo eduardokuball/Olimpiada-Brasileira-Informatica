@@ -7,6 +7,6 @@ function bills(value){
     }
     return bills.join(' ');
 }
-let value = Number(prompt('Digite o valor a ser sacado'));
+let value = Number(prompt());
 
 console.log(bills(value));

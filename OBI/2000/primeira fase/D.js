@@ -1,11 +1,11 @@
-const quantityGames = Number(prompt("digite a quantidade de jogos"));
+const quantityGames = Number(prompt());
 
 const golsFor = [];
 const golsAgainst = [];
 const positiveBalanceGames = [];
 
 for (let i = 0; i < quantityGames; i++) {
-    const game = prompt("digite o placar do jogo : " + (i + 1) + "")
+    const game = prompt()
         .split(" ")
         .map(e => parseInt(e));
     golsFor.push(game[0]);
