@@ -1,12 +1,3 @@
-const [lenghtString, lenghtSubString] = prompt('tamanho da subcadeia e cadeia')
-    .split(' ')
-    .map(Number);
-const substring = prompt('subcadeia').toUpperCase();
-const string = prompt('cadeia').toUpperCase();
-
-let stringHelperSubs = string;
-const foundedSubstringsPositions = [];
-
 function invertSubstring(substring) {
     const correspondentChars = {
         'A': 'T',
@@ -23,6 +14,15 @@ function invertSubstring(substring) {
 
     return invertedSubstring.join('');
 }
+
+const [lenghtString, lenghtSubString] = prompt()
+    .split(' ')
+    .map(Number);
+const substring = prompt().toUpperCase();
+const string = prompt().toUpperCase();
+
+let stringHelperSubs = string;
+const foundedSubstringsPositions = [];
 
 while (true) {
     const substringFounded = stringHelperSubs.indexOf(substring);

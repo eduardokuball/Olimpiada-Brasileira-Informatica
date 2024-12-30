@@ -1,6 +1,16 @@
+function longestTunnel() {
+    const maxTunnelHeight = [];
+    road.forEach((t) => {
+        if (t.cityOfStart == cityOfOrigin) {
+            maxTunnelHeight.push(t.tunnelHeight);
+        }
+    });
+    return Math.max(...maxTunnelHeight);
+}
+
 const [cityOfOrigin, destinationCity] = prompt('cidade de saída e destino')
-.split(" ")
-.map(Number);
+    .split(" ")
+    .map(e => parseInt(e));
 
 const road = [];
 
@@ -21,14 +31,6 @@ while (true) {
     });
 }
 
-function longestTunnel() {
-    const maxTunnelHeight = [];
-    road.forEach((t) => {
-        if (t.cityOfStart == cityOfOrigin) {
-            maxTunnelHeight.push(t.tunnelHeight);
-        }
-    });
-    return Math.max(...maxTunnelHeight);
-}
+
 
 console.log(longestTunnel());

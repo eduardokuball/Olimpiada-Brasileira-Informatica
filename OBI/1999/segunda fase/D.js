@@ -1,4 +1,4 @@
-const sequence = String(prompt('Digite a sequência'));
+const sequence = String(prompt());
 const sequences = ["10100", "100", "0"];
 
 function sequenceH(sequence) {

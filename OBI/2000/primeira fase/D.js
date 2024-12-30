@@ -6,8 +6,8 @@ const positiveBalanceGames = [];
 
 for (let i = 0; i < quantityGames; i++) {
     const game = prompt("digite o placar do jogo : " + (i + 1) + "")
-    .split(" ")
-    .map(Number);
+        .split(" ")
+        .map(e => parseInt(e));
     golsFor.push(game[0]);
     golsAgainst.push(game[1]);
 }
