@@ -1,5 +1,3 @@
-const cards = prompt('digite as cartas');
-
 function splitCards(str, chunkSize) {
     const result = [];
     for (let i = 0; i < str.length; i += chunkSize) {
@@ -7,6 +5,9 @@ function splitCards(str, chunkSize) {
     }
     return result;
 }
+
+const cards = prompt();
+
 
 const cardsArray = splitCards(cards, 3);
 

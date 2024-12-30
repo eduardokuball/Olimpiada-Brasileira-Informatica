@@ -1,5 +1,3 @@
-const note = Number(prompt('digite a nota'));
-
 function getConcept(note){
     if (note < 1) return "E";
     if(note <= 35) return "D";
@@ -7,5 +5,8 @@ function getConcept(note){
     if(note <= 85) return "B";
     return "A";
 };
+
+const note = Number(prompt());
+
 
 console.log(getConcept(note));

@@ -1,23 +1,29 @@
-const registers = Number(prompt('Digite a quantidade de registros'));
-const coordenates = [];
-let lightningSamePlace = false;
+function hasLightningInSamePlace(registers) {
+    const coordinates = [];
 
-for (let i = 0; i < registers; i++) {
-    const [x, y] = prompt('Digite a coordenada do quadrante')
-        .split(' ')
-        .map(Number);
+    for (let i = 0; i < registers; i++) {
+        const [x, y] = prompt()
+            .split(' ')
+            .map(Number);
 
-    const newCoordinate = { x, y };
+        const newCoordinate = { x, y };
 
-    const exists = coordenates.some(existingCoordinate =>
-        Object.keys(newCoordinate).every(key => newCoordinate[key] === existingCoordinate[key])
-    );
+        const exists = coordinates.some(existingCoordinate =>
+            Object.keys(newCoordinate).every(key => newCoordinate[key] === existingCoordinate[key])
+        );
 
-    if (!exists) {
-        coordenates.push(newCoordinate);
-    } else {
-        lightningSamePlace = true;
+        if (exists) {
+            return true; 
+        } else {
+            coordinates.push(newCoordinate);
+        }
     }
-};
+
+    return false;
+}
+
+const registers = Number(prompt());
+
+const lightningSamePlace = hasLightningInSamePlace(registers);
 
 console.log(lightningSamePlace ? 1 : 0);

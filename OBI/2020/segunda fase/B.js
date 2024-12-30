@@ -8,7 +8,6 @@ function createFrame(id, [x, y]=[]) {
     };
 }
 
-// Gerando as entradas:
 const pictureDimension = prompt()
     .split(' ', 2).map(e => parseInt(e));
 
@@ -27,7 +26,6 @@ for (let i = 1; i <= framesQuantity; i++) {
     picFrames.push(frame);
 }
 
-// Mão na massa:
 const fitPicFrames = picFrames.filter(frame => {
     const [x, y] = frame.dimensions;
 

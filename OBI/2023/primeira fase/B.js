@@ -1,9 +1,3 @@
-const lineStr = prompt();
-const typesAndSizes = lineStr
-    .split(' ')
-    .slice(0, 2)
-    .map(e => parseInt(e));
-
 function generateStock(types, sizes) {
     const stock = [];
 
@@ -56,6 +50,13 @@ function makePurchaseOfOrders(stock, orders) {
 
     return successfulPurchases;
 }
+
+const lineStr = prompt();
+const typesAndSizes = lineStr
+    .split(' ')
+    .slice(0, 2)
+    .map(e => parseInt(e));
+
 
 const stock = generateStock(...typesAndSizes);
 

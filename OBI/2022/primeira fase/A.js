@@ -1,12 +1,19 @@
-const daily = Number(prompt('digite o valor da diária'));
-const increase = Number(prompt('aumento da diária'));
-const arrive = Number(prompt('dia da chegada'));
+function calculateTotal(daily, increase, arrive) {
+    let total = 0;
 
-let total = 0;
+    if (arrive == 1) {
+        total = daily * 31;
+    } else if (arrive > 1 && arrive < 16) {
+        total = calculateFirstHalf(daily, increase, arrive);
+    } else if (arrive > 15) {
+        total = calculateSecondHalf(daily, increase, arrive);
+    }
 
-if (arrive == 1) {
-    total = daily * 31;
-} else if (arrive > 1 && arrive < 16) {
+    return total;
+}
+
+function calculateFirstHalf(daily, increase, arrive) {
+    let total = 0;
     for (let i = arrive; i < 16; i++) {
         const calc = daily + ((i - 1) * increase);
         console.log(calc);
@@ -15,10 +22,20 @@ if (arrive == 1) {
     }
     const rest = 31 - arrive;
     total += rest * daily;
-} else if (arrive > 15) {
+
+    return total;
+}
+
+function calculateSecondHalf(daily, increase, arrive) {
     const d = daily + (14 * increase);
     const days = 31 - (arrive - 1);
-    total += d * days;
+    return d * days;
 }
+
+const daily = Number(prompt());
+const increase = Number(prompt());
+const arrive = Number(prompt());
+
+const total = calculateTotal(daily, increase, arrive);
 
 console.log(total);

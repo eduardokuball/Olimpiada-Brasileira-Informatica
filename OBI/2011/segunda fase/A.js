@@ -1,5 +1,3 @@
-// FUNÇÕES:
-
 function checkSquareNumbers(square=[]) {
     const squareSide = square.length;
 
@@ -9,7 +7,6 @@ function checkSquareNumbers(square=[]) {
     return numbers.every(e => square.flat().includes(e));
 }
 
-// Soma geral
 const sumArray = (arr=[]) => arr
     .reduce((total, e) => total + e, 0);
 
@@ -30,8 +27,6 @@ function sumColumn(square=[], column) {
 function getMainDiagonal(square=[]) {
     const mainDiagonal = [];
 
-    // Sabe se que os índices X e Y são iguais quando o elemento está na diagonal
-    // Num quadrado 2x2: [0][0] e [1][1] são os índices dos elementos da diagonal
     square.forEach((line, i) => {
         line.forEach((column, j) => {
             if (i === j) mainDiagonal.push(column);
@@ -55,21 +50,17 @@ for (let i = 0; i < squareSide; i++) {
     square.push(squareLine);    
 }
 
-// A soma base vai usar a primeira linha para conseguir a soma
 const baseSum = sumLine(square, 0);
 
 let isPerfectSquare = true;
 
-// Verifica para ver se tem todos os números.
 if (!checkSquareNumbers(square)) isPerfectSquare = false;
 
-// Verifica as linhas
 square.forEach((line, i) => {
     const lineSum = sumLine(square, i);
 
     if (lineSum !== baseSum) isPerfectSquare = false;
 
-    // Verifica as colunas
     line.forEach((column, j) => {
         const columnSum = sumColumn(square, j);
 

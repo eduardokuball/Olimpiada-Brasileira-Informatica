@@ -1,8 +1,3 @@
-const tunnelsData = prompt()
-    .split(' ')
-    .slice(0, 2)
-    .map(e => parseInt(e));
-
 function generateTunnels(num) {
     const tunnels = [];
 
@@ -58,6 +53,12 @@ function isValirTour(tour, tunnels) {
 
     return true;
 }
+
+
+const tunnelsData = prompt()
+    .split(' ')
+    .slice(0, 2)
+    .map(e => parseInt(e));
 
 const tunnels = generateTunnels(tunnelsData[1]);
 

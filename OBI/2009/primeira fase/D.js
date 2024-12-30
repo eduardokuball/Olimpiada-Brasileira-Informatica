@@ -1,27 +1,42 @@
-const [registers, maximumDistance] = prompt('quantidade de regiostros e distância permitida')
-.split(' ')
-.map(Number);
+function calculateEuclideanDistance(x, y) {
+    return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+}
 
-let x = 0;
-let y = 0;
-let isRape = false;
+function checkDisplacement(registers, maximumDistance) {
+    let x = 0;
+    let y = 0;
+    let isRape = false;
 
-for(let i = 0; i < registers; i++){
-    const [direction,distance] = prompt('direção e distância do deslocamento')
-    .split(' ');
-    if(direction == "N"){
-        y += Number(distance);
-    } else if(direction == "S"){
-        y -= Number(distance);
-    } else if(direction == "O"){
-        x -= Number(distance);
-    } else if(direction == "L"){
-        x += Number(distance);
+    for (let i = 0; i < registers; i++) {
+        const [direction, distance] = prompt()
+            .split(' ');
+        const dist = Number(distance);
+
+        if (direction === "N") {
+            y += dist;
+        } else if (direction === "S") {
+            y -= dist;
+        } else if (direction === "O") {
+            x -= dist;
+        } else if (direction === "L") {
+            x += dist;
+        }
+
+        const euclideanDistance = calculateEuclideanDistance(x, y);
+
+        if (euclideanDistance > maximumDistance) {
+            isRape = true;
+            break;
+        }
     }
-    const euclideanDistance = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
-    if(euclideanDistance > maximumDistance){
-        isRape = true;
-    }
-};
+
+    return isRape;
+}
+
+const [registers, maximumDistance] = prompt()
+    .split(' ')
+    .map(e =>parseInt(e));
+
+const isRape = checkDisplacement(registers, maximumDistance);
 
 console.log(isRape ? 1 : 0);

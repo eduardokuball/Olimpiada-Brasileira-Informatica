@@ -1,35 +1,46 @@
-const [size, commands] = prompt('Digite o tamanho do vetor e os comandos')
-.split(' ')
-.map(Number);
-
-const word = [];
-
-for (let i = 0; i < size; i++) {
-    word.push(i + 1);
-};
-
-const sums = [];
-
-for(let i = 0; i < commands; i++) {
-let [command, indexx,indexy ] = prompt(`Digite o comando ${i + 1}: trocar elemento, index, novo valor`)
-.split(' ');
-indexx = Number(indexx);
-indexy = Number(indexy);
-if(command == "I"){
-    for(let j = 0; j < word.length; j++) {
-        if(indexx >= indexy){
-            break;
-        } else {
-            [word[indexx - 1], word[indexy - 1]] = [word[indexy - 1], word[indexx - 1]];
-            indexx += 1;
-            indexy -= 1;
-        }
+function initializeVector(size) {
+    return Array.from({ length: size }, (_, index) => index + 1);
+  }
+  
+function swapElements(word, indexx, indexy) {
+    while (indexx < indexy) {
+      [word[indexx], word[indexy]] = [word[indexy], word[indexx]];
+      indexx++;
+      indexy--;
     }
-} else if(command == "S"){
-    let newArray = word.slice(indexx - 1,indexy);
-    const sum = newArray.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-    sums.push(sum);
 }
+  
+function sumElements(word, indexx, indexy) {
+    return word.slice(indexx, indexy + 1).reduce((acc, curr) => acc + curr, 0);
 }
-
-console.log(sums.join('\n'));
+  
+function processCommands(size, commands) {
+    const word = initializeVector(size);
+    const sums = [];
+  
+    for (let i = 0; i < commands; i++) {
+      let [command, indexx, indexy] = prompt(`Digite o comando ${i + 1}: trocar elemento, index, novo valor`)
+        .split(' ');
+      
+      indexx = Number(indexx) - 1;  
+      indexy = Number(indexy) - 1;  
+  
+      if (command === "I") {
+        swapElements(word, indexx, indexy);  
+      } else if (command === "S") {
+        const sum = sumElements(word, indexx, indexy); 
+        sums.push(sum);
+      }
+    }
+  
+    return sums;
+  }
+  
+const [size, commands] = prompt('Digite o tamanho do vetor e os comandos')
+    .split(' ')
+    .map(Number);
+  
+const sums = processCommands(size, commands);
+  
+console.log(sums.join('\n'));  
+  

@@ -1,24 +1,32 @@
-const start = Number(prompt('começo da sequência'));
-const end = Number(prompt('fim da sequência'));
-const search = Number(prompt('número que esta procurando'));
-const results = [];
+function sumOfDigits(number) {
+    return number
+        .toString()
+        .split('')
+        .map(Number)
+        .reduce((a, b) => a + b, 0);
+}
 
-for (let i = start; i <= end; i++) {
-    const array = i
-    .toString()
-    .split('')
-    .map(Number);
-    const sum = array.reduce((a, b) => a + b, 0);
-    if (sum == search) {
-        results.push(i);
-    }  
+function findNumbers(start, end, search) {
+    const results = [];
+    for (let i = start; i <= end; i++) {
+        if (sumOfDigits(i) === search) {
+            results.push(i);
+        }
+    }
+    return results;
 }
 
 function response(array) {
-    if (array.length == 0) {
+    if (array.length === 0) {
         return -1;
     }
-    return array.at(-1);
+    return array.at(-1); 
 }
+
+const start = Number(prompt());
+const end = Number(prompt());
+const search = Number(prompt());
+
+const results = findNumbers(start, end, search);
 
 console.log(response(results));

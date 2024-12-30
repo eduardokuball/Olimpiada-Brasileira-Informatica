@@ -1,4 +1,3 @@
-// Vai retornar um array com objetos, cada objeto tem um id (número do salão) e a altura do salão
 function createRooms(heights=[]) {
     const rooms = [];
 
@@ -7,18 +6,9 @@ function createRooms(heights=[]) {
     return rooms;
 }
 
-// retorna a sala no id tal, ou null se não achar
 const findRoom = (rooms=[], roomId) => rooms
     .find(({id}) => id === roomId) || null;
 
-/*
-    Gera um grafo nesse formato:
-    [
-        "1 : 2",
-        "2 : 3",
-        "1 : 4"
-    ]
-*/
 function createGraph(rooms=[], tunnels=[]) {
     const graph = [];
 
@@ -26,7 +16,6 @@ function createGraph(rooms=[], tunnels=[]) {
         const startRoom = findRoom(rooms, start);
         const endRoom = findRoom(rooms, end);
 
-            // Uma string que representa uma ligação.
         if (startRoom.height > endRoom.height)
             graph.push(`${start} : ${end}`);
 
@@ -37,7 +26,6 @@ function createGraph(rooms=[], tunnels=[]) {
     return graph;
 }
 
-// Gerado os dados...
 const lineInput = prompt()
     .split(' ', 3)
     .map(e => parseInt(e));
@@ -59,14 +47,11 @@ for (let i = 0; i < tunnelsQuant; i++) {
     tunnels.push({ start, end });
 }
 
-// Crias as rooms com as alturas especificadas
 const rooms = createRooms(roomsHeights);
 const graph = createGraph(rooms, tunnels);
 
 
-// Tocando fixa...
 
-// Tenta dar uma escorregada e retorna se deu pra escorregar ou não
 function nextRoom(room) {
     for (let tunnel of graph) {
         const [start, end] = tunnel.split(' : ', 2).map(e => parseInt(e));
@@ -86,7 +71,6 @@ let slips = 0;
 while (true) {
     const canISlip = nextRoom(currentRoom);
 
-    // Se não pode escorregar, cabo.
     if (!canISlip) break;
 }
 

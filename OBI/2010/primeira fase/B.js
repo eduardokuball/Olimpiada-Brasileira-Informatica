@@ -1,25 +1,34 @@
-const [lines,columns] = prompt("linhas e colunas")
-.split(" ")
-.map(Number);
-
-const field = [];
-
-for (let i = 0; i < lines; i++) {
-    const row = prompt(`digite a ${i + 1} linha`)
-    .split("");
-    field.push(row);
-};
-
-const commands = Number(prompt('quantos comandos?'));
-let shipsHit = 0;
-for(let i = 0; i < commands; i++){
-    const [x,y] = prompt('coordenada do comando')
-    .split(' ')
-    .map(Number);
-    if(field[x - 1][y - 1] === '#'){
-        shipsHit++;
+function initializeField(lines) {
+    const field = [];
+    for (let i = 0; i < lines; i++) {
+        const row = prompt().split("");
+        field.push(row);
     }
+    return field;
 }
 
-console.log(shipsHit);
+function countHits(field, commands) {
+    let shipsHit = 0;
+    for (let i = 0; i < commands; i++) {
+        const [x, y] = prompt()
+            .split(' ')
+            .map(Number);
+        
+        if (field[x - 1][y - 1] === '#') {
+            shipsHit++;
+        }
+    }
+    return shipsHit;
+}
 
+const [lines, columns] = prompt()
+    .split(" ")
+    .map(e => parseInt(e));
+
+const field = initializeField(lines);
+
+const commands = Number(prompt());
+
+const shipsHit = countHits(field, commands);
+
+console.log(shipsHit);

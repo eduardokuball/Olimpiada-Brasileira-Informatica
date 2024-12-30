@@ -48,6 +48,6 @@ function isAnagram(wordA = "", wordB = "") {
     return compareObjects(charMapA, charMapB);
 }
 
-const wordOne = prompt('primeira palavra');
-const wordTwo = prompt('segunda palavra');
+const wordOne = prompt();
+const wordTwo = prompt();
 console.log(isAnagram(wordOne, wordTwo) ? 'S' : 'N');

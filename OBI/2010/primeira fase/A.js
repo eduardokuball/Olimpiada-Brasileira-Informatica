@@ -1,5 +1,3 @@
-const currentYear = Number(prompt('Digite o ano atual:'));
-
 function nextHalleyYear(year) {
     const period = 76;
     const lastAppearance = 1986;
@@ -11,6 +9,8 @@ function nextHalleyYear(year) {
     
     return nextYear;
 }
+
+const currentYear = Number(prompt());
 
 const nextYear = nextHalleyYear(currentYear);
 console.log(nextYear);

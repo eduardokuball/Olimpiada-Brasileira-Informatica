@@ -1,8 +1,11 @@
-const youngestAge = parseInt(prompt('idade irmão mais novo'));
-const meAge = parseInt(prompt('idade otávio'));
+function calculateOldestAge(youngestAge, meAge) {
+    const ageDifference = Math.abs(meAge - youngestAge);
+    return meAge + ageDifference;
+}
 
-const ageDifference = Math.abs(meAge - youngestAge);
+const youngestAge = parseInt(prompt());
+const meAge = parseInt(prompt());
 
-const oldestAge = meAge + ageDifference;
+const oldestAge = calculateOldestAge(youngestAge, meAge);
 
 console.log(oldestAge);
