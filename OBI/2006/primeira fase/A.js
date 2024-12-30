@@ -1,9 +1,3 @@
-const rounds = Number(prompt('digite as rodadas'));
-const order = [4, 5, 6, 7, 11, 12, 13, 14, 1, 2, 3];
-
-let winnersAdalberto = 0;
-let winnersBernadete = 0;
-
 function Organizegame(array) {
     for (let j = 0; j < 10; j++) {
         for (let i = 0; i < array.length - 1; i++) {
@@ -31,6 +25,12 @@ function countWinners(adalbertoGame, bernadeteGame) {
         winnersBernadete++;
     }
 }
+
+const rounds = Number(prompt());
+const order = [4, 5, 6, 7, 11, 12, 13, 14, 1, 2, 3];
+
+let winnersAdalberto = 0;
+let winnersBernadete = 0;
 
 for (let k = 0; k < rounds; k++) {
     const cards = prompt('digite os jogos')

@@ -1,13 +1,3 @@
-const piles = Number(prompt('digite a quantidade de pilhas'));
-const rocks = prompt('digite quantas pedras há em cada pilha')
-.split(' ')
-.map(Number);
-let perfectStair = [];
-
-for (let i = 0; i < piles; i++) {
-    perfectStair.push(rocks[i]);
-}
-
 function redistribution() {
     for (let i = 0; i < 100; i++) {
         for (let i = 0; i < piles; i++) {
@@ -53,6 +43,16 @@ function response() {
     } else {
         return -1;
     }
+}
+
+const piles = Number(prompt());
+const rocks = prompt()
+    .split(' ')
+    .map(e => parseInt(e,));
+let perfectStair = [];
+
+for (let i = 0; i < piles; i++) {
+    perfectStair.push(rocks[i]);
 }
 
 console.log(response());

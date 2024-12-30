@@ -1,17 +1,26 @@
-const rounds = Number(window.prompt('digite quantas rodadas'));
-const player1 = prompt('player 1');
-const player2 = prompt('player 2');
-const winners = [];
-
-for (let i = 0; i < rounds; i++) {
-    const [n1, n2] = prompt('digite a jogada de cada um')
-    .split(' ')
-    .map(Number);
-    if ((n1 + n2) % 2 == 0) {
-        winners.push(player1);
-    } else {
-        winners.push(player2);
-    }
+function determineWinner(player1, player2, n1, n2) {
+    return (n1 + n2) % 2 === 0 ? player1 : player2;
 }
 
-console.log(winners.join('\n'));
+function playRounds(rounds, player1, player2) {
+    const winners = [];
+    for (let i = 0; i < rounds; i++) {
+        const [n1, n2] = prompt()
+            .split(' ')
+            .map(Number);
+        winners.push(determineWinner(player1, player2, n1, n2));
+    }
+    return winners;
+}
+
+function displayWinners(winners) {
+    console.log(winners.join('\n'));
+}
+
+const rounds = Number(prompt());
+const player1 = prompt();
+const player2 = prompt();
+
+const winners = playRounds(rounds, player1, player2);
+
+displayWinners(winners);

@@ -1,38 +1,53 @@
-const quantity = prompt('Digite a quantidade de amigos');
+function processRequirements(friends) {
+    const obj = [];
+    const friendshipsMade = [];
 
-const friends = prompt('Digite os nomes dos amigos separados por espaço')
-.split(' ');
+    friends.forEach(friend => {
+        const requirement = Number(prompt());
+        if (requirement > 0) {
+            const requirements = prompt()
+            .split(' ')      
+            obj.push({
+                name: friend,
+                requirements: requirements
+            });
+        } else {
+            friendshipsMade.push(friend);
+        }
+    });
 
-const obj = [];
-const friendshipsMade = [];
+    return [obj, friendshipsMade] ;
+}
 
-for (let i = 0; i < friends.length; i++) {
-    const requirement = Number(prompt('Digite o número de exigências de ' + friends[i] + ": "));
-    if (requirement > 0) {
-        const requirements = prompt('Digite as exigências separadas por espaço')
-        .split(' ');
-        obj.push({
-            name: friends[i],
-            requirements: requirements
+function makeFriendships(quantity, obj, friendshipsMade) {
+    for (let j = 0; j < quantity; j++) {
+        obj.forEach((o, index) => {
+            const allRequirementsMet = o.requirements.every(r => friendshipsMade.includes(r));
+
+            if (allRequirementsMet) {
+                friendshipsMade.push(o.name);
+                obj.splice(index, 1);
+            }
         });
+    }
+
+    return friendshipsMade;
+}
+
+function displayResult(quantity, friendshipsMade) {
+    if (friendshipsMade.length < quantity) {
+        console.log('impossivel');
     } else {
-        friendshipsMade.push(friends[i]);
+        console.log(friendshipsMade.join(' '));
     }
 }
 
-for (let j = 0; j < quantity; j++) {
-    obj.forEach((o, index) => {
-        const allRequirementsMet = o.requirements.every(r => friendshipsMade.includes(r));
+const quantity = Number(prompt());
+const friends = prompt()
+    .split(' ')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1));  ;
 
-        if (allRequirementsMet) {
-            friendshipsMade.push(o.name);
-            obj.splice(index, 1); 
-        }
-    });
-}
+const [obj, friendshipsMade] = processRequirements(friends);
+const finalFriendships = makeFriendships(quantity, obj, friendshipsMade);
 
-if (friendshipsMade.length < quantity) {
-    console.log('impossivel');
-} else {
-    console.log(friendshipsMade.join(' '));
-}
+displayResult(quantity, finalFriendships);

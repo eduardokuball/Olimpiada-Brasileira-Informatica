@@ -1,23 +1,27 @@
-const [quantity, rounds] = prompt('jogadores e rounds')
-.split(' ')
-.map(Number);
-let players = prompt('digite a ordem dos jogadores')
-.split(' ')
-.map(Number);
-
-for (let i = 0; i < rounds; i++) {
-    const input = prompt('jogadores, ordem, relatório')
-    .split(' ')
-    .map(Number);
-    const player = input[0];
-    const order = input[1];
-    const reportplayers = input.slice(-player);
-    reportplayers.forEach((r) => {
-        if (r != order) {
-            const index = reportplayers.indexOf(r);
+function processRound(players, input) {
+    const [playerCount, order, ...reportPlayers] = input;
+    reportPlayers.forEach((reportedPlayer, index) => {
+        if (reportedPlayer !== order) {
             players.splice(index, 1);
         }
     });
+    return players;
+}
+
+
+const [quantity, rounds] = prompt()
+    .split(' ')
+    .map(e => parseInt(e));
+
+let players = prompt()
+    .split(' ')
+    .map(e => parseInt(e));
+
+for (let i = 0; i < rounds; i++) {
+    const input = prompt()
+        .split(' ')
+        .map(Number);
+    players = processRound(players, input);
 }
 
 console.log(players.join(' '));
