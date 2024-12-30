@@ -1,36 +1,53 @@
-const [airports, flights] = prompt('aeroportos e voos')
-.split(' ')
-.map(Number);
-
-const connections = [];
-
-for (let i = 0; i < flights; i++) {
-    const flight = prompt(`digite o voo ${i + 1}: aeroporto de origem, aeroporto de destino`)
-    .split(' ')
-    .map(Number);
-    connections.push(flight[0]);
-    connections.push(flight[1]);
+function getConnections(flights) {
+    const connections = [];
+    for (let i = 0; i < flights; i++) {
+        const flight = prompt()
+        .split(' ')
+        .map(e => parseInt(e));
+        connections.push(flight[0]);
+        connections.push(flight[1]);
+    }
+    return connections;
 }
 
-const ocurrences = [];
-let most = 0;
-
-connections.forEach((v) => {
-    ocurrences.push({
-        airport: v,
-        quantity: connections.filter(item => item === v).length
+function countOccurrences(connections) {
+    const ocurrences = [];
+    connections.forEach((v) => {
+        const existing = ocurrences.find(o => o.airport === v);
+        if (existing) {
+            existing.quantity++;
+        } else {
+            ocurrences.push({ airport: v, quantity: 1 });
+        }
     });
+    return ocurrences;
+}
+
+function findMostVisitedAirports(ocurrences) {
+    let most = 0;
     ocurrences.forEach((v) => {
         if (v.quantity > most) most = v.quantity;
     });
-});
 
-const mostVisitedAirpost = [];
+    const mostVisitedAirports = ocurrences
+        .filter(v => v.quantity === most)
+        .map(v => v.airport);
 
-ocurrences.forEach((v) => {
-    if (v.quantity == most && !mostVisitedAirpost.includes(v.airport)) {
-        mostVisitedAirpost.push(v.airport);
-    }
-});
+    return mostVisitedAirports;
+}
 
-console.log(mostVisitedAirpost.join(' '));
+function displayResult(mostVisitedAirports) {
+    console.log(mostVisitedAirports.join(' '));
+}
+
+const [airports, flights] = prompt()
+    .split(' ')
+    .map(e => parseInt(e));
+
+const connections = getConnections(flights);
+
+const ocurrences = countOccurrences(connections);
+
+const mostVisitedAirports = findMostVisitedAirports(ocurrences);
+
+displayResult(mostVisitedAirports);

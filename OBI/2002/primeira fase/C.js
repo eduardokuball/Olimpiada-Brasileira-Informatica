@@ -1,5 +1,3 @@
-const foldingD = Number(prompt("Numero de vezes que a dobradura d foi feita"))
-
 function calculateValue(n) {
     if(n == 0) return 4;
     let base = 3; 
@@ -8,6 +6,8 @@ function calculateValue(n) {
     }
     return Math.pow(base, 2);
 }
+
+const foldingD = Number(prompt());
 
 console.log(calculateValue(foldingD));
 

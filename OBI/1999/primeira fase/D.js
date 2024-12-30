@@ -1,11 +1,4 @@
-const [kg, priceTrain, kgTrain, priceTruck, kgTruck] = prompt('kg, preço por kg trem, kg trem, preço por kg caminhão, kg caminhão')
-.split(' ')
-.map(parseFloat);
-
-const totalTrain = (priceTrain + (kgTrain * kg)).toFixed(2);
-const totalTruck = (priceTruck + (kgTruck * kg)).toFixed(2);
-
-function getTransportMethod() {
+function getTransportMethod(totalTrain,totalTruck) {
     const condition = totalTrain > totalTruck;
     const difference = totalTrain < totalTruck ? totalTruck - totalTrain : totalTrain - totalTruck;
     if (difference <= 1) {
@@ -17,4 +10,11 @@ function getTransportMethod() {
     }
 }
 
-console.log(getTransportMethod());
+const [kg, priceTrain, kgTrain, priceTruck, kgTruck] = prompt()
+    .split(' ')
+    .map(e => parseFloat(e));
+
+const totalTrain = (priceTrain + (kgTrain * kg)).toFixed(2);
+const totalTruck = (priceTruck + (kgTruck * kg)).toFixed(2);
+
+console.log(getTransportMethod(totalTrain,totalTruck));
