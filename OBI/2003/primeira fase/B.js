@@ -1,26 +1,37 @@
-const students = Number(prompt('digite a quantidade de alunos'));
-const report = [];
-const notes = [];
-
-for (let i = 0; i < students; i++) {
-    const [student, note] = prompt('código do aluno e sua nota')
-    .split(' ')
-    .map(Number);
-    report.push({
-        student: student,
-        note: note,
-    });
-    notes.push(note);
+// Função para coletar os dados dos alunos
+function collectReport(students) {
+    const report = [];
+    const notes = [];
+    for (let i = 0; i < students; i++) {
+        const [student, note] = prompt('código do aluno e sua nota')
+            .split(' ')
+            .map(Number);
+        report.push({ student, note });
+        notes.push(note);
+    }
+    return  [report, notes];
 }
 
-const mostNote = Math.max(...notes);
+function findHighestNote(notes) {
+    return Math.max(...notes);
+}
 
-const studentsWithMostNote = report.filter(e => e.note === mostNote);
+function findStudentsWithHighestNote(report, mostNote) {
+    return report.filter(e => e.note === mostNote);
+}
 
-let studentsReturn = "";
+function formatStudentsList(studentsWithMostNote) {
+    return studentsWithMostNote.map(s => s.student).join(' ');
+}
 
-studentsWithMostNote.forEach((s) => {
-    studentsReturn += `${s.student} `;
-})
+const students = Number(prompt());
+
+const [report, notes] = collectReport(students);
+
+const mostNote = findHighestNote(notes);
+
+const studentsWithMostNote = findStudentsWithHighestNote(report, mostNote);
+
+const studentsReturn = formatStudentsList(studentsWithMostNote);
 
 console.log(studentsReturn);

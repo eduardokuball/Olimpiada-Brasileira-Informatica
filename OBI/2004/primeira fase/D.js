@@ -1,15 +1,3 @@
-const [lines, columns] = prompt('digite o número de linhas e colunas da tabela')
-.split(' ')
-.map(Number);
-let matrix = [];
-
-for (let i = 0; i < lines; i++) {
-    const line = prompt(`digite os números da ${i + 1}`)
-    .split(' ')
-    .map(Number);
-    matrix.push(line);
-}
-
 function scrollRight() {
     const newMatrix = [];
     for (let i = 0; i < lines; i++) {
@@ -56,12 +44,35 @@ function scrollDown() {
     return newMatrix;
 }
 
+const [lines, columns] = prompt()
+    .split(' ')
+    .map(e => parseInt(e));
+
+
+function createMatrix(lines){
+    let matrix = [];
+    for (let i = 0; i < lines; i++) {
+        const line = prompt()
+        .split(' ')
+        .map(Number);
+        matrix.push(line);
+    }
+    return matrix;
+}
+
+function showMatrix(matrix){
+    matrix.forEach(row => console.log(row.join(' ')));
+ 
+}
+
+let matrix = createMatrix(lines);
+
 while (true) {
-    const [x, y] = prompt("digite o deslocamento horizontal e vertical")
+    const [x, y] = prompt()
     .split(" ")
     .map(Number);
     if (x == 0 && y == 0) {
-        console.log(matrix);
+        showMatrix(matrix);
         break;
     }
     if (x > 0) {
