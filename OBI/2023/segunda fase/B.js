@@ -1,51 +1,64 @@
-const [students, together, separate] = prompt('estudantes, duplas juntas e duplas separadas')
-.split(' ')
-.map(Number);
-const studentstogether = [];
-const studentsseparate = [];
-for (let i = 0; i < together; i++) {
-    const [p1, p2] = prompt('digite a dupla que quer fazer junto')
-    .split(' ')
-    .map(Number);
-    studentstogether.push([p1, p2]);
+function getStudentPairs(count) {
+    const pairs = [];
+    for (let i = 0; i < count; i++) {
+        const [p1, p2] = prompt()
+            .split(' ')
+            .map(e => parseInt(e));
+        pairs.push([p1, p2]);
+    }
+    return pairs;
 }
 
-for (let i = 0; i < separate; i++) {
-    const [p1, p2] = prompt('digite a dupla que quer fazer separada')
-    .split(' ')
-    .map(Number);
-    studentsseparate.push([p1, p2]);
+function getGroups(studentCount) {
+    const groups = [];
+    for (let i = 0; i < studentCount / 3; i++) {
+        const trio = prompt()
+            .split(' ')
+            .map(e => parseInt(e));
+        groups.push(trio);
+    }
+    return groups;
 }
 
-const groupsStudents = [];
-
-for (let i = 0; i < students / 3; i++) {
-    const trio = prompt('digite o trio separado por espaço')
-    .split(' ')
-    .map(Number);
-    groupsStudents.push(trio);
+function countSeparationsViolations(groups, separations) {
+    let violations = 0;
+    groups.forEach((group) => {
+        separations.forEach((pair) => {
+            if (group.includes(pair[0]) && group.includes(pair[1])) {
+                violations++;
+            }
+        });
+    });
+    return violations;
 }
 
-let violations = 0;
-
-groupsStudents.forEach((g) => {
-    studentsseparate.forEach((s) => {
-        if (g.includes(s[0]) && g.includes(s[1])) {
+function countTogethernessViolations(groups, togetherness) {
+    let violations = 0;
+    togetherness.forEach((pair) => {
+        let found = false;
+        groups.forEach((group) => {
+            if (group.includes(pair[0]) && group.includes(pair[1])) {
+                found = true;
+            }
+        });
+        if (!found) {
             violations++;
         }
-    })
-});
+    });
+    return violations;
+}
 
-studentstogether.forEach((s) => {
-    let searching = false;
-    groupsStudents.forEach((g) => {
-        if (g.includes(s[0]) && g.includes(s[1])) {
-            searching = true;
-        }
-    })
-    if (!searching) {
-        violations++;
-    }
-})
+const [students, together, separate] = prompt()
+    .split(' ')
+    .map(e => parseInt(e));
 
-console.log(violations);
+const studentstogether = getStudentPairs(together);
+const studentsseparate = getStudentPairs(separate);
+const groupsStudents = getGroups(students);
+
+const separationsViolations = countSeparationsViolations(groupsStudents, studentsseparate);
+const togethernessViolations = countTogethernessViolations(groupsStudents, studentstogether);
+
+const totalViolations = separationsViolations + togethernessViolations;
+
+console.log(totalViolations);

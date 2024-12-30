@@ -1,3 +1,13 @@
+function isAcronym(word) {
+    const letters = word.split('');
+
+    for (const letter of letters) {
+        if (!initials.includes(letter)) return false;
+    }
+
+    return true;
+}
+
 const quantity = parseInt(prompt());
 const words = [];
 
@@ -14,15 +24,6 @@ words.forEach(word => {
         initials.push(firstLetter);
 });
 
-function isAcronym(word) {
-    const letters = word.split('');
-
-    for (const letter of letters) {
-        if (!initials.includes(letter)) return false;
-    }
-
-    return true;
-}
 
 let someathingAcronym = false;
 

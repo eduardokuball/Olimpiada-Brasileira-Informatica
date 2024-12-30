@@ -1,10 +1,3 @@
-const lenghtfirst = prompt('tamanho da primeira palavra');
-const firstword = prompt('digite a primeira palavra').toLowerCase();
-const lenghtsecond = prompt('tamanho da segunda palavra').toLowerCase();
-const secondword = prompt('digite a segunda palavra');
-
-const repetitions = secondword.length < firstword.length ? secondword.length : firstword.length;
-
 function prefixies() {
     let prefix = 0;
     for (let i = 0; i < repetitions; i++) {
@@ -16,5 +9,14 @@ function prefixies() {
     }
     return prefix;
 }
+
+const lenghtfirst = prompt();
+const firstword = prompt().toLowerCase();
+const lenghtsecond = prompt().toLowerCase();
+const secondword = prompt();
+
+const repetitions = secondword.length < firstword.length ? secondword.length : firstword.length;
+
+
 
 console.log(prefixies());

@@ -7,7 +7,7 @@ function countShirtSizes(shirtSizes) {
         if (size === 2) mediumShirts++;
     });
     
-    return { smallShirts, mediumShirts };
+    return [smallShirts, mediumShirts];
 }
 
 function canDistributeShirts(smallShirts, mediumShirts, smallShirtsQuantity, mediumShirtsQuantity) {
@@ -22,7 +22,7 @@ const shirtSizes = prompt()
 const smallShirtsQuantity = parseInt(prompt());
 const mediumShirtsQuantity = parseInt(prompt());
 
-const { smallShirts, mediumShirts } = countShirtSizes(shirtSizes);
+const [smallShirts, mediumShirts] = countShirtSizes(shirtSizes);
 
 const shirtsForEveryone = canDistributeShirts(smallShirts, mediumShirts, smallShirtsQuantity, mediumShirtsQuantity);
 

@@ -1,10 +1,5 @@
-const [quantity, calls] = prompt('Número de pessoas e chamadas')
-.split(' ')
-.map(Number);
-
-const peoples = [];
-
 function AnalizeCircle() {
+    const peoples = [];
     for (let i = 0; i < calls; i++) {
         const [firstpeople, secondPeople] = prompt("" + (i + 1) + ' chamada').split(' ');
         if (!peoples.includes(firstpeople)) {
@@ -16,6 +11,10 @@ function AnalizeCircle() {
     }
     return peoples.join(', ');
 }
+
+const [quantity, calls] = prompt()
+    .split(' ')
+    .map(e => parseInt(e));
 
 console.log("Círculos de chamadas para o conjunto de dados 1:")
 console.log(AnalizeCircle());

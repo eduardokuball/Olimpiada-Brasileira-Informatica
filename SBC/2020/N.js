@@ -1,19 +1,39 @@
-const days = Number(prompt('digite a quantidade de dias'));
-let openingBalance = 0;
-let delays = 0;
+function getInitialBalance() {
+    const value = prompt().slice(1);
+    return parseFloat(value);
+}
 
-for (let i = 0; i < days + 1; i++) {
-    if (i == 0) {
-        const value = prompt('digite o saldo inicial').slice(1);
-        openingBalance += parseFloat(value);
-    } else {
-        const value = prompt('digite o valor a ser depositado').slice(1);
-        openingBalance += parseFloat(value);
-        const string = String(openingBalance.toFixed(2));
-        if (string.slice(-2) !== "00") {
+function getDepositValue() {
+    const value = prompt().slice(1);
+    return parseFloat(value);
+}
+
+function updateBalance(balance, deposit) {
+    return balance + deposit;
+}
+
+function hasDelay(balance) {
+    const string = String(balance.toFixed(2));
+    return string.slice(-2) !== "00";
+}
+
+function countDelays(days) {
+    let openingBalance = getInitialBalance();
+    let delays = 0;
+
+    for (let i = 1; i <= days; i++) {
+        const deposit = getDepositValue();
+        openingBalance = updateBalance(openingBalance, deposit);
+
+        if (hasDelay(openingBalance)) {
             delays++;
         }
     }
+
+    return delays;
 }
+
+const days = Number(prompt());
+const delays = countDelays(days);
 
 console.log(delays);
