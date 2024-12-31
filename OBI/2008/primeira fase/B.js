@@ -1,36 +1,41 @@
-function convertToNumeric(phoneNumber) {
-    const buttonMappings = {
-        'ABC': '2',
-        'DEF': '3',
-        'GHI': '4',
-        'JKL': '5',
-        'MNO': '6',
-        'PQRS': '7',
-        'TUV': '8',
-        'WXYZ': '9'
-    };
+const keyboard = new Map([
+    [["A", "B", "C"], 2],   
+    [["D", "E", "F"], 3],   
+    [["G", "H", "I"], 4],
+    [["J", "K", "L"], 5],
+    [["M", "N", "O"], 6],
+    [["P", "Q", "R","S"], 7],
+    [["T", "U", "V"], 8],
+    [["W", "X", "Y", "Z"], 9]
+    
+]);
 
-    let phoneNumberNumeric = "";
-
-    for (let i = 0; i < phoneNumber.length; i++) {
-        const char = phoneNumber[i].toUpperCase();
-        let addedChar = char;
-
-        for (let button in buttonMappings) {
-            if (button.includes(char)) {
-                addedChar = buttonMappings[button];
-                break;
-            }
+function findNumber(keyboard,letter){
+    for (let [key, value] of keyboard) {
+        if(key.includes(letter)){
+            return value;
         }
-
-        phoneNumberNumeric += addedChar;
     }
+};
 
-    return phoneNumberNumeric;
-}
+function convertToNumber(criptografedNumber){
+    let result = "";
+    for(const letter of criptografedNumber){
+        console.log(letter);
+        if(letter == "-"){
+            result += letter;
+        }
+        else {
+            const number = findNumber(keyboard, letter);
+            result += number;
+        }
+    }
+    return result;
+};
 
-const phoneNumber = prompt();
+const criptografedNumber = prompt()
+    .toUpperCase();
 
-const phoneNumberNumeric = convertToNumeric(phoneNumber);
+const convertedNumber = convertToNumber(criptografedNumber);
 
-console.log(phoneNumberNumeric);
+console.log(convertedNumber);
