@@ -1,20 +1,31 @@
-function getPanel(){
-    let panels = 0;
-    for(const letter of description){
-        if(letter == "C" || letter == "P"){
-            panels += 2;
-        } else if(letter == "A"){
-            panels += 1;
-        } 
+const panelsForRoad = new Map([
+    [["D"], 0],   
+    [["P","C"], 2],
+    [["A"], 1] 
+]);
+
+function calculatePanels(panelsForRoad,command){
+    for(let [key,value] of panelsForRoad){
+        if(key.includes(command)){
+            return value;
+        }
     }
-    return panels;
+    return 0;
 };
 
-const quantity = Number(prompt());
-const description = prompt()
-    .toUpperCase()
-    .slice(0,quantity);
+const commands = Number(prompt())
+const relatory = prompt()
+    .split('', commands)
+    .map(e => e.toUpperCase());
 
+function coountPanels(relatory){
+    let totalPanels = 0;
+    for(const command of relatory){
+        totalPanels += calculatePanels(panelsForRoad, command);
+    }
+    return totalPanels;
+};
 
+const panels = coountPanels(relatory);
 
-console.log(getPanel());
+console.log(panels);
