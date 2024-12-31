@@ -1,55 +1,49 @@
-const quantity = Number(prompt('quantidade:')) * 3;
-const input = prompt('números do quadro');
-const numbers = input
-.split(' ')
-.map(Number);
-numbers.sort((a, b) => b + a);
-
 function plays(numbers) {
     const plays = [];
     for (let i = 0; i < numbers.length; i += 3) {
-        plays.push(numbers.slice(i, i + 3));
+      plays.push(numbers.slice(i, i + 3));
     }
     return plays;
-}
-
+  }
+  
 function allequal(numbers) {
-    let equal = true;
-    for (let i = 0; i < numbers.length; i++) {
-        if (numbers[i] > numbers[i + 1] || numbers[i] < numbers[i + 1]) {
-            equal = false;
-            break;
-        }
+    for (let i = 0; i < numbers.length - 1; i++) {
+        if (numbers[i] !== numbers[i + 1]) {
+            return false;
+      }
     }
-    return equal;
-}
-
-const carlinhosnumbers = [];
-const equalizernumbers = [];
-const deleteds = [];
-
-function distribution() {
-    const playsGame = plays(numbers);
-    playsGame.forEach((e) => {
-        carlinhosnumbers.push(e[0]);
-        equalizernumbers.push(e[1]);
-        deleteds.push(e[2]);
+    return true;
+  }
+  
+function calculateSums(numbers) {
+    const carlinhosNumbers = [];
+    const equalizerNumbers = [];
+    const deletedNumbers = [];
+  
+    plays(numbers).forEach((play) => {
+      carlinhosNumbers.push(play[0]);
+      equalizerNumbers.push(play[1]);
+      deletedNumbers.push(play[2]);
     });
-}
-
-function response() {
+  
+    const sumCarlinhos = carlinhosNumbers.reduce((sum, num) => sum + num, 0);
+    const sumEqualizer = equalizerNumbers.reduce((sum, num) => sum + num, 0);
+  
+    return [sumCarlinhos, sumEqualizer];
+  }
+  
+function determineResponse(numbers) {
     if (allequal(numbers)) {
-        return "N";
-    } else {
-        distribution();
-        const sumcarlos = carlinhosnumbers.reduce((soma, numero) => soma + numero, 0);
-        const sumequalizer = equalizernumbers.reduce((soma, numero) => soma + numero, 0);
-        if (sumcarlos == sumequalizer) {
-            return "N";
-        } else {
-            return "Y";
-        }
+      return "N";
     }
-}
+    const  [sumCarlinhos, sumEqualizer] = calculateSums(numbers);
+    return sumCarlinhos === sumEqualizer ? "N" : "Y";
+  }
 
-console.log(response());
+const quantity = Number(prompt()) * 3;
+const numbers = prompt()
+    .split(" ").
+    map(e => parseInt(e));
+numbers.sort((a, b) => b + a);
+
+console.log(determineResponse(numbers));

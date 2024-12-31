@@ -1,35 +1,30 @@
-const [width, pieceWidth, emptyCells] = prompt('largura do tabuleiro, largura da peça e quadrados vazios a esquerda')
-.split(" ")
-.map(Number);
+const [width, pieceWidth, emptyCells] = prompt()
+  .split(" ")
+  .map(e => parseInt(e));
 
-let pieces = [];
-
-for (let i = 0; i < width; i++) {
-    if (i + 1 != pieceWidth) {
-        pieces.push(i + 1);
-    }
+function generatePieces(width, pieceWidth) {
+  return Array.from({ length: width }, (_, i) => i + 1).filter((p) => p !== pieceWidth).reverse();
 }
 
-pieces = pieces.reverse();
+function tryPlacePiece(start, end, remaining, piece) {
+  if (start - piece >= 0 && remaining - piece >= 0) {
+    return { start: start - piece, end, remaining: remaining - piece };
+  } else if (end - piece >= 0 && remaining - piece >= 0) {
+    return { start, end: end - piece, remaining: remaining - piece };
+  }
+  return { start, end, remaining };
+}
 
+let pieces = generatePieces(width, pieceWidth);
 let cellsEnd = emptyCells;
 let cellsStart = (pieceWidth - width + emptyCells) * -1;
 let cellsRemaining = width - pieceWidth;
 
 pieces.forEach((p) => {
-    if (cellsStart - p >= 0) {
-        if (cellsRemaining - p >= 0) {
-            cellsStart -= p;
-            cellsRemaining -= p;
-        }
-    } else {
-        if (cellsEnd - p >= 0) {
-            if (cellsRemaining - p >= 0) {
-                cellsEnd -= p;
-                cellsRemaining -= p;
-            }
-        }
-    }
+  const result = tryPlacePiece(cellsStart, cellsEnd, cellsRemaining, p);
+  cellsStart = result.start;
+  cellsEnd = result.end;
+  cellsRemaining = result.remaining;
 });
 
 console.log(cellsRemaining);

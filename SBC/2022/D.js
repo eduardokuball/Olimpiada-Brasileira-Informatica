@@ -1,56 +1,60 @@
-const [days, homeUmbrella, serviceUmbrella] = prompt("dias, guarda chuvas em casa, guarda chuvas no serviço")
-.split(" ")
-.map(Number);
+const [days, homeUmbrella, serviceUmbrella] = prompt()
+  .split(" ")
+  .map(Number);
 
 const reports = [];
 
+let currentHomeUmbrella = homeUmbrella;
+let currentServiceUmbrella = serviceUmbrella;
+
+function handleGo(go, hasUmbrellaInService) {
+  if (go === "N") {
+    if (hasUmbrellaInService) {
+      return { goReport: "N", home: 0, service: 0 };
+    } else {
+      return { goReport: "Y", home: -1, service: 1 };
+    }
+  }
+
+  if (go === "Y") {
+    return { goReport: "Y", home: -1, service: 1 };
+  }
+
+  return { goReport: "", home: 0, service: 0 };
+}
+
+function handleBack(back, hasUmbrellaInHome) {
+  if (back === "Y") {
+    return { backReport: "Y", home: 1, service: -1 };
+  }
+
+  if (back === "N") {
+    if (hasUmbrellaInHome) {
+      return { backReport: "N", home: 0, service: 0 };
+    } else {
+      return { backReport: "Y", home: 1, service: -1 };
+    }
+  }
+
+  return { backReport: "", home: 0, service: 0 };
+}
+
 for (let i = 0; i < days; i++) {
-    const [go, back] = prompt('Clima na ida e na volta')
-    .split(' ')
+  const [go, back] = prompt()
+    .split(" ")
     .map((str) => str.toUpperCase());
-    const hasUmbrellaInHome = homeUmbrella > 0;
-    const hasUmbrellaInService = serviceUmbrella > 0;
+  const hasUmbrellaInHome = currentHomeUmbrella > 0;
+  const hasUmbrellaInService = currentServiceUmbrella > 0;
 
-    const report = {
-        go: "",
-        back: ""
-    }
+  const goResult = handleGo(go, hasUmbrellaInService);
+  const backResult = handleBack(back, hasUmbrellaInHome);
 
-    if (go == "N") {
-        if (hasUmbrellaInService) {
-            report.go = "N";
-        } else {
-            report.go = "Y";
-            homeUmbrella--;
-            serviceUmbrella++;
-        }
-    }
+  currentHomeUmbrella += goResult.home + backResult.home;
+  currentServiceUmbrella += goResult.service + backResult.service;
 
-    if (go == "Y") {
-        report.go = "Y";
-        homeUmbrella--;
-        serviceUmbrella++;
-    }
-
-    if (back == "Y") {
-        report.back = "Y";
-        homeUmbrella++;
-        serviceUmbrella--;
-    }
-
-    if (back == "N") {
-        if (hasUmbrellaInHome) {
-            report.back = "N";
-        } else {
-            report.back = "Y";
-            homeUmbrella++;
-            serviceUmbrella--;
-        }
-    }
-
-    reports.push(report);
+  reports.push({ go: goResult.goReport, back: backResult.backReport });
 }
 
 reports.forEach((r) => {
-    console.log(`${r.go} ${r.back}`);
+  console.log(`${r.go} ${r.back}`);
 });
