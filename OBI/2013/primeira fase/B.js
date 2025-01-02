@@ -28,7 +28,7 @@ function score(radius,shots){
 };
 
 const [circles,shots] = prompt()
-   .split(' ')
+    .split(' ')
     .map(e => parseInt(e));
 
 const radius = collectRadius(circles);
