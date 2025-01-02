@@ -1,5 +1,5 @@
 import Graph from "../../../utils/graph.js";
-import Permutations from "../../../utils/Permutation.js";
+import Permutations from "../../../utils/permutation.js";
 
 function calculateChemistry(trio) {
     let time = 0;
