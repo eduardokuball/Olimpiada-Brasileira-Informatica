@@ -10,7 +10,7 @@ function calculateRouteTime(route) {
             time += 100000;
         }
     }
-    return time;
+    return [time,route];
 }
 
 const citiesQuantity = parseInt(prompt());
@@ -29,15 +29,13 @@ for (let i = 1; i <= paths; i++) {
     graph.addEdge(v1, v2, time);
 }
 
-graph.showGraph();
-
-
-
 const lastCity = cities[cities.length - 1];
 const routes = Permutations.withoutRepetition(cities);
 const valideRoutes = routes.filter(route => route[0] === lastCity || route[route.length-1] === lastCity);
 
 
 const times = valideRoutes.map(route => calculateRouteTime(route));
-times.sort((a, b) => a - b);
-console.log(times[0]);
+
+times.sort((a, b) => a[0] - b[0]);
+
+console.log(times[0][0]);
