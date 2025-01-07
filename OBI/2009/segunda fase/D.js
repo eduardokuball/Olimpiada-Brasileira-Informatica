@@ -7,22 +7,37 @@ function calculateChemistry(trio) {
         try {
             time += graph.getEdgeWeight(trio[i], trio[i + 1]);
         } catch (error) {
-            time += -100000;
+            time += 0;
         }
     }
     try {
         time += graph.getEdgeWeight(trio[0], trio[2]);
     } catch (error) {
-        time += -100000;
+        time += 0;
     }
     return [time,trio];
-}
+};
+
+function getTrios(){
+    //cria as permutações possiveís de todos os trios
+    let trios = Permutations.fixedSizeWithoutRepetition(artists,3);
+    //ordena elas em ordem crescente, pois o trio 3,2,1 é igual o trio 1,2,3
+    trios.forEach(subArray => {
+        subArray.sort((a, b) => a - b); 
+    });
+    //remove os duplicados, pois irão se repetir varias vezes após a ordenação
+    trios = Array.from(
+    new Set(trios.map(arr => JSON.stringify(arr)))
+    ).map(str => JSON.parse(str));
+
+    return trios;
+};
 
 function trioMostChemistry(chemistries){
     const trio = chemistries[0][1];
     trio.sort((a, b) => a - b);
     return trio.join(' ');
-}
+};
 
 
 const [musics, pares] = prompt()
@@ -43,9 +58,7 @@ for (let i = 1; i <= pares; i++) {
     graph.addEdge(v1, v2, time);
 }
 
-const trios = Permutations.fixedSizeWithoutRepetition(artists,3);
-
-
+const trios = getTrios();
 
 const chemistries = trios.map(trio => calculateChemistry(trio));
 chemistries.sort((a, b) => b[0] - a[0]);
@@ -53,5 +66,5 @@ chemistries.sort((a, b) => b[0] - a[0]);
 const trio = trioMostChemistry(chemistries);
 
 console.log(trio);
-console.log(trios);
-console.log(chemistries);
+
+
