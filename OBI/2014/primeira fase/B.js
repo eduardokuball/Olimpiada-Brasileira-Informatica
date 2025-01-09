@@ -15,4 +15,4 @@ function decrypt(string){
 
 const string = prompt();
 
-console.log(decrypt('pppp'));
+console.log(decrypt(string));
