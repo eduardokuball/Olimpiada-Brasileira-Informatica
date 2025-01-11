@@ -87,14 +87,47 @@ class Graph {
         return weight;
     }
     
-    getVertexEdges(vertex) {
+    getVertexEdges(vertex, ignoreWeight=false) {
         if (!this.graph.has(vertex)) {
             console.error(`vertex ${vertex} not exists`);
             throw new Error(`vertex ${vertex} not exists`);
         }
+
+        if (this.weighted && ignoreWeight) {
+            return this.graph.get()
+                .map(edge => edge?.vertex || edge);
+        }
+
         return this.graph.get(vertex);
     }
     
+    allPathsFrom(start, end, visited = new Set(), path=[]) {
+        if (!this.hasVertex(start)) {
+            console.error(`${start} not exists`);
+            throw new Error(`${start} not exists`);
+        }
+        if (!this.hasVertex(end)) {
+            console.error(`${end} not exists`);
+            throw new Error(`${end} not exists`);
+        }
+
+        if (visited.has(start)) return [];
+        if (start === end) return [path.concat(start)];
+    
+        visited.add(start);
+        path.push(start);
+    
+        let allPaths = [];
+    
+        const neighbors = this.getVertexEdges(start, true);
+        for (let neighbor of neighbors) {
+            const pathForks = this.allPathsFrom(neighbor, end, new Set(visited), [...path]);
+            allPaths = allPaths.concat(pathForks);
+        }
+    
+        return allPaths.toSorted();
+    }
+
     showGraph() {
         const links = [];
         
