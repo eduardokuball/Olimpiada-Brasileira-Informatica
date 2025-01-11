@@ -1,18 +1,22 @@
-function decrypt(string){   
-    let message = string;
-    let result = "";
-    for(let i = 0; i < message.length; i++){
-        if(message[i] == 'p'){
-            if(message[i + 1] == 'p'){
-                result += 'p'
-            }
-        } else {
-            result += message[i];
+function decriptWord(string){
+    let result = '';
+    for(let i = 0; i < string.length; i++){
+        if(i % 2 != 0){
+            result += string[i];
         }
-    } 
-    return result.replaceAll('pp', 'p');
+    }
+    return result;
+};
+
+function decriptPhrase(array){
+    let result = [];
+    for(let i = 0; i < array.length; i++){
+        result.push(decriptWord(array[i]));
+    }
+    return result.join(' ');
 };
 
 const string = prompt();
+const array = string.split(' ');
 
-console.log(decrypt(string));
+console.log(decriptPhrase(array));
