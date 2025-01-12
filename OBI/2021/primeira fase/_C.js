@@ -38,16 +38,18 @@ function calculateResponseTimes(registers, friends) {
                     alreadySentAMessage = true;
                 }
                 isT = false;
+            } else if (r.type === 'R' && r.personOrTime != f){
+                isT = false;
             } else if (r.type === 'T') {
-                time += Number(r.personOrTime);
+                if(!answered) time += Number(r.personOrTime);
                 isT = true;
             } else if (r.type === 'E' && r.personOrTime === f) {
                 answered = true;
-                if (!isT) {
+                time += 1;
+            } else if (r.type === 'E' && r.personOrTime !== f) {
+                if(!answered && !isT){
                     time++;
                 }
-            } else if (r.type === 'E' && r.personOrTime !== f) {
-                time++;
             }
         });
 
