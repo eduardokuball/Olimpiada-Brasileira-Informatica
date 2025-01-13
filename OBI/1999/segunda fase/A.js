@@ -1,4 +1,4 @@
-function generateZeroSquare({ top, right, bottom, left}) {
+function generateZeroSquare({ top, right, bottom, left }) {
     const MAX_X = Math.abs(right) + Math.abs(left);
     const MAX_Y = Math.abs(top) + Math.abs(bottom);
 
