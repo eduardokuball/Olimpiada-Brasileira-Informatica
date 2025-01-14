@@ -1,42 +1,64 @@
-const dimension = Number(prompt('digite a dimensão do quadrado'));
-const square = [];
-const numbersInSquare = [];
+function getSquare(dimension){
+    const square = [];
+    for (let i = 0; i < dimension; i++) {
+        const line = prompt()
+            .split(' ')
+            .map(e => parseInt(e));
+        square.push(line);
+    }
+    return square;
+};
 
-for (let i = 1; i <= dimension * dimension; i++) {
-    numbersInSquare.push(i);
-}
+function getNumbersInSquare(dimension){
+    const numbersInSquare = [];
+    for (let i = 1; i <= dimension * dimension; i++) {
+        numbersInSquare.push(i);
+    }
+    return numbersInSquare;
+};
 
-for (let i = 0; i < dimension; i++) {
-    const line = prompt('digite os valores da linha')
-    .split(' ')
-    .map(Number);
-    line.forEach((l) => {
-        square.push(l);
-    });
-}
+function convertToArray(square){
+    const array = [];
+    for(let i = 0; i < square.length; i++){
+        for(let j = 0; j < square.length; j++){
+            array.push(square[i][j]);
+        }
+    }
+    return array;
+};
 
-function search() {
-    let wanted = 0;
+function illegibleNumber(numbersInSquare, square) {
+    const array = convertToArray(square);
+    let search = null
     numbersInSquare.forEach((n) => {
-        if (!square.includes(n)) {
-            wanted += n;
+        if (!array.includes(n)) {
+            search = n;
         }
     });
-    return wanted;
-}
+    return search;
+};
 
-const index = square.indexOf(0);
 
-function searchLine() {
-    const line = Math.floor(index / dimension);
-    return line + 1;
-}
+function getIndex(square){
+    let index = null;
+    for(let i = 0; i < square.length; i++){
+        for(let j = 0; j < square.length; j++){
+            if(square[i][j] === 0 ){
+                index = [i + 1, j + 1];
+            }
+        }
+    }
+    return index;
+};
 
-function searchColumn() {
-    const column = index % dimension;
-    return column + 1;
-}
+const dimension = parseInt(prompt());
 
-console.log(search());
-console.log(searchLine());
-console.log(searchColumn());
+const square = getSquare(dimension);
+
+const numbersInSquare = getNumbersInSquare(dimension);
+
+const index = getIndex(square);
+
+console.log(illegibleNumber(numbersInSquare,square));
+console.log(index[0]);
+console.log(index[1]);
