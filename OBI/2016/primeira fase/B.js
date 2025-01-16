@@ -8,9 +8,6 @@ function getCode(lines){
     return code.flat();
 };
 
-const lines = parseInt(prompt());
-const code = getCode(lines);
-
 function balanced(code){
     let openKeys = 0;
     let closeKeys = 0;
@@ -30,4 +27,9 @@ function balanced(code){
     return 'N';
 };
 
+const lines = parseInt(prompt());
+
+const code = getCode(lines);
+
 console.log(balanced(code));
+
