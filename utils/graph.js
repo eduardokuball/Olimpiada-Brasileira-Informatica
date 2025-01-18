@@ -94,7 +94,7 @@ class Graph {
         }
 
         if (this.weighted && ignoreWeight) {
-            return this.graph.get()
+            return this.graph.get(vertex)
                 .map(edge => edge?.vertex || edge);
         }
 
