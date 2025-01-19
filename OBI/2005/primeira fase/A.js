@@ -3,7 +3,7 @@ function processRounds(rounds) {
     let beto = 0;
 
     for (let i = 0; i < rounds; i++) {
-        const [n1, n2] = prompt(`Digite a quantidade de cartas viradas na rodada ${i + 1}`)
+        const [n1, n2] = prompt()
             .split(' ')
             .map(Number);
         aldo += n1;
@@ -17,7 +17,7 @@ function determineWinner(aldo, beto) {
     return aldo > beto ? 'Aldo' : 'Beto';
 }
 
-const rounds = Number(prompt('Digite o número de rodadas do bafo'));
+const rounds = Number(prompt());
 
 const [aldo, beto] = processRounds(rounds);
 const winner = determineWinner(aldo, beto);

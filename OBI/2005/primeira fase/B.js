@@ -20,7 +20,7 @@ function checkAllConnections(stations, connections) {
     return "normal";
 }
 
-const [stations, transmissionLines] = prompt('Digite o número de estações e linhas de transmissão')
+const [stations, transmissionLines] = prompt()
     .split(' ')
     .map(Number);
 

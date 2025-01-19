@@ -1,13 +1,12 @@
 function processRound(players, input) {
-    const [playerCount, order, ...reportPlayers] = input;
-    reportPlayers.forEach((reportedPlayer, index) => {
-        if (reportedPlayer !== order) {
+    const [, order, ...reportPlayers] = input;
+    for (let index = reportPlayers.length - 1; index >= 0; index--) {
+        if (reportPlayers[index] !== order) {
             players.splice(index, 1);
         }
-    });
+    }
     return players;
 }
-
 
 const [quantity, rounds] = prompt()
     .split(' ')
@@ -22,6 +21,7 @@ for (let i = 0; i < rounds; i++) {
         .split(' ')
         .map(Number);
     players = processRound(players, input);
+    console.log(players);
 }
 
 console.log(players.join(' '));
