@@ -1,9 +1,3 @@
-const number = parseInt(prompt());
-
-const start = parseInt(prompt());
-
-const end = parseInt(prompt());
-
 function searchNumbers(number,start,end) {
     const numbers = [];
     for(let i = start; i <= end; i++){
@@ -15,11 +9,16 @@ function searchNumbers(number,start,end) {
             numbers.push(i);
         }
     }
-    numbers.sort((a,b) => a - b);
-    return [numbers[0], numbers[numbers.length - 1]];
+    return numbers;
 };
 
-const search = searchNumbers(number,start,end);
+const number = parseInt(prompt());
+const start = parseInt(prompt());
+const end = parseInt(prompt());
 
-console.log(search[0]);
-console.log(search[1]);
+const maxSearch = Math.max(...searchNumbers(number,start,end));
+
+const minSearch = Math.min(...searchNumbers(number,start,end));
+
+console.log(minSearch);
+console.log(maxSearch);
