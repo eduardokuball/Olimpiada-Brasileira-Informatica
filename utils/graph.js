@@ -48,6 +48,29 @@ class Graph {
         }
     }
     
+    removeEdge(vertexA, vertexB) {
+        if (!this.hasEdge(vertexA, vertexB)) {
+            console.error('edge not exists');
+            throw new Error('edge not exists');
+        }
+
+        // Removendo de A para B
+        const removedEdgesFromA = this.graph.get(vertexA)
+            .filter(e => 
+                this.weighted ? e.vertex !== vertexB : e !== vertexB
+            );
+
+        this.graph.set(vertexA, removedEdgesFromA);
+
+        // Removendo de B para A
+        const removedEdgesFromB = this.graph.get(vertexB)
+            .filter(e =>
+                this.weighted ? e.vertex !== vertexA : e !== vertexA
+            );
+
+        this.graph.set(vertexB, removedEdgesFromB);
+    }
+
     // Pegar informações do grafo:
     hasVertex(vertex) {
         return this.graph.has(vertex);
@@ -99,6 +122,69 @@ class Graph {
         }
 
         return this.graph.get(vertex);
+    }
+
+    allPathsThatStartWith(start, visited = new Set(), path = []) {
+        if (!this.hasVertex(start)) {
+            console.error(`${start} not exists`);
+            throw new Error(`${start} not exists`);
+        }
+    
+        let allPaths = [];
+        path.push(start); // Adiciona o ponto atual ao caminho
+        visited.add(start); // Marca o ponto como visitado
+    
+        const neighbors = this.getVertexEdges(start, true);
+        let isDeadEnd = true; // Marca se chegamos ao fim de um ramo
+    
+        for (let neighbor of neighbors) {
+            if (!visited.has(neighbor)) {
+                // Continua explorando apenas se o vizinho ainda não foi visitado
+                isDeadEnd = false;
+                const subPaths = this.allPathsThatStartWith(neighbor, new Set(visited), [...path]);
+                allPaths = allPaths.concat(subPaths);
+            }
+        }
+    
+        if (isDeadEnd) {
+            // Se não há mais vizinhos, adiciona o caminho completo
+            allPaths.push([...path]);
+        }
+    
+        path.pop(); // Remove o ponto atual (backtracking)
+        visited.delete(start); // Desmarca o ponto atual (backtracking)
+    
+        return allPaths;
+    }
+    
+    allCyclesFrom(start) {
+        if (!this.hasVertex(start)) {
+            console.error(`${start} not exists`);
+            throw new Error(`${start} not exists`);
+        }
+    
+        const allPaths = this.allPathsThatStartWith(start);
+        let allCycles = [];
+    
+        for (let path of allPaths) {
+            const lastVertex = path[path.length - 1];
+            if (lastVertex !== start) {
+                const allCyclePaths = this.allPathsFrom(lastVertex, start); 
+
+                if (allCyclePaths.length <= 0) continue;
+
+                const smallestCycle = allCyclePaths.reduce((smallest, e) =>
+                    e.length < smallest.length ? e : smallest, allCyclePaths[0]);
+
+                allCycles.push([...path, ...smallestCycle.slice(1)]);
+                continue;
+            }
+            
+            if (path.length <= 2) continue;
+            allCycles.push(path);
+        }
+    
+        return allCycles.toSorted();
     }
     
     allPathsFrom(start, end, visited = new Set(), path=[]) {
