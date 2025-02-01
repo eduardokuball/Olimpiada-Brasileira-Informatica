@@ -3,7 +3,7 @@ function collectReport(students) {
     const report = [];
     const notes = [];
     for (let i = 0; i < students; i++) {
-        const [student, note] = prompt('código do aluno e sua nota')
+        const [student, note] = prompt()
             .split(' ')
             .map(Number);
         report.push({ student, note });
