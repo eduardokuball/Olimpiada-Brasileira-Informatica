@@ -19,7 +19,7 @@ function processCommands(size, commands) {
     const sums = [];
   
     for (let i = 0; i < commands; i++) {
-      let [command, indexx, indexy] = prompt(`Digite o comando ${i + 1}: trocar elemento, index, novo valor`)
+      let [command, indexx, indexy] = prompt()
         .split(' ');
       
       indexx = Number(indexx) - 1;  
@@ -36,7 +36,7 @@ function processCommands(size, commands) {
     return sums;
   }
   
-const [size, commands] = prompt('Digite o tamanho do vetor e os comandos')
+const [size, commands] = prompt()
     .split(' ')
     .map(Number);
   
