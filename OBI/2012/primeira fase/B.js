@@ -7,37 +7,28 @@ const holes = [
     { x: 5, y: 4 }
 ];
 
-let currentCoordenates = { x: 4, y: 3 };
-const squaresCovered = [];
-
 const quantity = Number(prompt());
 const moves = prompt()
     .split(' ', quantity)
     .map(e => parseInt(e));
 
-const boardSize = 8; 
-const knight = new Knight(boardSize);
+const boardSize = 8;
+const knight = new Knight(boardSize, 4, 3);
 
 function executeMoves(moves) {
-    let count = 0;
-    
+    let stepsTaken = 0;
+
     for (const move of moves) {
-        const possibleMoves = knight.getMoves([currentCoordenates.x, currentCoordenates.y]);
-        
-        if (move - 1 < possibleMoves.length) {
-            const [x, y] = possibleMoves[move - 1];
 
-            squaresCovered.push({ x, y });
-            currentCoordenates = { x, y };
+        knight.move(move);
 
-            if (holes.some(h => h.x === x && h.y === y)) {
-                return count + 1;
-            }
+        if (holes.some(h => h.x === knight.x && h.y === knight.y)) {
+            return stepsTaken + 1;
         }
 
-        count++;
+        stepsTaken++;
     }
-    return count;
+    return stepsTaken;
 }
 
 console.log(executeMoves(moves));
