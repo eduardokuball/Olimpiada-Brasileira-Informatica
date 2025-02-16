@@ -11,7 +11,9 @@ class Palindrome {
         }
 
         // Inverte a string e compara com a original.
-        const reversed = [...str].reverse().join('');
+        const reversed = [...str]
+            .reverse()
+            .join('');
         return str === reversed;
     }
 }

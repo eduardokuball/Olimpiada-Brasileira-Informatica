@@ -26,7 +26,7 @@ class Knight {
     };
 
     getIsPossibleMovie(move){
-        if (move < 0 || move > 8) {
+        if (move < 1 || move > 8) {
             throw new Error('Invalid Movement');
         }
         const moves = this.getMoves();
@@ -54,11 +54,27 @@ class Knight {
         this.x = newX;
         this.y = newY;
     }
+
+    getPosition() {
+        return { x: this.x, y: this.y };
+    }
 }
 
 export default Knight;
 
+// const knight = new Knight(8, 0, 0);
 
+// console.log(knight.getMoves());
+
+// console.log(knight.getIsPossibleMovie(3));
+
+// console.log(knight.getPossiblesMovies());
+
+// console.log(knight.getPosition());
+
+// knight.move(2);
+
+// console.log(knight.getPosition());
 
 
 
