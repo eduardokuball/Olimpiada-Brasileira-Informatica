@@ -10,7 +10,7 @@ for (let i = 0; i < rows; i++) {
         .map(e => parseInt(e));
 
     image.push(row);    
-}
+};
 
 
 function getNeighbors(matrix, x, y) {
@@ -29,7 +29,7 @@ function getNeighbors(matrix, x, y) {
         .map(([dx, dy]) => [x + dx, y + dy]) // Faz a soma para pegar os vizinhos
         .filter(([nx, ny]) => nx >= 0 && ny >= 0) // Filtra os que tem range <
         .filter(([nx, ny]) => (nx < matrix.length) && (ny < matrix[0].length)); // Filtra os que tem range >
-}
+};
 
 const absoluteArray = array => JSON.stringify(array);
 
@@ -47,7 +47,7 @@ function getConstructionBlocks(matrix, [i, j], visited=[]) {
     });
 
     return visited;
-}
+};
 
 let buildings = 0;
 let occupiedBlocks = [];
