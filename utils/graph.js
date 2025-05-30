@@ -233,6 +233,33 @@ class Graph {
         const filteredLinks = links.filter((e, i) => links.indexOf(e) === i);
         filteredLinks.forEach(link => console.log(link));
     }
+
+    getAdjacencyMatrix() {
+        const vertices = Array.from(this.graph.keys()).sort((a, b) => a - b);
+        const size = vertices.length;
+
+        const indexMap = new Map();
+        vertices.forEach((vertex, index) => indexMap.set(vertex, index));
+
+        const matrix = Array.from({ length: size }, () =>
+            Array.from({ length: size }, () => Infinity)
+        );
+
+        for (let i = 0; i < size; i++) {
+            matrix[i][i] = 0;
+        }
+
+        for (let [vertex, edges] of this.graph) {
+            const fromIndex = indexMap.get(vertex);
+            edges.forEach(edge => {
+                const toIndex = indexMap.get(this.weighted ? edge.vertex : edge);
+                const weight = this.weighted ? edge.weight : 1;
+                matrix[fromIndex][toIndex] = weight;
+            });
+        }
+
+        return matrix;
+    }
 }
 
 export default Graph;
