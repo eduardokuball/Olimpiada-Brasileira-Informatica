@@ -28,7 +28,7 @@ function floyd(graph, size) {
 }
 
 
-const [s, c] = prompt("Digite o número de cidades e conexões (ex: '4 5'):")
+const [s, c] = prompt()
     .split(' ')
     .map(Number);
 
@@ -38,9 +38,7 @@ const vertices = Array.from({ length: s }, (_, i) => i);
 graph.addVertexes(...vertices);
 
 for (let i = 0; i < c; i++) {
-    const [a, b, custo] = prompt(
-        `Digite a conexão ${i + 1} (ex: '1 2 10'):`
-    )
+    const [a, b, custo] = prompt()
         .split(' ')
         .map(Number);
 
