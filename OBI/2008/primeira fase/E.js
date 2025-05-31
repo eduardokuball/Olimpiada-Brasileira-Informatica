@@ -1,38 +1,46 @@
-function pontuacao(a, forca, n) {
-    let start = 0;
-    let finish = n;
+function pontuation(a, power, n) {
+    let ini = 0;
+    let fim = n;
 
-    while (finish - start > 1) {
-        const med = Math.floor((finish + start) / 2);
-        if (a[med] <= forca) {
-            start = med;
+    while (fim - ini > 1) {
+        const med = Math.floor((fim + ini) / 2);
+        if (a[med] <= power) {
+            ini = med;
         } else {
-            finish = med;
+            fim = med;
         }
     }
-    return finish - 1;
+    return fim - 1;
 }
 
-const [n, m] = prompt()
+const [strips, competitors] = prompt()
     .split(' ')
-    .map(Number);
+    .map((e) => {
+        return parseInt(e);
+    });
 
-const a = [0, ...prompt()
+const powers = [0, ...prompt()
     .split(' ')
-    .map(Number)];
+    .map((e) => {
+        return parseInt(e);
+    })];
 
-const f = prompt()
+const pontuations = prompt()
     .split(' ')
-    .map(Number);
+    .map((e) => {
+        return parseInt(e);
+    });
 
 const ogros = prompt()
     .split(' ')
-    .map(Number);
+    .map((e) => {
+        return parseInt(e);
+    });
 
-let resultado = '';
+let result = '';
 
 for (let o of ogros) {
-    resultado += f[pontuacao(a, o, n)] + ' ';
+    result += pontuations[pontuation(powers, o, strips)] + ' ';
 }
 
-console.log(resultado.trim());
+console.log(result.trim());
