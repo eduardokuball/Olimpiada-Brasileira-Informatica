@@ -19,13 +19,10 @@ function calculateChemistry(trio) {
 };
 
 function getTrios(){
-    //cria as permutações possiveís de todos os trios
     let trios = Permutations.fixedSizeWithoutRepetition(artists,3);
-    //ordena elas em ordem crescente, pois o trio 3,2,1 é igual o trio 1,2,3
     trios.forEach(subArray => {
         subArray.sort((a, b) => a - b); 
     });
-    //remove os duplicados, pois irão se repetir varias vezes após a ordenação
     trios = Array.from(
     new Set(trios.map(arr => JSON.stringify(arr)))
     ).map(str => JSON.parse(str));
