@@ -2,12 +2,10 @@
 
 # Estrutura do Projeto de Resolução de Maratonas
 
-Este projeto é organizado para facilitar a navegação, compreensão e resolução de questões de diversas maratonas de programação. Abaixo está a descrição detalhada da estrutura e finalidade de cada componente do projeto.
+Este projeto é organizado para facilitar a navegação, compreensão e resolução de questões da Olimpíada brasileira de informática. Abaixo está a descrição detalhada da estrutura e finalidade de cada componente do projeto.
 
 ## Estrutura Geral
 
-- **Pastas de Maratonas**:  
-  Cada maratona é representada por uma pasta nomeada com o título correspondente à maratona (ex.: `OBI`, `SBC`, etc.).
 
 - **Pastas por Ano**:  
   Dentro de cada pasta de maratona, há subpastas nomeadas com o ano da edição (ex.: `2023`, `2006`).
