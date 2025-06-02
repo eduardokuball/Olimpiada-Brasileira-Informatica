@@ -12,7 +12,7 @@ class DirectedGraph {
     }
     
     addEdge(vertexA, vertexB, weight=null) {
-        if (this.weighted && !weight) {
+        if (this.weighted && weight == null) {
             console.error('weight is not defined');
             throw new Error('weight is not defined');
         }
