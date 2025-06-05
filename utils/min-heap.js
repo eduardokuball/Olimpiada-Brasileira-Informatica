@@ -64,6 +64,10 @@ class MinHeap {
     isEmpty() {
         return this.heap.length === 0;
     }
+
+    size() {
+        return this.heap.length;
+    }
 }
 
 export default MinHeap;
