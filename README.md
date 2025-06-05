@@ -1,8 +1,8 @@
-[Métodos](https://www.notion.so/gustrutkowski/323943399c0f424fa61e2dc97f142392?v=103f35ee43eb4debb11b2fdaa036ed34&pvs=4)
-
 # Estrutura do Projeto de Resolução de Maratonas
 
 Este projeto é organizado para facilitar a navegação, compreensão e resolução de questões da Olimpíada brasileira de informática. Abaixo está a descrição detalhada da estrutura e finalidade de cada componente do projeto.
+
+A ideia era fazer a resolução do nível mais alto de cada fase de cada ano
 
 ## Estrutura Geral
 
