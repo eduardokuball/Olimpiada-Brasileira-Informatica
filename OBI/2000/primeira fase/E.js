@@ -18,8 +18,8 @@ function getRegions(quantity){
     let y2s = [];
     for (let i = 0; i < quantity; i++) {
         const [x1, y1, x2, y2] = prompt()
-           .split(' ')
-           .map(e => parseInt(e));
+        .split(' ')
+        .map(e => parseInt(e));
         x1s.push(x1);
         y1s.push(y1);
         x2s.push(x2);

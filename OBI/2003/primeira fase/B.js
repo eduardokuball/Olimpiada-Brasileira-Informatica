@@ -1,4 +1,3 @@
-// Função para coletar os dados dos alunos
 function collectReport(students) {
     const report = [];
     const notes = [];

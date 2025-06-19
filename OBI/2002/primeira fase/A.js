@@ -15,7 +15,7 @@ function averages(temperatures){
     };
     averages.sort((a,b) => a - b);
     return [Math.min(...averages), Math.max(...averages)].join(' '); 
-}
+};
 
 const [meditions, interval] = prompt()
     .split(' ')

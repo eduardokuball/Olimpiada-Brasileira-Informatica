@@ -10,6 +10,7 @@ function getOccupations(iceCreamMaker) {
 }
 
 function mergeOccupations(occupations) {
+    
     occupations.sort((a, b) => a.start - b.start);
 
     const merged = [];
