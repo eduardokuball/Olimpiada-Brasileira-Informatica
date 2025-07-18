@@ -4,7 +4,6 @@ class Point {
         this.y = y;
     }
 
-    // Comparison by x coordinate (for sorting)
     isLessThan(other) {
         return this.x < other.x;
     }

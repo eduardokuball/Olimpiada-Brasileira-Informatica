@@ -28,12 +28,10 @@ function getNextState(game=[[]]) {
                 .filter(n => n === 1)
                 .length;
 
-            // Caso esteja morta e tenha 3 vizinhos vivos
             if (cell === 0 && livingNeighbors === 3) {
                 newStateCell = 1;
             }
             
-            // Caso esteja viva e tenha menos de 2 ou mais de 3 vizinhos
             if (cell === 1 && (livingNeighbors < 2 || livingNeighbors > 3)) {
                 newStateCell = 0;
             }
