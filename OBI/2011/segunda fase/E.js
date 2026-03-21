@@ -5,7 +5,7 @@ const WHITE = 'B';
 const EMPTY = '_';
 
 function getNextMoves(position) {
-    const pieces = position.split('')
+    const pieces = position.split(' ')
     if (pieces.every(e => e === EMPTY)) return []; // Jogo finalizado
     if (pieces.every(e => e !== BLACK)) return null; // Só peças brancas
 
@@ -26,7 +26,7 @@ function getNextMoves(position) {
         if (i < pieces.length-1 && newPosition[i+1] !== EMPTY)
             newPosition[i+1] = toggle(newPosition[i+1]);
 
-        moves.push(newPosition.join(''));
+        moves.push(newPosition.join(' '));
     }
 
     return moves;
@@ -50,5 +50,5 @@ function main(start) {
 }
 
 const n = parseInt(prompt('Digite o número de peças no jogo'));
-const game = prompt('Digite a configuração inicial do jogo').slice(0, n);
+const game = prompt('Digite a configuração inicial do jogo').split(' ', n).join(' ');
 console.log(main(game));
