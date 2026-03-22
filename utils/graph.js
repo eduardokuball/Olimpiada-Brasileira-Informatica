@@ -24,7 +24,7 @@ class Graph {
             console.error('vertexB is not defined');
             throw new Error('vertexB is not defined');
         }
-      
+
         const edgesA = this.graph.get(vertexA);
         const edgesB = this.graph.get(vertexB);
         const edgeA = this.weighted ? { vertex: vertexB, weight } : vertexB;
