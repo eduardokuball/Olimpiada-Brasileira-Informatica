@@ -25,7 +25,7 @@ Rodar os testes de uma questão específica:
 ```bash
 # npm run test:one obi/{ano}/{fase}/tests/{question}.test.js
 # Rodar apenas a questão A da fase 1 de 1999:
-npm run test:one obi/1999/fase1/tests/A.test.js
+npm run test:one obi/1999/fase2/tests/A.test.js
 ```
 
 ## Estrutura Geral
