@@ -6,7 +6,7 @@ const quantity = input();
 const regions = [];
 
 for(var i = 0; i < quantity; i++){
-    regions.push(input.split(" ").map(Number));
+    regions.push(input());
 };
 
 const result = findIntersection(regions);
