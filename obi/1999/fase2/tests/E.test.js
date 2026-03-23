@@ -1,6 +1,6 @@
 import longestTunnel from '../E.js';
 
-describe('Maior túnel a partir da cidade de origem', () => {
+describe('1999 -> fase 2 -> Carga Pesada', () => {
 
     test('Caso com múltiplos túneis', () => {
         const cityOfOrigin = 2;
