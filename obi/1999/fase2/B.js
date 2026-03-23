@@ -1,4 +1,4 @@
-function simultaneousPeople(timeEntrance=[],timeOut=[]){
+export default function simultaneousPeople(timeEntrance=[],timeOut=[], persons){
     let simultaneousPeople = 0;
 
     for (let i = 0; i < persons; i++) {
@@ -12,12 +12,3 @@ function simultaneousPeople(timeEntrance=[],timeOut=[]){
 
 }
 
-const persons = Number(prompt());
-const timeEntrance = prompt()
-    .split(' ')
-    .map(e => parseInt(e));
-const timeOut = prompt()
-    .split(' ')
-    .map(e => parseInt(e));
-
-console.log(simultaneousPeople(timeEntrance,timeOut));
