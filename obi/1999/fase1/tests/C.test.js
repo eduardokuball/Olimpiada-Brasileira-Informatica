@@ -1,7 +1,7 @@
 import crosswords from '../C.js'
 
 describe('1999 -> Fase 1 -> Palavras Cruzadas', () => {
-    test('Teste 1: Linha Horizontal', () => {
+    test('Teste 1', () => {
         const board = ['*PASCAL*'.split('')];
         const result = {
             horizontal: [{ number: 1, word: 'PASCAL' }],
@@ -10,7 +10,7 @@ describe('1999 -> Fase 1 -> Palavras Cruzadas', () => {
         expect(crosswords(board)).toEqual(result);
     });
 
-    test('Teste 2: Matriz 3x3', () => {
+    test('Teste 2', () => {
         const board = ['*M*', 'BIT', '*L*']
             .map(e => e.split(''));
         const result = {
@@ -20,7 +20,7 @@ describe('1999 -> Fase 1 -> Palavras Cruzadas', () => {
         expect(crosswords(board)).toEqual(result);
     });
 
-    test('Teste 2: Matriz 5x7', () => {
+    test('Teste 3', () => {
         const board = [
             'ATOS**J',
             'MEMORIA',

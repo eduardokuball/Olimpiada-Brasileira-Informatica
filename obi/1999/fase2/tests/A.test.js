@@ -2,7 +2,7 @@ import calculateRotations from '../A.js';
 
 describe('1999 -> Fase 2 -> RoboCoffee', () => {
 
-    test('Quadrado simples (sentido anti-horário)', () => {
+    test('Teste 1', () => {
         const points = [
             { x: 1, y: 1 },
             { x: 1, y: 0 },
@@ -13,7 +13,7 @@ describe('1999 -> Fase 2 -> RoboCoffee', () => {
         expect(calculateRotations(points)).toBe(1);
     });
     
-    test('Polígono com roteções', () => {
+    test('Teste 2', () => {
         const points = [
             { x: 2, y: -3 },
             { x: 2, y: 2 },
@@ -24,7 +24,7 @@ describe('1999 -> Fase 2 -> RoboCoffee', () => {
         expect(calculateRotations(points)).toBe(3);
     });
 
-    test('Linha reta (sem rotação)', () => {
+    test('Teste 3', () => {
         const points = [
             { x: 0, y: 0 },
             { x: 1, y: 0 },
@@ -34,7 +34,7 @@ describe('1999 -> Fase 2 -> RoboCoffee', () => {
         expect(calculateRotations(points)).toBe(0);
     });
 
-    test('Triângulo', () => {
+    test('Teste 4', () => {
         const points = [
             { x: 0, y: 0 },
             { x: 1, y: 0 },

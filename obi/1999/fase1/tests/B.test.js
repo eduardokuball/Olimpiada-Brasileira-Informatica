@@ -1,7 +1,7 @@
 import images from '../B.js';
 
 describe('1999 -> Fase 1 -> Imagens de Satélite', () => {
-    test('Teste 1: 2x2 Image', () => {
+    test('Teste 1', () => {
         const image = [
             [0, 0],
             [0, 0]
@@ -9,7 +9,7 @@ describe('1999 -> Fase 1 -> Imagens de Satélite', () => {
         expect(images(image)).toBe(0);
     });
 
-    test('Teste 2: 9x15 Image', () => {
+    test('Teste 2', () => {
         const image = [
             '000000000000000',
             '007677888000080',
