@@ -1,15 +1,3 @@
-function getArrayFromColumn(matrix, column) {
-    const rows = [];
-
-    matrix.forEach(row => {
-        row.forEach((col, J) => {
-            if (J === column) rows.push(col);
-        });
-    });
-
-    return rows;
-};
-
 function numerateCrossword(emptyCrossword) {
     let counter = 1;
 
@@ -24,7 +12,7 @@ function numerateCrossword(emptyCrossword) {
                 '→': emptyCrossword?.[i]?.[j+1],
                 '↓': emptyCrossword?.[i+1]?.[j],
                 '←': emptyCrossword?.[i]?.[j-1]
-            }
+            };
 
             const conditions = [
                 neighbors['←'] === 0 && neighbors['→'] === null,
@@ -44,8 +32,7 @@ function numerateCrossword(emptyCrossword) {
     return wordsNumber;
 };
 
-function getWordsHorizontal(){
-
+function getWordsHorizontal(rows, columns, crossword, numbered) {
     let horizontal = [];
 
     for (let i = 0; i < rows; i++) {
@@ -72,11 +59,11 @@ function getWordsHorizontal(){
         if (word.length > 1) {
             horizontal.push({ word, number: numbered[startI][startJ] });
         }
-    };
+    }
     return horizontal.sort((a, b) => a.number - b.number);
-};
+}
 
-function getWordsVertical(){
+function getWordsVertical(rows, columns, crossword, numbered) {
     let vertical = [];
     for (let j = 0; j < columns; j++) {
         let word = "";
@@ -103,44 +90,20 @@ function getWordsVertical(){
     }
 };  
     return vertical.sort((a, b) => a.number - b.number);
-};
-
-function displayWords(horizontal, vertical) {
-    if (horizontal.length > 0) {
-        console.log('Horizontais:');
-        horizontal.forEach(wordObj => {
-            console.log(`   ${wordObj.number}.  ${wordObj.word.toUpperCase()}`);
-        });
-    }
-
-    if (vertical.length > 0) {
-        console.log('Verticais:');
-        vertical.forEach(wordObj => {
-            console.log(`   ${wordObj.number}.  ${wordObj.word.toUpperCase()}`);
-        });
-    }
-};
-const [ rows, columns ] = prompt()
-    .split(' ', 2)
-    .map(e => parseInt(e));
-
-const crossword = [];
-
-for (let i = 0; i < rows; i++) {
-    const line = prompt()
-        .split('', columns);
-
-    crossword.push(line);
 }
 
-const numbered = crossword.map(row => {
-    return row.map(column => column === '*' ? 0 : null);
-});
+// Main Function
+export default function crosswords(matrix) {
+    const toNumberRow = r => r.map(c => c === '*' ? 0 : null);
+    const numbered = matrix.map(toNumberRow);
+    
+    const rows = matrix.length;
+    const columns = matrix[0].length;
 
-const wordsNumbersMap = numerateCrossword(numbered);
-
-const horizontal = getWordsHorizontal();
-
-const vertical = getWordsVertical();
-
-displayWords(horizontal, vertical);
+    numerateCrossword(numbered);
+    
+    const horizontal = getWordsHorizontal(rows, columns, matrix, numbered);
+    const vertical = getWordsVertical(rows, columns, matrix, numbered);
+    
+    return { horizontal, vertical };
+}

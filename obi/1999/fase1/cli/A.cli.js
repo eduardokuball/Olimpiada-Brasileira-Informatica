@@ -1,4 +1,4 @@
-import { input, output } from '../../../utils/io.js';
+import { input, output } from '../../../../utils/io.js';
 import genome from '../A.js';
 
 // Formatando a saída...
