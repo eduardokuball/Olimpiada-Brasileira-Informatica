@@ -1,29 +1,28 @@
-const quantityGames = Number(prompt());
+export default function bestGames(quantityGames, lines) {
 
-const golsFor = [];
-const golsAgainst = [];
-const positiveBalanceGames = [];
+    const games = [];
 
-for (let i = 0; i < quantityGames; i++) {
-    const game = prompt()
-        .split(" ")
-        .map(e => parseInt(e));
-    golsFor.push(game[0]);
-    golsAgainst.push(game[1]);
-}
+    console.log(lines);
 
-for (let i = 0; i < quantityGames; i++) {
-    if (golsFor[i] > golsAgainst[i]) {
-        positiveBalanceGames.push(i + 1);
+    for (let i = 0; i < quantityGames; i++) {
+        const [golsFor, golsAgainst] = lines[i].split(' ').map(Number);
+        games.push([golsFor, golsAgainst]);
+   
     }
-}
 
-function bestGames() {
+    const positiveBalanceGames = [];
+
+    for (let i = 0; i < games.length; i++) {
+        const [golsFor, golsAgainst] = games[i];
+
+        if (golsFor > golsAgainst) {
+            positiveBalanceGames.push(i + 1);
+        }
+    }
+
     if (positiveBalanceGames.length === 0) {
-        return "Nenhum"; 
-    } else {
-        return `${positiveBalanceGames[0]} ${positiveBalanceGames.at(-1)}`;
+        return "Nenhum";
     }
-}
 
-console.log(bestGames());
+    return `${positiveBalanceGames[0]} ${positiveBalanceGames.at(-1)}`;
+}

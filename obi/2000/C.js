@@ -1,4 +1,4 @@
-function bills(value){
+export default function bills(value){
     const bits = [50, 10, 5, 1];
     const bills = [0, 0, 0, 0];
     for (let i = 0; i < bits.length; i++) {
@@ -7,6 +7,3 @@ function bills(value){
     }
     return bills.join(' ');
 }
-let value = Number(prompt());
-
-console.log(bills(value));

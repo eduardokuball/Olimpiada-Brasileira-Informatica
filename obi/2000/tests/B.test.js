@@ -1,4 +1,4 @@
-import draw  from "../B";
+import draw  from "../B.js";
 
 describe('2000 -> fase única -> Quermesse', () => {
 
