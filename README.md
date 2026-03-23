@@ -4,6 +4,30 @@ Este projeto é organizado para facilitar a navegação, compreensão e resoluç
 
 A ideia era fazer a resolução do nível mais alto de cada fase de cada ano
 
+## Como rodar as questões:
+
+Todas as questões tem um arquivo `question_name.js` e um `/cli/question_name.cli.js`. Para rodar uma questão é muito simples, basta:
+
+Escrever as linhas de entrada no arquivo `input.txt` (caso não o tenha criado, crie)
+
+Rodar o comando:
+`node obi/{ano}/{fase}/cli/{question_name}.cli.js < input.txt`
+
+Exemplo (rodar primeira questão de 1999 - Fase 1):
+`node obi/1999/fase1/cli/A.cli.js < input.txt`
+
+## Como rodar os testes:
+
+Rodar todos os testes de todas as questões:
+`npm run test`
+
+Rodar os testes de uma questão específica:
+```bash
+# npm run test:one {ano}/{fase}/tests/{question}.test.js
+# Rodar apenas a questão A da fase 1 de 1999:
+npm run test:one 1999/fase1/tests/A.test.js
+```
+
 ## Estrutura Geral
 
 

@@ -1,24 +1,9 @@
-const [ rows, columns ] = prompt()
-    .split(' ', 2)
-    .map(e => parseInt(e));
-
-const image = [];
-
-for (let i = 0; i < rows; i++) {
-    const row = prompt()
-        .split('', columns)
-        .map(e => parseInt(e));
-
-    image.push(row);    
-};
-
-
 function getNeighbors(matrix, x, y) {
     const directions = [
         [-1,  0], // ↑
         [-1,  1], // ↗
         [ 0,  1], // →
-        [ 1,  1]  // ↘
+        [ 1,  1], // ↘
         [ 1,  0], // ↓
         [ 1, -1], // ↙
         [ 0, -1], // ←
@@ -33,7 +18,6 @@ function getNeighbors(matrix, x, y) {
 
 const absoluteArray = array => JSON.stringify(array);
 
-// Ao invés de passar um vertex a gente passa uma coordenada ij
 function getConstructionBlocks(matrix, [i, j], visited=[]) {
     const vertex = absoluteArray([i, j]);
 
@@ -49,20 +33,23 @@ function getConstructionBlocks(matrix, [i, j], visited=[]) {
     return visited;
 };
 
-let buildings = 0;
-let occupiedBlocks = [];
-
-image.forEach((row, i) => {
-    for (let [j, column] of row.entries()) {
-        const block = absoluteArray([i, j]);
+// Main Function:
+export default function images(image) {
+    let buildings = 0;
+    let occupiedBlocks = [];
     
-        if (column === 0) continue;
-        if (occupiedBlocks.includes(block)) continue;
-    
-        const blocks = getConstructionBlocks(image, [i, j]);
-        occupiedBlocks = [...occupiedBlocks, ...blocks];
-        buildings++;
-    }
-});
+    image.forEach((row, i) => {
+        for (let [j, column] of row.entries()) {
+            const block = absoluteArray([i, j]);
+        
+            if (column === 0) continue;
+            if (occupiedBlocks.includes(block)) continue;
+        
+            const blocks = getConstructionBlocks(image, [i, j]);
+            occupiedBlocks = [...occupiedBlocks, ...blocks];
+            buildings++;
+        }
+    });
 
-console.log(buildings);
+    return buildings;
+}

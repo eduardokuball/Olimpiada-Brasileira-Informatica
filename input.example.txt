@@ -1,0 +1,4 @@
+Crie um arquivo de entrada chamado "input.txt" na raiz do projeto.
+Use esse arquivo para passar os valores de entrada para uma questão.
+
+O arquito "input.txt" será privado (.gitignore), ou seja, só você pode ler.
