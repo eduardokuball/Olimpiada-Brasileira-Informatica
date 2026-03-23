@@ -1,14 +1,14 @@
 import { input, output } from '../../../../utils/io.js';
 import calculateRotations from '../A.js';
 
-const n = parseInt(input());
-const points = [];
+const lines = [];
 
-for (let i = 0; i < n; i++) {
-    const [x, y] = input().split(' ').map(Number);
-    points.push({ x, y });
+while (true) {
+    const line = input();
+    if (!line) break;
+    lines.push(line);
 }
 
-const result = calculateRotations(points);
+const result = calculateRotations(lines);
 
 output(`rotacoes: ${result}`);

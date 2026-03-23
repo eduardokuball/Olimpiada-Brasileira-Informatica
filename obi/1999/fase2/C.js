@@ -11,7 +11,10 @@ function createGame(quantity, favored) {
     return game;
 }
 
-export default function simulateGame(quantity, favored) {
+export default function simulateGame(lines) {
+    console.log(lines);
+    const [quantity, favored] = lines[0].split(' ').map(Number);
+
     const game = createGame(quantity, favored);
 
     let rounds = 0;

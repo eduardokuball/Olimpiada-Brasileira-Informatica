@@ -2,7 +2,18 @@ function positiveNormalize(angle) {
     return (angle + 360) % 360;
 }
 
-export default function calculateRotations(points) {
+export default function calculateRotations(lines) {
+
+    console.log(lines);
+    const n = parseInt(lines[0]);
+
+    const points = [];
+
+    for (let i = 1; i <= n; i++) {
+        const [x, y] = lines[i].split(' ').map(Number);
+        points.push({ x, y });
+    }
+
     let playerAngle = 0;
     let angleRotateCounter = 0;
 
