@@ -1,38 +1,30 @@
-function longestTunnel() {
+export default function longestTunnel(cityOfOrigin, destinationCity, lines) {
+
+    console.log(lines);
+
+    const road = [];
+
+    for (let line of lines) {
+        const [cityOfStart, cityOfEnd, tunnelHeight] = line.split(' ').map(Number);
+
+        if (cityOfStart === 0 || cityOfEnd === 0) break;
+
+        road.push({
+            cityOfStart,
+            cityOfEnd,
+            tunnelHeight
+        });
+    }
+
     const maxTunnelHeight = [];
+
     road.forEach((t) => {
-        if (t.cityOfStart == cityOfOrigin) {
+        if (t.cityOfStart === cityOfOrigin) {
             maxTunnelHeight.push(t.tunnelHeight);
         }
     });
+
+    if (maxTunnelHeight.length === 0) return 0;
+
     return Math.max(...maxTunnelHeight);
 }
-
-const [cityOfOrigin, destinationCity] = prompt()
-    .split(" ")
-    .map(e => parseInt(e));
-
-const road = [];
-
-while (true) {
-    const input = prompt()
-    .split(" ")
-    .map(e => parseInt(e));
-    const cityOfStart = input[0];
-    const cityOfEnd = input[1];
-    const tunnelHeight = input[2];
-
-    if (cityOfStart == 0 || cityOfEnd == 0) {
-        break;
-    }
-
-    road.push({
-        cityOfStart: cityOfStart,
-        cityOfEnd: cityOfEnd,
-        tunnelHeight: tunnelHeight
-    });
-}
-
-
-
-console.log(longestTunnel());
