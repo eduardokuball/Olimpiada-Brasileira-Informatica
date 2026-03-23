@@ -2,7 +2,7 @@ import longestTunnel from '../E.js';
 
 describe('1999 -> fase 2 -> Carga Pesada', () => {
 
-    test('Caso com múltiplos túneis', () => {
+    test('Teste 1 ', () => {
         const cityOfOrigin = 2;
         const destinationCity = 4;
 
@@ -11,7 +11,7 @@ describe('1999 -> fase 2 -> Carga Pesada', () => {
         expect(longestTunnel(cityOfOrigin, destinationCity, lines)).toBe(12);
     });
 
-    test('Sem túneis saindo da origem', () => {
+    test('Teste 2', () => {
         const cityOfOrigin = 1;
         const destinationCity = 3;
 
