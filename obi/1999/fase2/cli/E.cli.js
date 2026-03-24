@@ -3,14 +3,23 @@ import longestTunnel from '../E.js';
 
 const [cityOfOrigin, destinationCity] = input().split(' ').map(Number);
 
-const lines = [];
+const roads = [];
 
 while (true) {
     const line = input();
     if (!line) break;
-    lines.push(line);
+
+    const [cityOfStart, cityOfEnd, tunnelHeight] = line.split(' ').map(Number);
+
+    if (cityOfStart === 0 || cityOfEnd === 0) break;
+
+    roads.push({
+        cityOfStart,
+        cityOfEnd,
+        tunnelHeight
+    });
 }
 
-const result = longestTunnel(cityOfOrigin, destinationCity, lines);
+const result = longestTunnel(cityOfOrigin, destinationCity, roads);
 
 output(`altura maxima: ${result}`);

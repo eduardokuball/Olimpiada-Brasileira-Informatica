@@ -1,23 +1,31 @@
 import longestTunnel from '../E.js';
 
-describe('1999 -> fase 2 -> Carga Pesada', () => {
+describe('1999 -> Fase 2 -> Carga Pesada', () => {
 
-    test('Teste 1 ', () => {
+    test('Teste 1', () => {
         const cityOfOrigin = 2;
         const destinationCity = 4;
 
-        const lines = [ '1 4 5', '2 4 12' ]
+        const roads = [
+            { cityOfStart: 1, cityOfEnd: 4, tunnelHeight: 5 },
+            { cityOfStart: 2, cityOfEnd: 4, tunnelHeight: 12 },
+        ];
 
-        expect(longestTunnel(cityOfOrigin, destinationCity, lines)).toBe(12);
+        expect(longestTunnel(cityOfOrigin, destinationCity, roads)).toBe(12);
     });
 
     test('Teste 2', () => {
         const cityOfOrigin = 1;
         const destinationCity = 3;
 
-        const lines = [ '1 2 10', '1 3 8', '2 3 12', '3 1 5' ]
+        const roads = [
+            { cityOfStart: 1, cityOfEnd: 2, tunnelHeight: 10 },
+            { cityOfStart: 1, cityOfEnd: 3, tunnelHeight: 8 },
+            { cityOfStart: 2, cityOfEnd: 3, tunnelHeight: 12 },
+            { cityOfStart: 3, cityOfEnd: 1, tunnelHeight: 5 },
+        ];
 
-        expect(longestTunnel(cityOfOrigin, destinationCity, lines)).toBe(10);
+        expect(longestTunnel(cityOfOrigin, destinationCity, roads)).toBe(10);
     });
 
 });
