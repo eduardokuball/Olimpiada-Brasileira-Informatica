@@ -14,7 +14,7 @@ Rodar o comando:
 `node obi/{ano}/{fase}/cli/{question_name}.cli.js < input.txt`
 
 Exemplo (rodar primeira questão de 1999 - Fase 1):
-`node obi/1999/fase1/cli/A.cli.js < input.txt`
+`node obi/1999/fase2/cli/A.cli.js < input.txt`
 
 ## Como rodar os testes:
 
