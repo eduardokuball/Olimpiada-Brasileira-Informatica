@@ -1,4 +1,5 @@
-function calculate(expressao) {
+export default function calculate(expressao) {
+
     let resultado = 0;
     let numeroAtual = '';
     let operador = '+';
@@ -25,9 +26,3 @@ function calculate(expressao) {
         return resultado;
 }
 
-const quantity = parseInt(prompt());
-const expression = prompt()
-    .split('');
-
-
-console.log(calculate(expression));
