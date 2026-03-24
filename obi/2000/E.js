@@ -1,11 +1,5 @@
 export default function findIntersection(regions) {
 
-    regions = regions.map((e) => {
-        return e.split(" ").map((e) => {
-            return parseInt(e);
-        });
-    });
-
     const x1s = regions.map(e => e[0]);
     const y1s = regions.map(e => e[1]);
     const x2s = regions.map(e => e[2]);
