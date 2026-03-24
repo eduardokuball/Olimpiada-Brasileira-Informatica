@@ -1,15 +1,12 @@
 import { input, output } from '../../../../utils/io.js';
 import simulateGame from '../C.js';
 
-const lines = [];
 
-while (true) {
-    const line = input();
-    if (!line) break;
-    lines.push(line);
-}
+const [quantity, favored] = input().split(' ').map(Number);
 
-const result = simulateGame(lines);
+
+const result = simulateGame(quantity, favored);
+
 
 output(`turnos: ${result.turns}`);
 output(`vencedor: ${result.winner}`);
