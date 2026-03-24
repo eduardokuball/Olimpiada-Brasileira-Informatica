@@ -3,30 +3,36 @@ import minimumSpanningTree from '../A.js';
 describe('2000 -> fase única -> Rede ótica', () => {
 
     test('Teste 1', () => {
-        const lines = [ '3 3', '1 2 10', '2 3 10', '3 1 10' ]
+        const edges = [
+                { tabaA: 1, tabaB: 2, cost: 15 },
+                { tabaA: 1, tabaB: 3, cost: 12 },
+                { tabaA: 2, tabaB: 4, cost: 13 },
+                { tabaA: 2, tabaB: 5, cost: 5 },
+                { tabaA: 3, tabaB: 2, cost: 6 },
+                { tabaA: 3, tabaB: 4, cost: 6 }
+            ]
 
-        const result = minimumSpanningTree(lines);
+        const result = minimumSpanningTree(edges);
 
-        expect(result).toEqual([
-            [1, 2],
-            [1, 3],
-        ]);
-    });
-
-    test('Teste 2', () => {
-        const lines = [
-            '5 6',    '1 2 15',
-            '1 3 12', '2 4 13',
-            '2 5 5',  '3 2 6',
-            '3 4 6'
-    ]
-
-        const result = minimumSpanningTree(lines);
         expect(result).toEqual([
             [1, 3],
             [2, 3],
             [2, 5],
             [3, 4]
+        ]);
+    });
+
+    test('Teste 2', () => {
+        const edges = [
+                { tabaA: 1, tabaB: 2, cost: 10 },
+                { tabaA: 2, tabaB: 3, cost: 10 },
+                { tabaA: 3, tabaB: 1, cost: 10 },
+        ]
+
+        const result = minimumSpanningTree(edges);
+        expect(result).toEqual([
+            [1, 2],
+            [1, 3],
         ]);
     });
 

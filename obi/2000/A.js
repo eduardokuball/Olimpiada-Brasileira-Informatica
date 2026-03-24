@@ -1,21 +1,11 @@
-export default function minimumSpanningTree(lines) {
 
-    const [tabas, branchesQuantity] = lines[0].split(' ').map(Number);
+export default function minimumSpanningTree(edges) {
 
-    let edges = [];
-
-    for (let i = 1; i <= branchesQuantity; i++) {
-        let [tabaA, tabaB, cost] = lines[i].split(' ').map(Number);
-        edges.push({ tabaA, tabaB, cost });
-    }
-
-    // Normaliza arestas
     edges = edges.map(({ tabaA, tabaB, cost }) => {
         if (tabaA > tabaB) [tabaA, tabaB] = [tabaB, tabaA];
         return { tabaA, tabaB, cost };
     });
 
-    // Ordena arestas
     edges.sort((a, b) => 
         a.cost - b.cost || 
         a.tabaA - b.tabaA || 
@@ -25,7 +15,7 @@ export default function minimumSpanningTree(lines) {
     const disjointSet = new Map();
     const mst = [];
 
-    // Inicializa conjuntos
+    // Inicializa cada vértice como seu próprio pai
     edges.forEach(({ tabaA, tabaB }) => {
         if (!disjointSet.has(tabaA)) disjointSet.set(tabaA, tabaA);
         if (!disjointSet.has(tabaB)) disjointSet.set(tabaB, tabaB);
@@ -51,3 +41,4 @@ export default function minimumSpanningTree(lines) {
 
     return mst;
 }
+

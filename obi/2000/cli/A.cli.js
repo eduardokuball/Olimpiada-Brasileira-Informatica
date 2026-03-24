@@ -1,17 +1,15 @@
-import { input, output } from '../../../utils/io.js';
-import minimumSpanningTree from '../A.js';
+import { input, output } from '../../../utils/io.js'; 
+import minimumSpanningTree from '../A.js'; 
 
-const lines = [];
+const [tabas, branchesQuantity] = input().split(' ').map(Number); 
 
+const edges = []; 
+for (let i = 0; i < branchesQuantity; i++) { 
 
-while (true) {
-    const line = input();
-    if (!line) break;
-    lines.push(line);
+    let [tabaA, tabaB, cost] = input().split(' ').map(Number); 
+    edges.push({ tabaA, tabaB, cost }); 
 }
 
-const result = minimumSpanningTree(lines);
+const result = minimumSpanningTree(edges); 
 
-result.forEach(([a, b]) => {
-    output(a, b);
-});
+result.forEach(([a, b]) => { output(a, b); }); 
