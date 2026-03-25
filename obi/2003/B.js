@@ -1,36 +1,18 @@
-function collectReport(students) {
-    const report = [];
-    const notes = [];
-    for (let i = 0; i < students; i++) {
-        const [student, note] = prompt()
-            .split(' ')
-            .map(Number);
-        report.push({ student, note });
-        notes.push(note);
-    }
-    return  [report, notes];
+export default function bestStudents(report) {
+
+    console.log(report);
+
+    let maxNote = -Infinity;
+
+    report.forEach((r) => {
+        if (r.note > maxNote) {
+            maxNote = r.note;
+        }
+    });
+
+    const studentsWithMax = report
+        .filter(r => r.note === maxNote)
+        .map(r => r.student);
+
+    return studentsWithMax.join(' ');
 }
-
-function findHighestNote(notes) {
-    return Math.max(...notes);
-}
-
-function findStudentsWithHighestNote(report, mostNote) {
-    return report.filter(e => e.note === mostNote);
-}
-
-function formatStudentsList(studentsWithMostNote) {
-    return studentsWithMostNote.map(s => s.student).join(' ');
-}
-
-const students = Number(prompt());
-
-const [report, notes] = collectReport(students);
-
-const mostNote = findHighestNote(notes);
-
-const studentsWithMostNote = findStudentsWithHighestNote(report, mostNote);
-
-const studentsReturn = formatStudentsList(studentsWithMostNote);
-
-console.log(studentsReturn);
