@@ -23,12 +23,22 @@ function roundHeLost(target, players) {
 
 // Main Function
 export default function main(players, roundK) {
+    console.log('Players:', players, 'Round K:', roundK);
     const target = players[0];
+
+    console.log('Target:', target);
 
     let lostsInRoundK = 0;
     const dispositions = P.fromArray(players);
+
+    console.log('Total Dispositions:', dispositions);
+
+
     dispositions.forEach(disp => {
         const round = roundHeLost(target, disp)
+        console.log('Disposition:', disp, 'Round He Lost:', round, "Round K:", roundK);
         if (round === roundK) lostsInRoundK++; 
     });
+
+    return lostsInRoundK;
 }
