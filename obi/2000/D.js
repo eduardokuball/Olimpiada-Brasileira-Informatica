@@ -1,13 +1,9 @@
 export default function bestGames(quantityGames, lines) {
-
     const games = [];
-
-    console.log(lines);
 
     for (let i = 0; i < quantityGames; i++) {
         const [golsFor, golsAgainst] = lines[i].split(' ').map(Number);
         games.push([golsFor, golsAgainst]);
-   
     }
 
     const positiveBalanceGames = [];

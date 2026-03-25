@@ -1,8 +1,4 @@
 export default function canFormGame(pieces, game) {
-
-    console.log(pieces)
-    console.log(game);
-
     function placePieceInGame(p, game, pieces) {
         if (p[1] === game[0][0]) {
             game.unshift(p[0] + p[1]);
