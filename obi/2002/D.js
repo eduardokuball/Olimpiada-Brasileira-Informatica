@@ -1,7 +1,5 @@
 export default function mostVisitedAirports(flightsConnections) {
 
-    console.log(flightsConnections)
-
     const ocurrences = [];
 
     flightsConnections.forEach((v) => {

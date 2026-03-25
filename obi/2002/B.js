@@ -1,6 +1,5 @@
 export default function canDivideEqually(objectsValues) {
 
-    console.log(objectsValues)
 
     objectsValues.sort((a, b) => a - b);
 

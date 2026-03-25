@@ -1,7 +1,5 @@
 export default function temperatureAnalysis(interval, temperatures) {
 
-    console.log(interval);
-    console.log(temperatures);
 
     const averages = [];
 
