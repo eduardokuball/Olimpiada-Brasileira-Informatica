@@ -14,6 +14,5 @@ for (let i = 0; i < quantity; i++) {
 
 const result = rankPlayers(playersData);
 
-console.log(result);
 
 result.forEach(line => output(line));
