@@ -1,23 +1,18 @@
-function distribution(quantity){
-    let differences = [];
+export default function distribution(quantity, rounds) {
+    
+    let valuej = 0;
+    let valuez = 0;
+
+    const differences = [];
+
     for (let i = 0; i < quantity; i++) {
-        const [j, z] = prompt()
-        .split(' ')
-        .map(e => parseInt(e));
+        const [j, z] = rounds[i];
+
         valuej += j;
         valuez += z;
-        const difference = valuej - valuez;
-        differences.push(difference);
+
+        differences.push(valuej - valuez);
     }
+    console.log(differences)
     return differences;
 }
-
-const quantity = Number(prompt());
-
-let valuej = 0;
-let valuez = 0;
-
-const differences = distribution(quantity);
-
-
-console.log(differences.join('\n'));
