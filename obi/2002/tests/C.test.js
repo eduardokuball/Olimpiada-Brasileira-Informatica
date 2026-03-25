@@ -11,7 +11,7 @@ describe("2002 -> Fase única -> Dobradura", () => {
         expect(result).toBe(9);
     })
 
-    test("Teste 1", () => {
+    test("Teste 2", () => {
 
         const foldings = 0
 
