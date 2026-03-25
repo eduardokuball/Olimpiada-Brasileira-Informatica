@@ -1,35 +1,26 @@
-function collectPlayersData(quantity) {
-    const report = [];
-    for (let i = 0; i < quantity; i++) {
-        const player = prompt(`nome do jogador ${i + 1}`);
-        const results = prompt('digite os resultados')
-            .split(' ')
-            .map(Number);
-        const pontuation = calculatePontuation(results);
-        report.push({ player, pontuation });
+export default function rankPlayers(playersData) {
+
+    function calculatePontuation(results) {
+        const sorted = [...results].sort((a, b) => a - b);
+
+        sorted.shift();
+        sorted.pop();
+
+        return sorted.reduce((a, b) => a + b, 0);
     }
-    return report;
-}
 
-function calculatePontuation(results) {
-    results.sort((a, b) => a - b);
-    results.shift(); 
-    results.pop();   
-    return results.reduce((a, b) => a + b, 0); 
-}
+    const report = playersData.map(({ player, results }) => ({
+        player,
+        pontuation: calculatePontuation(results)
+    }));
 
-function sortPlayersByPontuation(report) {
-    return report.sort((a, b) => b.pontuation - a.pontuation);
-}
+    report.sort((a, b) => {
+        if (b.pontuation !== a.pontuation) {
+            return b.pontuation - a.pontuation; // maior primeiro
+        }
 
-function displayReport(report) {
-    report.forEach((r, index) => {
-        console.log(`${index + 1} ${r.player} ${r.pontuation}`);
+        return a.player.localeCompare(b.player); // alfabética
     });
+
+    return report.map((r, index) => `${index + 1} ${r.player} ${r.pontuation}`);
 }
-
-const quantity = Number(prompt());
-const report = collectPlayersData(quantity);
-const sortedReport = sortPlayersByPontuation(report);
-
-displayReport(sortedReport);
