@@ -1,7 +1,5 @@
 export default function bestStudents(report) {
 
-    console.log(report);
-
     let maxNote = -Infinity;
 
     report.forEach((r) => {
