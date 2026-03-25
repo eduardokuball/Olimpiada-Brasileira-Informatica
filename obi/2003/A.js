@@ -13,6 +13,5 @@ export default function distribution(quantity, rounds) {
 
         differences.push(valuej - valuez);
     }
-    console.log(differences)
     return differences;
 }
