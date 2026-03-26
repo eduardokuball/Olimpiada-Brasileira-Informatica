@@ -35,8 +35,6 @@ for (let i = 0; i < associations; i++) {
     });
 }
 
-console.log(associationsPasswords.password);
-
 const result = findCommonPassword(associationsPasswords);
 
 output(result);
