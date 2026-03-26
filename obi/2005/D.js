@@ -1,31 +1,17 @@
-const [cardLength, phrasesQuantity] = prompt()
-    .split(' ', 2)
-    .map(e => parseInt(e));
+export default function maximizeSorry(cardLength, phrases) {
 
-const phrases = [];
+    // Ordena por número de "sorry" decrescente
+    phrases.sort((a, b) => b.sorry_occurrences - a.sorry_occurrences);
 
-for (let i = 0; i < phrasesQuantity; i++) {
-    const [phraseLength, sorryOccurrences] = prompt()
-        .split(' ', 2)
-        .map(e => parseInt(e));
+    let remainingStorage = cardLength;
+    let sorryCount = 0;
 
-    phrases.push({
-        length: phraseLength,
-        sorry_occurrences: sorryOccurrences
-    });
+    for (const phrase of phrases) {
+        if (phrase.length > remainingStorage) continue;
+
+        remainingStorage -= phrase.length;
+        sorryCount += phrase.sorry_occurrences;
+    }
+
+    return sorryCount;
 }
-
-// Ordena por sorry_occurrences de forma decrescente:
-phrases.sort((a, b) => b.sorry_occurrences - a.sorry_occurrences);
-
-let remainingStorage = cardLength;
-let sorryCount = 0;
-
-phrases.forEach(phrase => {
-    if (phrase.length > remainingStorage) return;
-
-    remainingStorage -= phrase.length;
-    sorryCount += phrase.sorry_occurrences;
-});
-
-console.log(sorryCount);
