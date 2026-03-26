@@ -1,27 +1,25 @@
 function processRound(players, input) {
     const [, order, ...reportPlayers] = input;
-    for (let index = reportPlayers.length - 1; index >= 0; index--) {
-        if (reportPlayers[index] !== order) {
-            players.splice(index, 1);
+
+    const filtered = [];
+
+    for (let i = 0; i < reportPlayers.length; i++) {
+        if (reportPlayers[i] === order) {
+            filtered.push(players[i]);
         }
     }
-    return players;
+
+    return filtered;
 }
 
-const [quantity, rounds] = prompt()
-    .split(' ')
-    .map(e => parseInt(e));
+export default function solveGame(rounds, players, roundsData) {
 
-let players = prompt()
-    .split(' ')
-    .map(e => parseInt(e));
+    console.log
+    let currentPlayers = [...players];
 
-for (let i = 0; i < rounds; i++) {
-    const input = prompt()
-        .split(' ')
-        .map(Number);
-    players = processRound(players, input);
-    console.log(players);
+    for (let i = 0; i < rounds; i++) {
+        currentPlayers = processRound(currentPlayers, roundsData[i]);
+    }
+
+    return currentPlayers.join(' ');
 }
-
-console.log(players.join(' '));
