@@ -7,38 +7,41 @@ function splitPairs(players) {
     return pairs;
 }
 
-function roundHeLost(target, players) {
+function simulation(target, players) {
     let rounds = splitPairs(players);
-    let currentRound = 1;
+    const res = [false, 1];
     
-    while (rounds.length > 1) {       
+    while (rounds.length > 0) {
         const winners = rounds.map(pair => Math.max(...pair));
-        if (!winners.includes(target)) return currentRound;
-        currentRound++;
+        const heWin = winners.includes(target);
+        res[0] = heWin;
+        if (!heWin) return res; // Retorna quando é derrotado
+        res[1]++; // Conta os rounds
         rounds = splitPairs(winners);
     }
 
-    return currentRound;
+    return res;
 }
 
 // Main Function
-export default function main(players, roundK) {
-    console.log('Players:', players, 'Round K:', roundK);
+export default function tournament(players, roundK) {
     const target = players[0];
+    const rounds = Math.log2(players.length);
 
-    console.log('Target:', target);
-
-    let lostsInRoundK = 0;
+    let counter = 0;
     const dispositions = P.fromArray(players);
 
-    console.log('Total Dispositions:', dispositions);
-
-
     dispositions.forEach(disp => {
-        const round = roundHeLost(target, disp)
-        console.log('Disposition:', disp, 'Round He Lost:', round, "Round K:", roundK);
-        if (round === roundK) lostsInRoundK++; 
+        const [heWin, lastRound] = simulation(target, disp);
+
+        const isWinMode = roundK === rounds + 1;
+        if (isWinMode) {
+            if (heWin) counter++;
+            return;
+        }
+
+        if (!heWin && lastRound === roundK) counter++;
     });
 
-    return lostsInRoundK;
+    return counter;
 }
