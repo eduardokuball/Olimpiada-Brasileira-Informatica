@@ -1,48 +1,26 @@
-const [ matrixX, matrixY, submatrixX, submatrixY ] = prompt()
-    .split(' ', 4)
-    .map(e => parseInt(e));
+export default function maxCajuSum(matrix, submatrixX, submatrixY) {
+    console.log(matrix);
+    const matrixX = matrix.length;
+    const matrixY = matrix[0].length;
 
-const cajusMatrix = [];
+    const cajuSums = [];
 
-for (let i = 1; i <= matrixX; i++) {
-    const line = prompt()
-        .split(' ', matrixY)
-        .map(e => parseInt(e));
+    for (let i = 0; i < matrixX; i++) {
+        for (let j = 0; j < matrixY; j++) {
 
-    cajusMatrix.push(line);
-}
+            if (i + submatrixX > matrixX || j + submatrixY > matrixY) continue;
 
+            let sum = 0;
 
+            for (let x = 0; x < submatrixX; x++) {
+                for (let y = 0; y < submatrixY; y++) {
+                    sum += matrix[i + x][j + y];
+                }
+            }
 
-const cajuSums = [];
-
-
-for (let j = 0; j < cajusMatrix.length; j++) {
-    let values = [];
-
-    for (let i = 0; i < cajusMatrix.length; i++) {
-        for (let c = i; c < i+submatrixX; c++) {
-            if (i + submatrixX > cajusMatrix.length) break;
-    
-            const cajuInternalRow = cajusMatrix[c];
-    
-            const rowValues = cajuInternalRow
-                .slice(j, j + submatrixY)
-                .map(e => parseInt(e));
-            
-            values.push(rowValues);
+            cajuSums.push(sum);
         }
-    
-    
-        if (values.length > 0) {
-            const valuesSum = values.flat().reduce((acc, e) => acc + e, 0);
-            cajuSums.push(valuesSum);
-        }
-    
-        values = [];
     }
+
+    return Math.max(...cajuSums);
 }
-
-const maxSum = Math.max(...cajuSums);
-
-console.log(maxSum);

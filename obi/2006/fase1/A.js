@@ -1,46 +1,52 @@
-function Organizegame(array) {
+const ORDER = [4, 5, 6, 7, 11, 12, 13, 14, 1, 2, 3];
+
+function organizeGame(array) {
+    const arr = [...array];
+
     for (let j = 0; j < 10; j++) {
-        for (let i = 0; i < array.length - 1; i++) {
-            if (order.indexOf(array[i]) > order.indexOf(array[i + 1])) {
-                [array[i], array[i + 1]] = [array[i + 1], array[i]];
+        for (let i = 0; i < arr.length - 1; i++) {
+            if (ORDER.indexOf(arr[i]) > ORDER.indexOf(arr[i + 1])) {
+                [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]];
             }
         }
     }
-    return array;
+
+    return arr;
 }
 
-function countWinners(adalbertoGame, bernadeteGame) {
+function countRoundWinner(adalbertoGame, bernadeteGame) {
     let a = 0;
     let b = 0;
+
     for (let i = 0; i < 3; i++) {
-        if (order.indexOf(adalbertoGame[i]) >= order.indexOf(bernadeteGame[i])) {
+        if (ORDER.indexOf(adalbertoGame[i]) >= ORDER.indexOf(bernadeteGame[i])) {
             a++;
         } else {
             b++;
         }
     }
-    if (a > b) {
-        winnersAdalberto++;
-    } else {
-        winnersBernadete++;
+
+    return a > b ? 'A' : 'B';
+}
+
+export default function gameResult(roundsData) {
+
+    console.log(roundsData);
+    let winnersAdalberto = 0;
+    let winnersBernadete = 0;
+
+    for (const cards of roundsData) {
+        let adalbertoGame = cards.slice(0, 3);
+        let bernadeteGame = cards.slice(3, 6);
+
+        adalbertoGame = organizeGame(adalbertoGame);
+        bernadeteGame = organizeGame(bernadeteGame);
+
+        const winner = countRoundWinner(adalbertoGame, bernadeteGame);
+
+        if (winner === 'A') winnersAdalberto++;
+        else winnersBernadete++;
     }
+
+    return [winnersAdalberto, winnersBernadete];
 }
-
-const rounds = Number(prompt());
-const order = [4, 5, 6, 7, 11, 12, 13, 14, 1, 2, 3];
-
-let winnersAdalberto = 0;
-let winnersBernadete = 0;
-
-for (let k = 0; k < rounds; k++) {
-    const cards = prompt('digite os jogos')
-    .split(' ')
-    .map(Number);
-    let adalbertoGame = cards.slice(0, 3);
-    let bernadeteGame = cards.slice(3, 6);
-    adalbertoGame = Organizegame(adalbertoGame);
-    bernadeteGame = Organizegame(bernadeteGame);
-    countWinners(adalbertoGame, bernadeteGame);
-}
-
-console.log(`${winnersAdalberto} ${winnersBernadete}`);

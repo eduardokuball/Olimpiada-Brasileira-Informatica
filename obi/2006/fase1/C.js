@@ -1,54 +1,45 @@
-// a visita deve tomar o menor tempo possível
-
 import DirectedGraph from '../../../utils/DirectedGraph.js';
 
-const [roomsQuantity, hallwaysQuantity] = prompt()
-    .split(' ', 2)
-    .map(e => parseInt(e));
-
-const roomsWeights = prompt()
-    .split(' ', roomsQuantity)
-    .map(e => parseInt(e));
-
-const vertexes = new Array(roomsQuantity).fill(0).map((_, i) => i + 1);
-const graph = new DirectedGraph(true);
-graph.addVertexes(...vertexes);
-
-for (let i = 0; i < hallwaysQuantity; i++) {
-    const [roomA, roomB, weight] = prompt()
-        .split(' ', 3)
-        .map(e => parseInt(e));
-    
-    graph.addEdge(roomA, roomB, weight);
-}
-
-function calculateTourTime(graph = new DirectedGraph(true), tour=[]) {
+function calculateTourTime(graph, tour, roomsWeights) {
     let totalTime = 0;
 
-    tour.forEach((e, i, arr) => {
-        if (i === tour.length - 1) return;
-        
-        const time = roomsWeights[e-1];
-        totalTime += time;
+    for (let i = 0; i < tour.length - 1; i++) {
+        const current = tour[i];
+        const next = tour[i + 1];
 
-        const timeToNext = graph.getEdgeWeight(e, arr[i+1]);
-        totalTime += timeToNext;
-    });
+        totalTime += roomsWeights[current - 1];
+        totalTime += graph.getEdgeWeight(current, next);
+    }
 
     return totalTime;
 }
 
-let allTourTimes = [];
+export default function minTourTime(roomsQuantity, roomsWeights, edges) {
+    console.log(roomsQuantity);
+    console.log(roomsWeights);
+    console.log(edges);
+    const graph = new DirectedGraph(true);
 
-for (let i = 1; i <= roomsQuantity; i++) {
-    const cycles = graph.allCyclesFrom(i)
-        .filter(cycle => cycle.length >= 2+1);
-    
-    const tourTimes = cycles.map(cycle => calculateTourTime(graph, cycle));
-    
-    allTourTimes = [...allTourTimes, ...tourTimes];
+    const vertexes = Array.from({ length: roomsQuantity }, (_, i) => i + 1);
+    graph.addVertexes(...vertexes);
+
+    for (const [roomA, roomB, weight] of edges) {
+        graph.addEdge(roomA, roomB, weight);
+    }
+
+    let allTourTimes = [];
+
+    for (let i = 1; i <= roomsQuantity; i++) {
+        const cycles = graph
+            .allCyclesFrom(i)
+            .filter(cycle => cycle.length >= 3); // mínimo: ida + volta
+
+        const tourTimes = cycles.map(cycle =>
+            calculateTourTime(graph, cycle, roomsWeights)
+        );
+
+        allTourTimes.push(...tourTimes);
+    }
+
+    return Math.min(...allTourTimes);
 }
-
-const minTourTime = Math.min(...allTourTimes);
-
-console.log(minTourTime);
