@@ -1,42 +1,22 @@
-function collectApps(count) {
-    const apps = [];
-    for (let i = 0; i < count; i++) {
-        const [app, version] = prompt().split(' ');
-        apps.push({
-            app: String(app),
-            version: Number(version)
-        });
-    }
-    return apps;
-}
+export default function findUpgrades(downloadeds, availables) {
 
-function findUpgrades(downloadeds, availables) {
+    const availableMap = new Map();
+
+    for (const { app, version } of availables) {
+        if (!availableMap.has(app) || availableMap.get(app) < version) {
+            availableMap.set(app, version);
+        }
+    }
+
     const upgrades = [];
-    downloadeds.forEach((downloaded) => {
-        availables.forEach((available) => {
-            if (
-                downloaded.app === available.app &&
-                downloaded.version < available.version
-            ) {
-                upgrades.push({
-                    app: String(available.app),
-                    version: Number(available.version)
-                });
-            }
-        });
-    });
+
+    for (const { app, version } of downloadeds) {
+        if (availableMap.has(app) && version < availableMap.get(app)) {
+            upgrades.push({
+                app,
+                version: availableMap.get(app)
+            });
+        }
+    }
     return upgrades;
 }
-
-const [downloaded, available] = prompt()
-    .split(' ')
-    .map(e => parseInt(e));
-
-const downloadeds = collectApps(downloaded);
-const availables = collectApps(available);
-
-const upgrades = findUpgrades(downloadeds, availables);
-
-upgrades.forEach((upgrade) => {
-    console.log(`${upgrade.app} ${upgrade.version}`);
-});
