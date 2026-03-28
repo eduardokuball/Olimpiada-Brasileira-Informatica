@@ -1,24 +1,21 @@
-const quantiy = parseInt(prompt());
-const slices = prompt()
-    .split(" ", quantiy)
-    .map((e) => parseInt(e));
+export default function maxPizza(slices) {
+    const n = slices.length;
 
-const rotatepizza = [...slices, ...slices, ...slices];
+    const arr = [...slices, ...slices, ...slices];
 
-let possibilities = [];
+    let maxSum = 0;
 
-for (let size = 1; size <= slices.length; size++) { 
-    for (let i = 0; i <= rotatepizza.length - size; i++) { 
-        possibilities.push(rotatepizza.slice(i, i + size));
+    for (let size = 1; size <= n; size++) {
+        for (let i = 0; i <= arr.length - size; i++) {
+            const sub = arr.slice(i, i + size);
+
+            if (sub.length > n) continue;
+
+            const sum = sub.reduce((a, b) => a + b, 0);
+
+            if (sum > maxSum) maxSum = sum;
+        }
     }
-}
 
-possibilities = possibilities.filter((array) => array.length <= quantiy);
-
-const sums = possibilities.map((array) => array.reduce((a, b) => a + b, 0));
-
-if(Math.max(...sums) > 0){
-    console.log(Math.max(...sums));
-} else {
-    console.log(0);
+    return maxSum;
 }
