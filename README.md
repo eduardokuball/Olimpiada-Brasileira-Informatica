@@ -38,7 +38,7 @@ No entanto, com o avanço do projeto, surgiu um objetivo maior:
 
 Hoje, o repositório conta com:
 
-* ✅ +250 questões resolvidas
+* ✅ +200 questões resolvidas
 * 📆 Diversos anos cobertos
 * 🧩 Problemas que vão do nível básico ao avançado
 
