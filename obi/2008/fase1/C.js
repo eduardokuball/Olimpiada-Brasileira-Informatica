@@ -1,41 +1,12 @@
-function generateSeats(rows, columns) {
-    let seats = [];
-    let letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'; 
+export default function findSeat(rows, columns, firstClass, position) {
+    const totalSeats = (rows - firstClass + 1) * columns;
 
+    if (position > totalSeats) return "PROXIMO VOO";
 
-    for (let i = 1; i <= rows; i++) {
-        let row = [];
-        
-        for (let j = 0; j < columns; j++) {
-            let letter = letters[j];
-            row.push(`${i} ${letter}`);
-        }
-        
-        seats.push(row);
-    }
+    const row = firstClass + Math.floor((position - 1) / columns);
+    const col = (position - 1) % columns;
 
-    return seats;
-};
+    const letter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[col];
 
-function searchSeat(seatMatrix){
-    let count = 0;
-    for(let i = firstClass - 1; i < seatMatrix.length; i++){
-        for(let j = 0; j < seatMatrix[i].length; j++){
-            count++;
-            if(count == position){
-                return seatMatrix[i][j];
-            }
-        }
-    };
-    return "PROXIMO VOO";
-};
-
-const [ rows, columns, firstClass, position ] = prompt()
-    .split(' ',4)
-    .map(e => parseInt(e));
-
-const seatMatrix = generateSeats(rows, columns);
-
-const selectedSeat = searchSeat(seatMatrix);
-
-console.log(selectedSeat);
+    return `${row} ${letter}`;
+}
