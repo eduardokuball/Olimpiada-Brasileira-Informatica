@@ -1,6 +1,6 @@
 import countPanels from '../A.js';
 
-describe('2007 -> Fase 1 -> painéis', () => {
+describe('2007 -> Fase 2 -> Auto Estrada', () => {
 
     test('Teste 1', () => {
         const relatory = ['P', 'A', 'D'];
