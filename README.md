@@ -171,7 +171,7 @@ Você pode:
 
 ## 👨‍💻 Sobre
 
-Meu nome é **Eduardo Kuball**, tenho 21 anos e sou técnico em Informática pelo **IFSul – Campus Charqueadas**.
+Meu nome é **Eduardo Kuball**, tenho 21 anos, moro na cidade de Arroio dos Ratos e sou técnico em Informática pelo **IFSul – Campus Charqueadas**, desenvolvi o repositório juntamente com meu amigo **Gustavo Rutkowski**, que possui 18 anos, mora na cidade de Charqueadas e atualmente esta no último ano do curso para se tornar também técnico em informática .
 
 Atualmente trabalho como analista de suporte técnico na **TMW Telecom** e moro em **Arroio dos Ratos**.
 
