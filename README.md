@@ -1,4 +1,4 @@
-# 🧠📚 OBI – Resolução de Maratonas de Programação
+# 🧠📚 OBI – Resoluções das fases de nível mais alto de cada edição da maratona
 
 ![Node.js](https://img.shields.io/badge/Node.js-18+-green?logo=node.js)
 ![Status](https://img.shields.io/badge/status-em%20desenvolvimento-blue)
