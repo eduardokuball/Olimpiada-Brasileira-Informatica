@@ -5,7 +5,6 @@ function ruleOfThree(grams, price){
 };
 
 export default function values(valuesData){
-    console.log(valuesData);
   
     const prices = [];
 
