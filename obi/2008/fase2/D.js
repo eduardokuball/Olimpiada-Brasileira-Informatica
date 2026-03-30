@@ -39,27 +39,16 @@ function prim(graph) {
     return totalCost;
 }
 
+export default function solve(colonies, roads, edges) {
+    const graph = new Graph(true);
 
-const [colonies, roads] = prompt()
-    .split(' ')
-    .map((e) => {
-        return parseInt(e);
-    });
+    const vertexes = Array.from({ length: colonies }, (_, i) => i);
+    graph.addVertexes(...vertexes);
 
-const graph = new Graph(true);
+    for (let i = 0; i < roads; i++) {
+        const [start, end, cost] = edges[i];
+        graph.addEdge(start, end, cost);
+    }
 
-const vertexes = Array.from({ length: colonies }, (_, i) => i);
-graph.addVertexes(...vertexes);
-
-for (let i = 0; i < roads; i++) {
-    const [start, end, cost] = prompt()
-    .split(' ')
-    .map((e) => {
-        return parseInt(e);
-    });
-    graph.addEdge(start, end, cost);
+    return prim(graph);
 }
-
-const value = prim(graph);
-console.log(value);
-
