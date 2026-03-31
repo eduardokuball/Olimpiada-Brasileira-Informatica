@@ -18,7 +18,6 @@ export default function processArrayCommands(size, commandsCount, commandsList) 
     const word = initializeVector(size);
     const sums = [];
 
-    console.log(commandsList);
 
     for (let i = 0; i < commandsCount; i++) {
         let [command, indexx, indexy] = commandsList[i];
