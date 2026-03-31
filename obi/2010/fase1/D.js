@@ -1,67 +1,88 @@
-import Graph from '../../../utils/Graph.js';
+import DirectedGraph from '../../../utils/DirectedGraph.js';
 
-const [cities, roads] = prompt()
-    .split(' ', 2)
-    .map(e => parseInt(e));
+export default function getBestCity(cities, roads, edges) {
 
-const vertexes = new Array(cities).fill(0).map((_, i) => i + 1);
+    const graph = new DirectedGraph(true);
 
-const graph = new Graph(true);
+    const vertexes = Array.from({ length: cities }, (_, i) => i + 1);
+    graph.addVertexes(...vertexes);
 
-vertexes.forEach((v) => {
-    graph.addVertexes(v);
-})
+    for (let i = 0; i < roads; i++) {
+        const [u, v, w] = edges[i];
 
-for (let i = 0; i < roads; i++) {
-    const [vertexA, vertexB, width] = prompt()
-        .split(' ', 3)
-        .map(e => parseInt(e));
+        const a = u + 1;
+        const b = v + 1;
 
-    graph.addEdge(vertexA + 1, vertexB + 1, width);
-};
-graph.showGraph();
-function calcDistance(path) {
-    let totalWidth = 0;
+        if (graph.hasEdge(a, b)) {
+            const currentWeight = graph.getEdgeWeight(a, b);
+            if (w < currentWeight) {
+                graph.removeEdge(a, b);
+                graph.addEdge(a, b, w);
+            }
+        } else {
+            graph.addEdge(a, b, w);
+        }
 
-    for (let i = 0; i <= path.length - 2; i++) {
-        const current = path[i];
-        const successor = path[i + 1];
-
-        const width = graph.getEdgeWeight(current, successor);
-        totalWidth += width;
-    }
-
-    return totalWidth;
-};
-
-
-const originAndDistances = [];
-
-for (let i = 1; i < cities + 1; i++) {
-    let maxDistance = 0;
-
-    for (let j = 1; j < cities + 1; j++) {
-        if (j != i) {
-            const paths = graph.allPathsFrom(i, j);
-            let minDistance = Infinity; 
-
-            paths.forEach((p) => {
-                const d = calcDistance(p);
-                minDistance = Math.min(minDistance, d); 
-            });
-
-            maxDistance = Math.max(maxDistance, minDistance); 
+        if (graph.hasEdge(b, a)) {
+            const currentWeight = graph.getEdgeWeight(b, a);
+            if (w < currentWeight) {
+                graph.removeEdge(b, a);
+                graph.addEdge(b, a, w);
+            }
+        } else {
+            graph.addEdge(b, a, w);
         }
     }
 
-    originAndDistances.push([i, maxDistance]);
-};
+    function dijkstra(start) {
 
-const distances = originAndDistances.map((dist) => dist[1]);
+        const dist = Array(cities + 1).fill(Infinity);
+        dist[start] = 0;
 
-console.log(Math.min(...distances));
+        const visited = new Set();
+
+        while (visited.size < cities) {
+            let u = -1;
+            let minDist = Infinity;
+
+            for (let i = 1; i <= cities; i++) {
+                if (!visited.has(i) && dist[i] < minDist) {
+                    minDist = dist[i];
+                    u = i;
+                }
+            }
+
+            if (u === -1) break;
 
 
+            visited.add(u);
+
+            const neighbors = graph.getVertexEdges(u);
+
+            for (let edge of neighbors) {
+                const v = edge.vertex;
+                const weight = edge.weight;
 
 
+                if (dist[u] + weight < dist[v]) {
+                    dist[v] = dist[u] + weight;
+                }
+            }
+        }
 
+        return dist;
+    }
+
+    let answer = Infinity;
+
+    for (let i = 1; i <= cities; i++) {
+        const dist = dijkstra(i);
+
+        const maxDist = Math.max(...dist.slice(1));
+
+        answer = Math.min(answer, maxDist);
+    }
+
+
+    return answer;
+}
