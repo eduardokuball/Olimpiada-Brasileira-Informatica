@@ -1,25 +1,22 @@
-const [chocoball, maximum] = prompt()
-    .split(' ')
-    .map((e) => {
-        return parseInt(e);
-    });
+export default function getWinner(chocoball, maximum) {
 
-const MAX_SIZE = 10 ** 6 + 1;
-const count = Array(MAX_SIZE).fill(0);
-const forbiden = Array(MAX_SIZE).fill(0);
+    const MAX_SIZE = chocoball + maximum + 5;
+    const count = Array(MAX_SIZE).fill(0);
+    const forbidden = Array(MAX_SIZE).fill(0);
 
-for (let i = 0; i <= chocoball; i++) {
-    if (count[i] === 0) {
-        for (let j = 1; j <= maximum; j++) {
-            count[i + j] += 1;
-            forbiden[i + j] = j;
+    for (let i = 0; i <= chocoball; i++) {
+        if (count[i] === 0) {
+            for (let j = 1; j <= maximum; j++) {
+                count[i + j] += 1;
+                forbidden[i + j] = j;
+            }
+        }
+
+        if (count[i] === 1) {
+            count[i + forbidden[i]] += 1;
+            forbidden[i + forbidden[i]] = forbidden[i];
         }
     }
-    if (count[i] === 1) {
-        count[i + forbiden[i]] += 1;
-        forbiden[i + forbiden[i]] = forbiden[i];
-    }
-}
 
-const winner = count[chocoball] === 0 ? "Carlos" : "Paula";
-console.log(winner);
+    return count[chocoball] === 0 ? "Carlos" : "Paula";
+}
