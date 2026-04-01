@@ -1,67 +1,45 @@
-function collectPhotos(){
-    const photos = [];
-    for(let i = 0; i < 2; i++){
-        const [photoWidth, photoHeight] = prompt()
-            .split(' ')
-            .map(e => parseInt(e));
-        const photo = {
-            width: photoWidth,
-            height: photoHeight
-        }
-        photos.push(photo);
-    }
-    return photos;
-};
-
-function collagePatterns(photos){
+function collagePatterns(photos) {
     const patterns = [];
 
     const pattern1 = {
-        width: photos[0].width > photos[1].width ? photos[0].width : photos[1].width,
-        height: photos[0].height + photos[1].height 
+        width: Math.max(photos[0].width, photos[1].width),
+        height: photos[0].height + photos[1].height
     };
 
     const pattern2 = {
-        width: photos[0].height > photos[1].height ? photos[0].height : photos[1].height,
+        width: Math.max(photos[0].height, photos[1].height),
         height: photos[0].width + photos[1].width
     };
 
     const pattern3 = {
-        width: photos[1].height > photos[0].width ? photos[1].height : photos[0].width,
+        width: Math.max(photos[1].height, photos[0].width),
         height: photos[0].height + photos[1].width
     };
 
     const pattern4 = {
-        width: photos[0].height > photos[1].width ? photos[0].height : photos[1].width,
+        width: Math.max(photos[0].height, photos[1].width),
         height: photos[0].width + photos[1].height
-    }
+    };
 
     patterns.push(pattern1, pattern2, pattern3, pattern4);
 
     return patterns;
 }
 
-function fitsInPage(patterns,pageHeight,pageWidth){
-    let fit = false;
-    for(const pattern of patterns){
-        if(pattern.height <= pageHeight && pattern.width <= pageWidth){
-            fit = true;
-            break;
+function fitsInPage(patterns, pageHeight, pageWidth) {
+    for (const pattern of patterns) {
+        if (
+            pattern.height <= pageHeight &&
+            pattern.width <= pageWidth
+        ) {
+            return true;
         }
     }
-    return fit;
+    return false;
 }
 
-const [pageHeight, pageWidth] = prompt()
-    .split(' ')
-    .map(e => parseInt(e));
-
-const photos = collectPhotos();
-const patterns = collagePatterns(photos);
-const isFitInPage = fitsInPage(patterns,pageHeight,pageWidth);
-
-if(isFitInPage){
-    console.log('S');
-} else {
-    console.log('N');
+export default function canFitPhotosInPage(photos = [], pageHeight, pageWidth) {
+    const patterns = collagePatterns(photos);
+    const isFit = fitsInPage(patterns, pageHeight, pageWidth);
+    return isFit ? 'S' : 'N';
 }
