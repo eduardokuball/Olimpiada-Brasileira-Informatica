@@ -1,19 +1,15 @@
 import Permutations from '../../../utils/Permutations.js';
 
-const [ buildings, sale] = prompt()
-    .split(' ', 2)
-    .map(e => parseInt(e));
+export default function getMinimumDistance(buildingsArr = [], sale) {
+    const size = buildingsArr.length - sale;
 
-const buildingsArr = prompt()
-    .split(' ',buildings)
-    .map(e => parseInt(e));
+    let combinations = Permutations.fixedSizeWithoutRepetition(buildingsArr, size);
 
-const size = buildings - sale;
+    combinations = combinations.map(c => c.sort((a, b) => a - b));
 
-let combinations = Permutations.fixedSizeWithoutRepetition(buildingsArr,size);
+    const distances = combinations.map(
+        c => Math.abs(c[0] - c[c.length - 1])
+    );
 
-combinations = combinations.map((c) => c.sort((a,b) => a - b));
-
-const distances = combinations.map((c) => Math.abs(c[0] - c[c.length - 1]));
-
-console.log(Math.min(...distances));
+    return Math.min(...distances);
+}
