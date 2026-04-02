@@ -1,49 +1,38 @@
-let [n, m] = prompt()
-    .split(' ')
-    .map((e) => {
-        return parseInt(e);
-    });
+export default function validateSequence(aValues = [], bValues = []) {
 
-let a = new Set(prompt()
-    .split(' ')
-    .map((e) =>{
-        return parseInt(e);
-    })
-);
-let b = prompt()
-    .split(' ')
-    .map((e) => {
-        return parseInt(e);
-    });
+    console.log(aValues);
+    console.log(bValues);
 
-let countedB = new Set();
+    const a = new Set(aValues);
+    const countedB = new Set();
 
-let isValid = true;
-let invalid = 0;
+    let isValid = true;
+    let invalid = 0;
 
-for (let i = 0; i < m; i++) {
-    let current = b[i];
-    let validCase = false;
+    for (let i = 0; i < bValues.length; i++) {
+        const current = bValues[i];
+        let validCase = false;
 
-    if (a.has(current)) {
-        validCase = true;
-    } else {
-        for (let j = 0; j < i; j++) {
-            if (countedB.has(current - b[j])) {
-                validCase = true;
-                break;
+        if (a.has(current)) {
+            validCase = true;
+        } 
+        else {
+            for (const prev of countedB) {
+                if (countedB.has(current - prev)) {
+                    validCase = true;
+                    break;
+                }
             }
+        }
+
+        if (validCase) {
+            countedB.add(current);
+        } else {
+            isValid = false;
+            invalid = current;
+            break;
         }
     }
 
-    if (validCase) {
-        countedB.add(current);
-    } else {
-        isValid = false;
-        invalid = current;
-        break;
-    }
+    return isValid ? "sim" : invalid;
 }
-
-let output = isValid ? "sim" : invalid;
-console.log(output);
