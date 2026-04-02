@@ -1,47 +1,43 @@
-function getGame(dimention){
-    const game = [];
-    for(let i = 0; i < dimention; i++){
-        const row = prompt()
-            .split('',dimention);
-        game.push(row);
-    };
-    return game;
-};
+export default function getMaxCandies(game = []) {
 
-function order(game){
-    let newGame = game.map(row => [...row]);
-    for(let i = 0; i < newGame.length; i++){
-        if(i % 2 != 0){
-            newGame[i] = newGame[i].reverse();
+    const dimension = game.length;
+
+    function order(board) {
+        const newGame = board.map(row => [...row]);
+
+        for (let i = 0; i < newGame.length; i++) {
+            if (i % 2 !== 0) {
+                newGame[i].reverse();
+            }
         }
+
+        return newGame;
     }
-    return newGame;
-};
 
-function maxCandies(game){
-    let candies = 0;
-    let possibilities = [];
-    for(let i = 0; i < dimention; i++){
-        for(let j = 0; j < dimention; j++){
-            if(game[i][j] == "o"){
-                candies++;
+    function maxCandies(board) {
+        let candies = 0;
+        const possibilities = [];
+
+        for (let i = 0; i < dimension; i++) {
+            for (let j = 0; j < dimension; j++) {
+
+                if (board[i][j] === "o") {
+                    candies++;
+                }
+
+                if (board[i][j] === "A") {
+                    possibilities.push(candies);
+                    candies = 0;
+                }
             }
-            if(game[i][j] == "A"){
-                possibilities.push(candies);
-                candies = 0;
-            }
-        }  
+        }
+
+        possibilities.push(candies);
+
+        return Math.max(...possibilities);
     }
-    possibilities.push(candies);
-    return possibilities;
-};
 
-const dimention = parseInt(prompt());
+    const newGame = order(game);
 
-const game = getGame(dimention);
-
-const newGame = order(game);
-
-const possibilities = maxCandies(newGame);
-
-console.log(Math.max(...possibilities));
+    return maxCandies(newGame);
+}
