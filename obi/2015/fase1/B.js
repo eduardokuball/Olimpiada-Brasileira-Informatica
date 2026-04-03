@@ -1,48 +1,44 @@
-function getPieces(quantity){
+export default function assembleFinalWord(quantity, rawPieces = []) {
+
+    let assembledWord = '';
+    let lastEnd = null;
+
     const pieces = [];
-    for(let i = 0; i < quantity; i++){
-        const [start,word,end] = prompt()
-            .split(' ', 3);
+
+    for (const [start, word, end] of rawPieces) {
         const piece = {
-            start: parseInt(start),
+            start: Number(start),
             word: word.toUpperCase(),
-            end: parseInt(end)
+            end: Number(end)
         };
-        if(start == 0){
-            assembledWord += word;
-            lastEnd = end;
+
+        if (piece.start === 0) {
+            assembledWord += piece.word;
+            lastEnd = piece.end;
         } else {
             pieces.push(piece);
         }
     }
-    return pieces;
-};
 
-function assembleWord(words,assembledWord,quantity){
-    while(true){
-        for(let i = 0; i < words.length; i++){
-            if(lastEnd == words[i].start){
-                assembledWord += words[i].word;
-                lastEnd = words[i].end;
-                words.splice(i, 1);
+    while (true) {
+        let found = false;
+
+        for (let i = 0; i < pieces.length; i++) {
+            if (lastEnd === pieces[i].start) {
+                assembledWord += pieces[i].word;
+                lastEnd = pieces[i].end;
+                pieces.splice(i, 1);
+                found = true;
                 break;
             }
         }
-        if(assembledWord.length == quantity) return assembledWord;
+
+        if (!found) break;
+
+        if (assembledWord.length === quantity) {
+            return assembledWord;
+        }
     }
-};
 
-let assembledWord = '';
-let lastEnd = null;
-
-const quantity = parseInt(prompt());
-
-const pieces = getPieces(quantity);
-
-const word = assembleWord(pieces, assembledWord,quantity);
-
-console.log(word.toUpperCase());
-
-
-
-
+    return assembledWord;
+}
