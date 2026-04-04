@@ -1,53 +1,50 @@
-function processRequirements(friends) {
-    const obj = [];
-    const friendshipsMade = [];
+export default function solveFriendships(quantity, friends, requirementsData) {
+
+    const graph = new Map();
+    const inDegree = new Map();
 
     friends.forEach(friend => {
-        const requirement = Number(prompt());
-        if (requirement > 0) {
-            const requirements = prompt()
-            .split(' ')      
-            obj.push({
-                name: friend,
-                requirements: requirements
-            });
-        } else {
-            friendshipsMade.push(friend);
+        graph.set(friend, []);
+        inDegree.set(friend, 0);
+    });
+
+    // monta grafo CORRETAMENTE
+    requirementsData.forEach(({ name, requirements }) => {
+
+        requirements.forEach(req => {
+            graph.get(req).push(name); // req → name
+            inDegree.set(name, inDegree.get(name) + 1);
+        });
+
+    });
+
+    // fila
+    const queue = [];
+
+    friends.forEach(friend => {
+        if (inDegree.get(friend) === 0) {
+            queue.push(friend);
         }
     });
 
-    return [obj, friendshipsMade] ;
-}
+    const result = [];
 
-function makeFriendships(quantity, obj, friendshipsMade) {
-    for (let j = 0; j < quantity; j++) {
-        obj.forEach((o, index) => {
-            const allRequirementsMet = o.requirements.every(r => friendshipsMade.includes(r));
+    while (queue.length > 0) {
+        const current = queue.shift();
+        result.push(current);
 
-            if (allRequirementsMet) {
-                friendshipsMade.push(o.name);
-                obj.splice(index, 1);
+        graph.get(current).forEach(next => {
+            inDegree.set(next, inDegree.get(next) - 1);
+
+            if (inDegree.get(next) === 0) {
+                queue.push(next);
             }
         });
     }
 
-    return friendshipsMade;
-}
-
-function displayResult(quantity, friendshipsMade) {
-    if (friendshipsMade.length < quantity) {
-        console.log('impossivel');
-    } else {
-        console.log(friendshipsMade.join(' '));
+    if (result.length < quantity) {
+        return 'impossivel';
     }
+
+    return result.join(' ');
 }
-
-const quantity = Number(prompt());
-const friends = prompt()
-    .split(' ')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1));  ;
-
-const [obj, friendshipsMade] = processRequirements(friends);
-const finalFriendships = makeFriendships(quantity, obj, friendshipsMade);
-
-displayResult(quantity, finalFriendships);

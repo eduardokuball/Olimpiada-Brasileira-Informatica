@@ -260,6 +260,22 @@ class Graph {
 
         return matrix;
     }
+
+    getEdgeWeightSafe(vertexA, vertexB) {
+    if (!this.weighted) return null;
+    if (!this.graph.has(vertexA)) return null;
+    if (!this.graph.has(vertexB)) return null;
+
+    const edgesA = this.graph.get(vertexA);
+
+    const edge = edgesA.find(e =>
+        this.weighted ? e.vertex === vertexB : e === vertexB
+    );
+
+    if (!edge) return null;
+
+    return this.weighted ? edge.weight : 1;
+}
 }
 
 export default Graph;

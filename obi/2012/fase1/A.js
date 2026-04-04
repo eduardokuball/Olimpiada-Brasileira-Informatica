@@ -1,59 +1,22 @@
-function Rotatemattress(a,b,c){
-    const patterns = []; 
-
-    const pattern1 = {
-        mattressHeight : c,
-        mattresWidth : a,
-    };
-
-    const pattern2 = {
-        mattressHeight : c,
-        mattresWidth : b,
-    };
-
-    const pattern3 = {
-        mattressHeight : a,
-        mattresWidth : b,
-    }
-
-    const pattern4 = {
-        mattressHeight : a,
-        mattresWidth : c,
-    }
-
-    
-    const pattern5 = {
-        mattressHeight : b,
-        mattresWidth : a,
-    }
-
-    patterns.push(pattern1, pattern2, pattern3, pattern4,pattern5);
-    return patterns;
+function generateRotations(a, b, c) {
+    return [
+        { height: c, width: a },
+        { height: c, width: b },
+        { height: a, width: b },
+        { height: a, width: c },
+        { height: b, width: a },
+        { height: b, width: c },
+    ];
 }
 
-function passByTheDoor(){
-    const patterns = Rotatemattress(a,b,c);
-    let passByTheDoor = false;
+export default function canPassThroughDoor(a, b, c, doorHeight, doorWidth) {
+    const patterns = generateRotations(a, b, c);
+
+    let canPass = false;
+
     patterns.forEach((pattern) => {
-        if (pattern.mattresWidth <= doorWidth && pattern.mattressHeight <= doorHeight){
-            passByTheDoor = true;
-        }
-    })
-    return passByTheDoor;
+        if (pattern.width <= doorWidth && pattern.height <= doorHeight) canPass = true;
+    });
+
+    return canPass ? 'S' : 'N';
 }
-
-const [a,b,c] = prompt()
-    .split(' ')
-    .map(e => parseInt(e))
-
-const [doorHeight, doorWidth] = prompt()
-    .split(' ')
-    .map(e => parseInt(e))
-
-
-if (passByTheDoor()){
-    console.log('S');
-} else {
-    console.log('N');
-}
-

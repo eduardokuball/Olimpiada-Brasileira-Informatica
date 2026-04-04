@@ -1,30 +1,33 @@
-function collectConnections(transmissionLines) {
-    const connections = [];
-    for (let i = 0; i < transmissionLines; i++) {
-        const [x, y] = prompt()
-            .split(' ')
-            .map(Number);
-        connections.push(x);
-        connections.push(y);
-    }
-    return connections;
-}
+import Graph from '../../utils/Graph.js';
 
-function checkAllConnections(stations, connections) {
-    for (let i = 0; i < stations; i++) {
-        const station = i + 1;
-        if (!connections.includes(station)) {
-            return "falha";
+export default function checkWeb(stations, conections) {
+
+    const graph = new Graph();
+
+    const vertices = Array.from({ length: stations }, (_, i) => i + 1);
+    graph.addVertexes(...vertices);
+
+    conections.forEach(([x, y]) => {
+        graph.addEdge(x, y);
+        graph.addEdge(y, x);
+    });
+
+    const visitados = new Set();
+    const fila = [vertices[0]];
+
+    visitados.add(vertices[0]);
+
+    while (fila.length > 0) {
+        const atual = fila.shift();
+        const vizinhos = graph.getVertexEdges(atual, true);
+
+        for (let vizinho of vizinhos) {
+            if (!visitados.has(vizinho)) {
+                visitados.add(vizinho);
+                fila.push(vizinho);
+            }
         }
     }
-    return "normal";
+
+    return visitados.size === stations ? "normal" : "falha";
 }
-
-const [stations, transmissionLines] = prompt()
-    .split(' ')
-    .map(Number);
-
-const connections = collectConnections(transmissionLines);
-const statusConnection = checkAllConnections(stations, connections);
-
-console.log(statusConnection);

@@ -1,27 +1,13 @@
-let [possibilities, balloon] = prompt()
-    .split(' ')
-    .map((e) => {
-        return parseInt(e);
-    });
+export default function calculateMaxFloor(N, K) {
+    let dp = Array(K + 1).fill(0);
+    let moves = 0;
 
-
-    
-
-const pisoLog = Math.floor(Math.log2(possibilities)) + 1;
-
-let r;
-
-if (pisoLog <= balloon) {
-    r = pisoLog;
-} else {
-    r = 0;
-    while (balloon > 1) {
-        r += 1;
-        possibilities = Math.ceil((possibilities - 1) / 2);
-        balloon -= 1;
+    while (dp[K] < N) {
+        moves++;
+        for (let k = K; k > 0; k--) {
+            dp[k] = dp[k] + dp[k - 1] + 1;
+        }
     }
-    r += possibilities;
-}
 
-console.log(r);
-
+    return moves;
+};

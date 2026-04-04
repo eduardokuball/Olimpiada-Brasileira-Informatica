@@ -1,84 +1,63 @@
-String.prototype.count = function(letter){
+function countTrailingZeros(num) {
     let count = 0;
-    for(let i = this.length - 1; i >= 0; i--){
-        if(this[i] === letter) count++;
-        if(this[i] != letter) return count;
-    }
-};
-function getMatrix(dimension){
-    const matrix = [];
-    for (let i = 0; i < dimension; i++) {
-        const line = prompt()
-            .split(' ')
-            .map(e => parseInt(e));
-        matrix.push(line);
-    }
-    return matrix;
-};
 
-function penalityDown(matrix, dimension) {
-    let i = 0;
-    let j = 0;
-    let visited = [matrix[0][0]];
+    while (num % 10 === 0 && num !== 0) {
+        count++;
+        num /= 10;
+    }
 
-    while (true) {
-        if (i + 1 < dimension && matrix[i + 1][j] !== 0) {
-            visited.push(matrix[i + 1][j]);
+    return count;
+}
+
+function getPathDown(matrix, n) {
+    let i = 0, j = 0;
+    const path = [matrix[0][0]];
+
+    while (i !== n - 1 || j !== n - 1) {
+        if (i + 1 < n && matrix[i + 1][j] !== 0) {
             i++;
-        }
-        else if (j + 1 < dimension && matrix[i][j + 1] !== 0) {
-            visited.push(matrix[i][j + 1]);
+        } else if (j + 1 < n && matrix[i][j + 1] !== 0) {
             j++;
+        } else {
+            break; // evita loop infinito
         }
-        if (i === dimension - 1 && j === dimension - 1) {
-            return visited;
-        }
+
+        path.push(matrix[i][j]);
     }
-};
 
-function penalityRight(matrix, dimension) {
-    let i = 0;
-    let j = 0;
-    let visited = [matrix[0][0]];
+    return path;
+}
 
-    while (true) {
-        if (j + 1 < dimension && matrix[i][j + 1] !== 0) {
-            visited.push(matrix[i][j + 1]);
+function getPathRight(matrix, n) {
+    let i = 0, j = 0;
+    const path = [matrix[0][0]];
+
+    while (i !== n - 1 || j !== n - 1) {
+        if (j + 1 < n && matrix[i][j + 1] !== 0) {
             j++;
-        }
-        if (i + 1 < dimension && matrix[i + 1][j] !== 0) {
-            visited.push(matrix[i + 1][j]);
+        } else if (i + 1 < n && matrix[i + 1][j] !== 0) {
             i++;
+        } else {
+            break;
         }
-        else if (i + 1 < dimension && matrix[i + 1][j] !== 0) {
-            visited.push(matrix[i + 1][j]);
-            i++;
-        };
-        if (i === dimension - 1 && j === dimension - 1) {
-            return visited;
-        }
+
+        path.push(matrix[i][j]);
     }
-};
-function minPenalitie(productDown,productRight){
-    let possibilities = [];
-    let first = String(productDown);
-    let second = String(productRight);
-    possibilities.push(first.count('0'));
-    possibilities.push(second.count('0'));
-    return Math.min(...possibilities);
-};
 
-const dimension = parseInt(prompt());
+    return path;
+}
 
-const matrix = getMatrix(dimension);
+export default function minPenalty(matrix) {
+    const n = matrix.length;
 
-const penalitiesDown = penalityDown(matrix,dimension);
+    const pathDown = getPathDown(matrix, n);
+    const pathRight = getPathRight(matrix, n);
 
-const penalitiesRight = penalityRight(matrix,dimension);
+    const productDown = pathDown.reduce((acc, v) => acc * v, 1);
+    const productRight = pathRight.reduce((acc, v) => acc * v, 1);
 
-const productDown = penalitiesDown.reduce((accumulator, currentValue) => accumulator * currentValue, 1);
+    const zerosDown = countTrailingZeros(productDown);
+    const zerosRight = countTrailingZeros(productRight);
 
-const productRight = penalitiesRight.reduce((accumulator, currentValue) => accumulator * currentValue, 1);
-
-console.log(minPenalitie(productDown, productRight));
-
+    return Math.min(zerosDown, zerosRight);
+}

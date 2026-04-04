@@ -1,10 +1,8 @@
-function hasLightningInSamePlace(registers) {
+export default function hasDuplicateLightningCoordinates(registers, coordinatesInput) {
     const coordinates = [];
 
     for (let i = 0; i < registers; i++) {
-        const [x, y] = prompt()
-            .split(' ')
-            .map(Number);
+        const [x, y] = coordinatesInput[i];
 
         const newCoordinate = { x, y };
 
@@ -13,17 +11,11 @@ function hasLightningInSamePlace(registers) {
         );
 
         if (exists) {
-            return true; 
+            return 1;
         } else {
             coordinates.push(newCoordinate);
         }
     }
 
-    return false;
+    return 0;
 }
-
-const registers = Number(prompt());
-
-const lightningSamePlace = hasLightningInSamePlace(registers);
-
-console.log(lightningSamePlace ? 1 : 0);

@@ -1,16 +1,9 @@
-const quantity = prompt();
-const divisions = prompt()
-    .split(' ')
-    .map(e => parseInt(e));
-
-function pushStock() {
+export default function pushStock(divisions) {
     let stock = 0;
-    divisions.forEach((bars) => {
+
+    for (const bars of divisions) {
         stock += bars - 1;
-    });
+    }
+
     return stock;
-}
-
-const stock = pushStock();
-
-console.log(stock);
+};

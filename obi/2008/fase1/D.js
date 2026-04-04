@@ -12,13 +12,16 @@ function floyd(graph, size) {
     }
 
     let minDistance = Infinity;
+
     for (let i = 0; i < size; i++) {
         let maxDistance = 0;
+
         for (let j = 0; j < size; j++) {
             if (g[i][j] > maxDistance) {
                 maxDistance = g[i][j];
             }
         }
+
         if (maxDistance < minDistance) {
             minDistance = maxDistance;
         }
@@ -27,23 +30,16 @@ function floyd(graph, size) {
     return minDistance;
 }
 
+export default function solve(s, edges) {
 
-const [s, c] = prompt()
-    .split(' ')
-    .map(Number);
+    const graph = new Graph(true);
 
-const graph = new Graph(true);
+    const vertices = Array.from({ length: s }, (_, i) => i);
+    graph.addVertexes(...vertices);
 
-const vertices = Array.from({ length: s }, (_, i) => i);
-graph.addVertexes(...vertices);
+    for (const [a, b, cost] of edges) {
+        graph.addEdge(a - 1, b - 1, cost);
+    }
 
-for (let i = 0; i < c; i++) {
-    const [a, b, custo] = prompt()
-        .split(' ')
-        .map(Number);
-
-    graph.addEdge(a - 1, b - 1, custo);
+    return floyd(graph, s);
 }
-
-const resultado = floyd(graph, s);
-console.log(resultado);

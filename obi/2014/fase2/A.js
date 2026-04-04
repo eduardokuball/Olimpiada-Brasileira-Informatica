@@ -1,42 +1,28 @@
-function countItem(array,item){
-    let count = 0;
-    for(const a of array){
-        if(a == item) count++;
+export default function getMostFrequentNote(grades = []) {
+
+    const frequencyMap = new Map();
+
+    for (const grade of grades) {
+        frequencyMap.set(grade, (frequencyMap.get(grade) || 0) + 1);
     }
-    return count;
+
+    let maxFrequency = 0;
+
+    for (const freq of frequencyMap.values()) {
+        if (freq > maxFrequency) {
+            maxFrequency = freq;
+        }
+    }
+
+    let bestNote = -Infinity;
+
+    for (const [note, freq] of frequencyMap.entries()) {
+        if (freq === maxFrequency) {
+            if (note > bestNote) {
+                bestNote = note;
+            }
+        }
+    }
+
+    return bestNote;
 }
-
-function frequences(grade){
-    const frequencesNotes = [];
-    let set = new Set(grade);
-    for(const item of set){
-        const count = countItem(grade, item);
-        frequencesNotes.push({
-            note: item,
-            frequency: count
-        });
-    }
-    return frequencesNotes.sort((a, b) => b.frequency - a.frequency);
-};
-
-function noteMostFrequency(frequencesNotes){
-    let mostFrequency = frequencesNotes[0].frequency;
-    let notes = [];
-    for(const note of frequencesNotes){
-        if(note.frequency == mostFrequency) notes.push(note.note);
-    }
-    return notes[notes.length - 1];
-};
-
-const quantity = parseInt(prompt());
-const grade = prompt()
-    .split(' ', quantity)
-    .map(e => parseInt(e));
-
-
-const frequencesNotes = frequences(grade);
-const mostNoteFrequency = noteMostFrequency(frequencesNotes);
-
-console.log(mostNoteFrequency);
-
-

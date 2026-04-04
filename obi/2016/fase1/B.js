@@ -1,35 +1,24 @@
-function getCode(lines){
-    const code = [];
-    for(let i = 0; i < lines; i++){
-        const line = prompt()
-            .split('')
-        code.push(line);
-    }
-    return code.flat();
-};
+export default function isCodeBalanced(code = []) {
 
-function balanced(code){
+
     let openKeys = 0;
     let closeKeys = 0;
     let first = false;
-    for(let i = 0; i < code.length; i++){
-        if(code[i] == '{'){
+
+    for (let i = 0; i < code.length; i++) {
+        if (code[i] === '{') {
             openKeys++;
-            if(!first) first = "{";
+            if (!first) first = "{";
         }
-        if(code[i] == "}"){
+
+        if (code[i] === '}') {
             closeKeys++;
-            if(!first) first = "}";
+            if (!first) first = "}";
         }
     }
-    if(openKeys == 0 && closeKeys == 0) return 'S';
-    if(openKeys == closeKeys && first == "{") return 'S';
+
+    if (openKeys === 0 && closeKeys === 0) return 'S';
+    if (openKeys === closeKeys && first === "{") return 'S';
+
     return 'N';
-};
-
-const lines = parseInt(prompt());
-
-const code = getCode(lines);
-
-console.log(balanced(code));
-
+}

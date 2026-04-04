@@ -1,31 +1,30 @@
-const getMobileById = (mobiles, id) => mobiles.find(mobile => mobile.id === id) || null;
-
-const mobilesQuantity = parseInt(prompt());
-
-// Lista de mobiles com ponteiros para os outos sub-mobiles
-const mobiles = [{ id: 0, subs: [] }];
-
-for (let i = 0; i < mobilesQuantity; i++) {
-    const [mobileId, parentId] = prompt()
-        .split(' ', 2)
-        .map(e => parseInt(e));
-
-    // Adiciona o mobile na lista e cria o ponteiro do seu pai
-    mobiles.push({ id: mobileId, subs: [] });
-    getMobileById(mobiles, parentId).subs.push(mobileId);
+function getMobileById(mobiles, id) {
+    return mobiles.find(mobile => mobile.id === id) || null;
 }
 
-// Remove a raiz, não precisamos dela.
-mobiles.shift();
+export default function isBalanced(pairs) {
+    const mobiles = [{ id: 0, subs: [] }];
 
-const balanced = mobiles.map(e => {
-    const childs = e.subs.map(e => getMobileById(mobiles, e));
+    for (const [mobileId, parentId] of pairs) {
+        mobiles.push({ id: mobileId, subs: [] });
 
-    if (childs.length === 0) return true;
+        const parent = getMobileById(mobiles, parentId);
+        parent.subs.push(mobileId);
+    }
 
-    const baseSubchildsCount = childs[0].subs.length;
+    mobiles.shift();
 
-    return childs.every(e => e.subs.length === baseSubchildsCount);
-}).every(e => e === true);
+    const balanced = mobiles
+        .map(m => {
+            const childs = m.subs.map(id => getMobileById(mobiles, id));
 
-console.log(balanced ? 'bem' : 'mal');
+            if (childs.length === 0) return true;
+
+            const base = childs[0].subs.length;
+
+            return childs.every(c => c.subs.length === base);
+        })
+        .every(Boolean);
+
+    return balanced ? 'bem' : 'mal';
+}

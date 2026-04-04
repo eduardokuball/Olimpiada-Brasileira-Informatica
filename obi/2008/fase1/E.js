@@ -1,46 +1,30 @@
-function pontuation(a, power, n) {
+function pontuation(powers, power, n) {
     let ini = 0;
     let fim = n;
 
     while (fim - ini > 1) {
         const med = Math.floor((fim + ini) / 2);
-        if (a[med] <= power) {
+
+        if (powers[med] <= power) {
             ini = med;
         } else {
             fim = med;
         }
     }
+
     return fim - 1;
 }
 
-const [strips, competitors] = prompt()
-    .split(' ')
-    .map((e) => {
-        return parseInt(e);
-    });
+export default function solve(strips, powers, pontuations, ogros) {
 
-const powers = [0, ...prompt()
-    .split(' ')
-    .map((e) => {
-        return parseInt(e);
-    })];
+    const adjustedPowers = [0, ...powers];
 
-const pontuations = prompt()
-    .split(' ')
-    .map((e) => {
-        return parseInt(e);
-    });
+    const result = [];
 
-const ogros = prompt()
-    .split(' ')
-    .map((e) => {
-        return parseInt(e);
-    });
+    for (const o of ogros) {
+        const index = pontuation(adjustedPowers, o, strips);
+        result.push(pontuations[index]);
+    }
 
-let result = '';
-
-for (let o of ogros) {
-    result += pontuations[pontuation(powers, o, strips)] + ' ';
+    return result;
 }
-
-console.log(result.trim());

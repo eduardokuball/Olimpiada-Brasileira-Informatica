@@ -5,9 +5,10 @@ const WHITE = 'B';
 const EMPTY = '_';
 
 function getNextMoves(position) {
-    const pieces = position.split(' ')
-    if (pieces.every(e => e === EMPTY)) return []; // Jogo finalizado
-    if (pieces.every(e => e !== BLACK)) return null; // Só peças brancas
+    const pieces = position.split(' ');
+
+    if (pieces.every(e => e === EMPTY)) return []; // jogo finalizado
+    if (pieces.every(e => e !== BLACK)) return null; // só peças brancas
 
     const moves = [];
 
@@ -20,11 +21,11 @@ function getNextMoves(position) {
 
         const toggle = v => v === BLACK ? WHITE : BLACK;
 
-        if (i > 0 && newPosition[i-1] !== EMPTY)
-            newPosition[i-1] = toggle(newPosition[i-1]);
+        if (i > 0 && newPosition[i - 1] !== EMPTY)
+            newPosition[i - 1] = toggle(newPosition[i - 1]);
 
-        if (i < pieces.length-1 && newPosition[i+1] !== EMPTY)
-            newPosition[i+1] = toggle(newPosition[i+1]);
+        if (i < pieces.length - 1 && newPosition[i + 1] !== EMPTY)
+            newPosition[i + 1] = toggle(newPosition[i + 1]);
 
         moves.push(newPosition.join(' '));
     }
@@ -34,21 +35,18 @@ function getNextMoves(position) {
 
 function findNodes(parent) {
     const moves = getNextMoves(parent.value);
-    if (moves === null) return null;
+
+    if (moves === null) return;
 
     moves.forEach(m => {
         const node = new Node(m);
         parent.addChild(node);
         findNodes(node);
-    })
+    });
 }
 
-function main(start) {
+export default function getGameLeafNodes(start) {
     const tree = new Tree(start);
     findNodes(tree);
     return tree.leafs;
 }
-
-const n = parseInt(prompt('Digite o número de peças no jogo'));
-const game = prompt('Digite a configuração inicial do jogo').split(' ', n).join(' ');
-console.log(main(game));

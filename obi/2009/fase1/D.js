@@ -2,14 +2,13 @@ function calculateEuclideanDistance(x, y) {
     return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
 }
 
-function checkDisplacement(registers, maximumDistance) {
+export default function didExceedMaximumDistance(registers, maximumDistance, movements) {
     let x = 0;
     let y = 0;
-    let isRape = false;
+    let exceeded = false;
 
     for (let i = 0; i < registers; i++) {
-        const [direction, distance] = prompt()
-            .split(' ');
+        const [direction, distance] = movements[i];
         const dist = Number(distance);
 
         if (direction === "N") {
@@ -25,18 +24,10 @@ function checkDisplacement(registers, maximumDistance) {
         const euclideanDistance = calculateEuclideanDistance(x, y);
 
         if (euclideanDistance > maximumDistance) {
-            isRape = true;
+            exceeded = true;
             break;
         }
     }
 
-    return isRape;
+    return exceeded;
 }
-
-const [registers, maximumDistance] = prompt()
-    .split(' ')
-    .map(e =>parseInt(e));
-
-const isRape = checkDisplacement(registers, maximumDistance);
-
-console.log(isRape ? 1 : 0);

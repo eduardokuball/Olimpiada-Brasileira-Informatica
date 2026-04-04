@@ -27,28 +27,19 @@ function generatePodium(countries) {
     return countries.map(country => country.country).join(' ');
 }
 
+export default function getOlympicPodium(countriesCount, modalities, results) {
+    const countryList = [];
 
-const [countries, modalities] = prompt('Digite os países e modalidades')
-    .split(' ')
-    .map(Number);
-
-const countryList = [];
-
-for (let i = 0; i < countries; i++) {
+    for (let i = 0; i < countriesCount; i++) {
         countryList.push(createCountry(i + 1));
-}
+    }
 
-for (let i = 0; i < modalities; i++) {
-    const [gold, silver, bronze] = prompt('Digite o relatório das medalhas')
-        .split(' ')
-        .map(Number);
+    for (let i = 0; i < modalities; i++) {
+        const [gold, silver, bronze] = results[i];
         updateMedals(countryList, gold, silver, bronze);
     }
 
-const sortedCountries = sortCountries(countryList);
+    const sortedCountries = sortCountries(countryList);
 
-const podium = generatePodium(sortedCountries);
-
-console.log(podium);
-
-
+    return generatePodium(sortedCountries);
+}

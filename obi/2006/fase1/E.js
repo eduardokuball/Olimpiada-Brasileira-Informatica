@@ -1,58 +1,23 @@
-function redistribution() {
-    for (let i = 0; i < 100; i++) {
-        for (let i = 0; i < piles; i++) {
-            if (perfectStair[i] >= perfectStair[i + 1]) {
-                perfectStair[i]--;
-                perfectStair[i + 1]++;
-            } else if (perfectStair[i + 1] - perfectStair[i] > 1) {
-                perfectStair[i]++;
-                perfectStair[i + 1]--;
-            }
+export default function redistribution(rocks) {
+    const n = rocks.length;
+
+    const total = rocks.reduce((acc, v) => acc + v, 0);
+
+    const baseSum = (n * (n - 1)) / 2;
+
+    if ((total - baseSum) % n !== 0) return -1;
+
+    const x = (total - baseSum) / n;
+
+    const perfect = Array.from({ length: n }, (_, i) => x + i);
+
+    let moves = 0;
+
+    for (let i = 0; i < n; i++) {
+        if (rocks[i] > perfect[i]) {
+            moves += rocks[i] - perfect[i];
         }
     }
-    return perfectStair;
+
+    return moves;
 }
-
-function IsPerfectStairs(rocks) {
-    for (let i = 0; i < rocks.length - 1; i++) {
-        if (rocks[i] >= rocks[i + 1]) {
-            return false;
-        }
-    }
-    return true;
-}
-
-function moves() {
-    let movesrocks = 0;
-    perfectStair = redistribution();
-    for (let i = 0; i < piles; i++) {
-        const quantity = rocks[i] - perfectStair[i];
-        if (quantity < 0) {
-            movesrocks += quantity * -1;
-        } else {
-            movesrocks += quantity;
-        }
-    }
-    return movesrocks / 2;
-}
-
-function response() {
-    perfectStair = redistribution();
-    if (IsPerfectStairs(perfectStair)) {
-        return moves();
-    } else {
-        return -1;
-    }
-}
-
-const piles = Number(prompt());
-const rocks = prompt()
-    .split(' ')
-    .map(e => parseInt(e,));
-let perfectStair = [];
-
-for (let i = 0; i < piles; i++) {
-    perfectStair.push(rocks[i]);
-}
-
-console.log(response());

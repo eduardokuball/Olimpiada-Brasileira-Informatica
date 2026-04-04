@@ -1,20 +1,2 @@
-## 🚀 Contribuidores
 
-<table>
-  <tr>
-    <td align="center">
-      <a href="https://github.com/eduardokuball">
-        <img src="https://avatars.githubusercontent.com/u/136842648" width="100px;" alt=""/>
-        <br /><sub><b>Eduardo Kuball</b></sub>
-      </a><br />
-      💻 📖 💡
-    </td>
-    <td align="center">
-      <a href="https://github.com/GustavoRutkowski">
-        <img src="https://avatars.githubusercontent.com/u/140657464" width="100px;" alt=""/>
-        <br /><sub><b>Gustavo Rutkowski</b></sub>
-      </a><br />
-      🎨 🐛
-    </td>
-  </tr>
-</table>
+<p align="center"> 🚀 Contribuidores</p> <br> <table align="center"> <tr> <td align="center" width="200px"> <a href="https://github.com/eduardokuball"> <img src="https://avatars.githubusercontent.com/u/136842648" width="100px;" style="border-radius:50%;" alt="Eduardo Kuball"/> <br /><br /> <sub><b>Eduardo Kuball</b></sub> </a> <br /> <span title="Código">💻</span> <span title="Documentação">📖</span> <span title="Ideias">💡</span> </td> <td align="center" width="200px"> <a href="https://github.com/GustavoRutkowski"> <img src="https://avatars.githubusercontent.com/u/140657464" width="100px;" style="border-radius:50%;" alt="Gustavo Rutkowski"/> <br /><br /> <sub><b>Gustavo Rutkowski</b></sub> </a> <br /> <span title="Design">🎨</span> <span title="Bugfix">🐛</span> <span title="Brain">🧠</span></td> </tr> </table> <br>
