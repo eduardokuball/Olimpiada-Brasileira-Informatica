@@ -1,36 +1,20 @@
-const students = parseInt(prompt());
-
-const requirements = [];
-
-for (let i = 0; i < students; i++) {
-    const input = prompt()
-        .split(' ')
-        .map((e) => {
-            return parseInt(e);
-        });
-
-    const obj = {
-        id: i + 1,
-        requirement: input.slice(1) 
+export default function splitTeamsByDislikes(requirements) {
+    const canJoinTeam = (dislikes, team) => {
+        return !dislikes.some(person => team.includes(person));
     };
 
-    requirements.push(obj);
-}
+    const teamA = [1];
+    const teamB = [];
 
-const verify = (dislikes, team) => !dislikes.some(person => team.includes(person));
+    for (const student of requirements) {
+        if (student.id === 1) continue;
 
-const teamA = [1];
-const teamB = [];
-
-requirements.forEach((student) => {
-    if (student.id === 1) return; 
-
-    if (verify(student.requirement, teamA)) {
-        teamA.push(student.id);
-    } else if (verify(student.requirement, teamB)) {
-        teamB.push(student.id);
+        if (canJoinTeam(student.requirement, teamA)) {
+            teamA.push(student.id);
+        } else if (canJoinTeam(student.requirement, teamB)) {
+            teamB.push(student.id);
+        }
     }
-});
-
-console.log(teamA.join(''));
-console.log(teamB.join(' '));
+    console.log([teamA, teamB])
+    return [teamA, teamB];
+}
