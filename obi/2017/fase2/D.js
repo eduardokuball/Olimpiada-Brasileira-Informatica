@@ -1,39 +1,32 @@
-import Graph from '../../../utils/Graph.js';
+export default function findCheapestRoute(cities, edges) {
 
-const graph = new Graph(true);
+    const graph = Array.from({ length: cities + 1 }, () => []);
+    
 
-const [cities,links] = prompt()
-    .split(' ')
-    .map(e => parseInt(e));
-
-for(let i = 1; i < cities + 1; i++){
-    graph.addVertexes(i);
-};
-
-
-for(let i = 0; i < links; i++){
-    const [a, b, distance] = prompt()   
-        .split(' ')
-        .map(e => parseInt(e));
-    graph.addEdge(a, b, distance);
-};
-
-const routes = graph.allPathsFrom(1,cities);
-
-function CalculateShipping(routes){
-    let total = 0;
-    let totals = [];
-    for(let i = 0; i < routes.length; i++){
-        const array = routes[i];
-        for(let j = 0; j < array.length - 1; j++){
-            total += graph.getEdgeWeight(array[j], array[j + 1]);
-        }
-        totals.push(total);
-        total = 0;
+    for (const [a, b, w] of edges) {
+        graph[a].push([b, w]);
+        graph[b].push([a, w]); 
     }
-    return Math.min(...totals);
-};
 
-const cheapestRoute = CalculateShipping(routes);
+    function dfs(node, target, visited, currentCost) {
+        if (node === target) return currentCost;
 
-console.log(cheapestRoute);
+        let minCost = Infinity;
+
+        for (const [next, weight] of graph[node]) {
+            if (!visited.has(next)) {
+                visited.add(next);
+                const cost = dfs(next, target, visited, currentCost + weight);
+                minCost = Math.min(minCost, cost);
+                visited.delete(next);
+            }
+        }
+
+        return minCost;
+    }
+
+    const visited = new Set();
+    visited.add(1);
+
+    return dfs(1, cities, visited, 0);
+}

@@ -1,27 +1,20 @@
-function getBoots(quantity){
-    let boots = [];
-    let stringBoots = [];
-    for(let i = 0; i < quantity; i++){
-        const [size,foot] = prompt()
-        .split(' ');
-        if(!boots.includes(size)) boots.push(size);
-        stringBoots.push(String(size) + String(foot.toUpperCase()));
-    }
-    return [boots,stringBoots];
-};
+export default function countBootPairs(boots) {
+    console.log(boots);
+    const sizes = new Set();
+    const bootSet = new Set();
 
-function countPairs(bootSizes,bootStrings){
+    for (const { size, foot } of boots) {
+        sizes.add(size);
+        bootSet.add(String(size) + foot.toUpperCase());
+    }
+
     let pairs = 0;
-    for(let i = 0; i < bootSizes.length; i++){
-        if(bootStrings.includes(bootSizes[i] + 'D') && bootStrings.includes(bootSizes[i] + 'E')){
+
+    for (const size of sizes) {
+        if (bootSet.has(size + 'D') && bootSet.has(size + 'E')) {
             pairs++;
         }
     }
+
     return pairs;
-};
-
-const quantity = parseInt(prompt());
-
-const [bootSizes, bootStrings] = getBoots(quantity);
-
-console.log(countPairs(bootSizes,bootStrings));
+}
