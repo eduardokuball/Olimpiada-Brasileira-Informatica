@@ -1,26 +1,12 @@
-const [n, c, m] = prompt()
-    .split(" ")
-    .map((e) => {
-        return parseInt(e);
-    });
+export default function countMissingStickers(stampedStickers, boughtStickers) {
+    const stampedSet = new Set(stampedStickers);
+    const collected = new Set();
 
-const stampedStickers = prompt()
-    .split(" ")
-    .map((e) => {
-        return parseInt(e);
-    });
-const boughtStickers = prompt()
-    .split(" ")
-    .map((e) => {
-        return parseInt(e);
-    });
-
-const album = new Set();
-
-for (const sticker of boughtStickers) {
-    if (stampedStickers.includes(sticker)) {
-        album.add(sticker);
+    for (const sticker of boughtStickers) {
+        if (stampedSet.has(sticker)) {
+            collected.add(sticker);
+        }
     }
-}
 
-console.log(stampedStickers.length - album.size);
+    return stampedStickers.length - collected.size;
+}

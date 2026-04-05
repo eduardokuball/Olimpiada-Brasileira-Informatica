@@ -1,17 +1,12 @@
-const counter = new Array(10).fill(0);
-let result = 'S';
+export default function validateBalls(balls) {
+    const counter = new Array(10).fill(0);
 
-const balls = prompt()
-    .split(' ')
-    .map((e) => {
-        return parseInt(e);
-    });
-
-for (const b of balls) {
-    counter[b]++;
-    if (counter[b] > 4) {
-        result = 'N';
+    for (const b of balls) {
+        counter[b]++;
+        if (counter[b] > 4) {
+            return 'N';
+        }
     }
-}
 
-console.log(result);
+    return 'S';
+}

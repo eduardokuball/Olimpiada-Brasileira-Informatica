@@ -1,30 +1,26 @@
-const size = parseInt(prompt());
+export default function buildLargestSequence(sequence) {
+    const size = sequence.length;
+    const possibilities = [];
 
-const sequence = prompt()
-    .split(' ', size)
-    .map(e => parseInt(e));
+    if (sequence.includes(0) || sequence.includes(5)) {
+        let aux = [...sequence];
 
-
-const possibilities = [];
-
-if(sequence.includes(0) || sequence.includes(5)){
-    let aux = [...sequence];
-    for(let i = 0; i < size; i++){
-        if(aux[i] == 0 || aux[i] == 5){
-            [aux[i], aux[aux.length - 1]] = [aux[aux.length - 1],aux[i]]
-            possibilities.push(parseInt(aux.join('')));
+        for (let i = 0; i < size; i++) {
+            if (aux[i] === 0 || aux[i] === 5) {
+                [aux[i], aux[aux.length - 1]] = [aux[aux.length - 1], aux[i]];
+                possibilities.push(parseInt(aux.join('')));
+            }
+            aux = [...sequence];
         }
-        aux = [...sequence];
     }
-};
 
-if(possibilities.length == 0){
-    console.log(-1);
-} else {
+    if (possibilities.length === 0) {
+        return -1;
+    }
+
     const max = Math.max(...possibilities);
-    const string = String(max);
-    const formatted = string
+
+    return String(max)
         .split('')
-        .join(' ');
-    console.log(formatted);
+        .map(Number);
 }

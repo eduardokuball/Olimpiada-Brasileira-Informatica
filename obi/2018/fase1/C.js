@@ -1,51 +1,35 @@
-import Graph from '../../../utils/Graph.js';
+export default function calculateNetworkDifference(islands, edges, server) {
+    const graph = Array.from({ length: islands + 1 }, () => []);
 
-function calcPathWidth(path = []) {
-    let totalWidth = 0;
-
-    for (let i = 0; i <= path.length - 2; i++) {
-        const current = path[i];
-        const successor = path[i + 1];
-
-        const width = graph.getEdgeWeight(current, successor);
-        totalWidth += width;
+    for (const [a, b, w] of edges) {
+        graph[a].push([b, w]);
+        graph[b].push([a, w]);
     }
-    return totalWidth;
-};
 
+    function dfs(node, visited, currentWidth, best) {
+        for (const [next, weight] of graph[node]) {
+            if (!visited.has(next)) {
+                visited.add(next);
 
-const [islands, cables] = prompt()
-    .split(' ', 2)
-    .map(e => parseInt(e));
+                const newWidth = currentWidth + weight;
 
-const vertexes = new Array(islands).fill(0).map((_, i) => i + 1);
+                if (best[next] === undefined || newWidth < best[next]) {
+                    best[next] = newWidth;
+                    dfs(next, visited, newWidth, best);
+                }
 
-const graph = new Graph(true);
+                visited.delete(next);
+            }
+        }
+    }
 
-graph.addVertexes(...vertexes);
+    const best = {};
+    const visited = new Set();
+    visited.add(server);
 
-for (let i = 0; i < cables; i++) {
-    const [vertexA, vertexB, width] = prompt()
-        .split(' ', 3)
-        .map(e => parseInt(e));
+    dfs(server, visited, 0, best);
 
-    graph.addEdge(vertexA, vertexB, width);
-};
+    const values = Object.values(best);
 
-const server = parseInt(prompt());
-
-const paths = [];
-const mins = [];
-
-for (let i = 0; i < islands; i++) {
-    if (i + 1!== server) {
-        const path = graph.allPathsFrom(server, i + 1);
-        const widhths = path.map(path => calcPathWidth(path));
-        paths.push(path);
-        mins.push(Math.min(...widhths));
-    };
-};
-
-const difference = Math.max(...mins) - Math.min(...mins);
-
-console.log(difference);
+    return Math.max(...values) - Math.min(...values);
+}

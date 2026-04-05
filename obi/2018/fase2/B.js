@@ -1,21 +1,13 @@
-const boxs = parseInt(prompt());
-const boxWeights = prompt()
-    .split(" ",boxs)
-    .map((e) => {
-        return parseInt(e);
-    });
+export default function canArrangeBoxes(weights) {
+    const boxWeights = [...weights].sort((a, b) => a - b);
 
-boxWeights.sort((a, b) => a - b);
+    boxWeights.unshift(0);
 
-boxWeights.unshift(0);
-
-let result = 'S';
-
-for (let i = 0; i < boxs; i++) {
-    if (boxWeights[i + 1] - boxWeights[i] > 8) {
-        result = 'N';
-        break;
+    for (let i = 0; i < weights.length; i++) {
+        if (boxWeights[i + 1] - boxWeights[i] > 8) {
+            return 'N';
+        }
     }
-}
 
-console.log(result);
+    return 'S';
+}
