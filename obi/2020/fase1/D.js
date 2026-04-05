@@ -1,56 +1,33 @@
-function promptFriendPreference() {
-    const [ belovedMusic, hatedMusic ] = prompt()
-        .split(' ', 2)
-        .map(e => parseInt(e));
+export default function countMusicChanges(friends, selectedMusic) {
 
-    return { beloved: belovedMusic, hated: hatedMusic };
-}
+    const everyoneSatisfied = (friendsArr, music) =>
+        friendsArr.every(({ hated }) => hated !== music);
 
-const everyoneSatisfied = (friendsArr=[], music) => friendsArr
-    .every(({ hated }) => hated !== music);
+    const infiniteCycle = () => {
+        const hateds = friends.map(f => f.hated);
+        return friends.every(({ beloved }) => hateds.includes(beloved));
+    };
 
-function infiniteCycle() {
-    const hateds = [];
+    let changes = 0;
 
-    friends.forEach(({ hated }) => hateds.push(hated));
-    return friends.every(({ beloved }) => hateds.includes(beloved));
-}
+    while (true) {
+        if (infiniteCycle()) {
+            return -1;
+        }
 
-const inputLine = prompt()
-    .split(' ', 3)
-    .map(e => parseInt(e));
+        for (const friend of friends) {
+            if (friend.hated === selectedMusic) {
+                selectedMusic = friend.beloved;
+                changes++;
 
-const [ friendsQuantity, musics ] = inputLine;
-let [,,selectedMusic] = inputLine;
+                if (everyoneSatisfied(friends, selectedMusic)) {
+                    return changes;
+                }
+            }
+        }
 
-
-const friends = [];
-
-for (let i = 0; i < friendsQuantity; i++) {
-    const friend = promptFriendPreference();
-    friends.push(friend);
-}
-
-let changes = 0;
-
-while (true) {
-    if (infiniteCycle()) {
-        changes = -1;
-        break;
-    }
-
-    for (let i in friends) {    
-        const friend = friends[i];
-    
-        if (friend.hated === selectedMusic) {
-            selectedMusic = friend.beloved;
-            changes++;
-    
-            if (everyoneSatisfied(friends, selectedMusic)) break;
+        if (everyoneSatisfied(friends, selectedMusic)) {
+            return changes;
         }
     }
-
-    if (everyoneSatisfied(friends, selectedMusic)) break;
 }
-
-console.log(changes);

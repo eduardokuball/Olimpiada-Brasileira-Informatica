@@ -1,53 +1,51 @@
-const compareObjects = (obj1, obj2) => JSON.stringify(obj1) === JSON.stringify(obj2);
+export default function areAnagrams(wordA, wordB) {
 
-function getCharMap(word = "") {
-    const charMap = {};
-    const chars = word.split('').sort();
+    const compareObjects = (obj1, obj2) =>
+        JSON.stringify(obj1) === JSON.stringify(obj2);
 
-    for (const char of chars) {
-        if (!charMap[char]) {
-            charMap[char] = 1;
-            continue;
+    function getCharMap(word = "") {
+        const charMap = {};
+        const chars = word.split('').sort();
+
+        for (const char of chars) {
+            if (!charMap[char]) {
+                charMap[char] = 1;
+                continue;
+            }
+            charMap[char]++;
         }
-        charMap[char]++;
+
+        return charMap;
     }
 
-    return charMap;
-}
+    function permuteCharsA(wordA = "", wordB = "") {
+        const charsA = wordA.split('');
+        const charsB = wordB.split('');
 
-function permuteCharsA(wordA = "", wordB = "") {
-    const charsA = wordA.split('');
-    const charsB = wordB.split('');
+        for (let i in charsA) {
+            const aChar = charsA[i];
 
-    for (let i in charsA) {
-        const aChar = charsA[i];
+            if (!charsB.includes(aChar)) {
+                charsA[i] = '*';
+                continue;
+            }
 
-        if (!charsB.includes(aChar)) {
-            charsA[i] = '*';
-            continue;
-        }
+            for (let j in charsB) {
+                const bChar = charsB[j];
 
-        for (let j in charsB) {
-            const bChar = charsB[j];
-
-            if (aChar === bChar) {
-                charsB[j] = bChar.toUpperCase();
-                break;
+                if (aChar === bChar) {
+                    charsB[j] = bChar.toUpperCase();
+                    break;
+                }
             }
         }
+
+        return charsA.join('');
     }
 
-    return charsA.join('');
-}
-
-function isAnagram(wordA = "", wordB = "") {
     const permutedWordA = permuteCharsA(wordA, wordB);
     const charMapA = getCharMap(permutedWordA);
     const charMapB = getCharMap(wordB);
 
-    return compareObjects(charMapA, charMapB);
+    return compareObjects(charMapA, charMapB) ? 'S' : 'N';
 }
-
-const wordOne = prompt();
-const wordTwo = prompt();
-console.log(isAnagram(wordOne, wordTwo) ? 'S' : 'N');

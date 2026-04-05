@@ -1,77 +1,55 @@
-function createRooms(heights=[]) {
-    const rooms = [];
+export default function countSlips(heights, tunnels, startRoom) {
 
-    heights.forEach((height, i) => rooms.push({ id: i+1, height }));
-
-    return rooms;
-}
-
-const findRoom = (rooms=[], roomId) => rooms
-    .find(({id}) => id === roomId) || null;
-
-function createGraph(rooms=[], tunnels=[]) {
-    const graph = [];
-
-    tunnels.forEach(({ start, end }) => {
-        const startRoom = findRoom(rooms, start);
-        const endRoom = findRoom(rooms, end);
-
-        if (startRoom.height > endRoom.height)
-            graph.push(`${start} : ${end}`);
-
-        if (endRoom.height > startRoom.height)
-            graph.push(`${end} : ${start}`);
-    });
-
-    return graph;
-}
-
-const lineInput = prompt()
-    .split(' ', 3)
-    .map(e => parseInt(e));
-
-const [ roomsQuant, tunnelsQuant ] = lineInput;
-let [,,currentRoom] = lineInput;
-
-const roomsHeights = prompt()
-    .split(' ', roomsQuant)
-    .map(e => parseInt(e));
-
-const tunnels = [];
-
-for (let i = 0; i < tunnelsQuant; i++) {
-    const [start, end] = prompt()
-        .split(' ', 2)
-        .map(e => parseInt(e))
-    
-    tunnels.push({ start, end });
-}
-
-const rooms = createRooms(roomsHeights);
-const graph = createGraph(rooms, tunnels);
-
-
-
-function nextRoom(room) {
-    for (let tunnel of graph) {
-        const [start, end] = tunnel.split(' : ', 2).map(e => parseInt(e));
-
-        if (start === room) {
-            slips++;
-            currentRoom = end;
-            return true;
-        }
+    function createRooms(heights = []) {
+        return heights.map((height, i) => ({
+            id: i + 1,
+            height
+        }));
     }
 
-    return false;
+    const findRoom = (rooms = [], roomId) =>
+        rooms.find(({ id }) => id === roomId) || null;
+
+    function createGraph(rooms = [], tunnels = []) {
+        const graph = [];
+
+        for (const { start, end } of tunnels) {
+            const startRoom = findRoom(rooms, start);
+            const endRoom = findRoom(rooms, end);
+
+            if (startRoom.height > endRoom.height) {
+                graph.push([start, end]);
+            }
+
+            if (endRoom.height > startRoom.height) {
+                graph.push([end, start]);
+            }
+        }
+
+        return graph;
+    }
+
+    const rooms = createRooms(heights);
+    const graph = createGraph(rooms, tunnels);
+
+    let currentRoom = startRoom;
+    let slips = 0;
+
+    function nextRoom(room) {
+        for (const [start, end] of graph) {
+            if (start === room) {
+                slips++;
+                currentRoom = end;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    while (true) {
+        const canSlip = nextRoom(currentRoom);
+        if (!canSlip) break;
+    }
+
+    return slips;
 }
-
-let slips = 0;
-
-while (true) {
-    const canISlip = nextRoom(currentRoom);
-
-    if (!canISlip) break;
-}
-
-console.log(slips);

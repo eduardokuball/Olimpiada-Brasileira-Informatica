@@ -1,41 +1,67 @@
-import Graph from '../../../utils/Graph.js';
-import Permutations from '../../../utils/Permutations.js';
+export default function findMinimumRouteTime(citiesQuantity, edges) {
 
-function calculateRouteTime(route) {
-    let time = 0;
-    for (let i = 0; i < route.length - 1; i++) {
-        try {
-            time += graph.getEdgeWeight(route[i], route[i + 1]);
-        } catch (error) {
-            time += 100000;
+    function getPermutations(arr) {
+        if (arr.length <= 1) return [arr];
+
+        const result = [];
+
+        for (let i = 0; i < arr.length; i++) {
+            const current = arr[i];
+            const remaining = arr.slice(0, i).concat(arr.slice(i + 1));
+            const perms = getPermutations(remaining);
+
+            for (const perm of perms) {
+                result.push([current, ...perm]);
+            }
+        }
+
+        return result;
+    }
+
+    function calculateRouteTime(route, graph) {
+        let time = 0;
+
+        for (let i = 0; i < route.length - 1; i++) {
+            const u = route[i];
+            const v = route[i + 1];
+
+            if (!graph[u] || graph[u][v] === undefined) {
+                time += 100000;
+            } else {
+                time += graph[u][v];
+            }
+        }
+
+        return time;
+    }
+
+    const graph = {};
+
+    for (const [a, b, w] of edges) {
+        if (!graph[a]) graph[a] = {};
+        if (!graph[b]) graph[b] = {};
+
+        graph[a][b] = w;
+        graph[b][a] = w;
+    }
+
+    const cities = Array.from({ length: citiesQuantity }, (_, i) => i + 1);
+    const lastCity = cities[cities.length - 1];
+
+    const routes = getPermutations(cities);
+
+    const validRoutes = routes.filter(route =>
+        route[0] === lastCity || route[route.length - 1] === lastCity
+    );
+
+    let minTime = Infinity;
+
+    for (const route of validRoutes) {
+        const time = calculateRouteTime(route, graph);
+        if (time < minTime) {
+            minTime = time;
         }
     }
-    return [time,route];
+
+    return minTime;
 }
-
-const citiesQuantity = parseInt(prompt());
-const paths = citiesQuantity * (citiesQuantity-1) / 2;
-
-const cities = Array(citiesQuantity).fill()
-    .map((_, i) => i + 1);
-
-const graph = new Graph(true);
-graph.addVertexes(...cities);
-
-for (let i = 1; i <= paths; i++) {
-    const [v1, v2, time] = prompt().split(' ', 3)
-        .map(e => parseInt(e));
-
-    graph.addEdge(v1, v2, time);
-}
-
-const lastCity = cities[cities.length - 1];
-const routes = Permutations.withoutRepetition(cities);
-const valideRoutes = routes.filter(route => route[0] === lastCity || route[route.length-1] === lastCity);
-
-
-const times = valideRoutes.map(route => calculateRouteTime(route));
-
-times.sort((a, b) => a[0] - b[0]);
-
-console.log(times[0][0]);

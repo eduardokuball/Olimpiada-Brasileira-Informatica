@@ -1,11 +1,4 @@
-function calculateOldestAge(youngestAge, meAge) {
-    const ageDifference = Math.abs(meAge - youngestAge);
-    return meAge + ageDifference;
+export default function calculateOldestAge(youngestAge, myAge) {
+    const ageDifference = Math.abs(myAge - youngestAge);
+    return myAge + ageDifference;
 }
-
-const youngestAge = parseInt(prompt());
-const meAge = parseInt(prompt());
-
-const oldestAge = calculateOldestAge(youngestAge, meAge);
-
-console.log(oldestAge);
