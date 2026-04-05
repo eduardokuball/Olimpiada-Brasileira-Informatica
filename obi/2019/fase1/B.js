@@ -1,10 +1,5 @@
-function eldestSon(){
-    const ageOtherSon = ageMonic - (ageFirstSon + ageSecondSon);
-    return Math.max(ageOtherSon, ageFirstSon, ageSecondSon);
-};
+export default function findEldestSonAge(ageMonic, ageFirstSon, ageSecondSon) {
+    const ageThirdSon = ageMonic - (ageFirstSon + ageSecondSon);
 
-const ageMonic = parseInt(prompt());
-const ageFirstSon = parseInt(prompt());
-const ageSecondSon = parseInt(prompt());
-
-console.log(eldestSon());
+    return Math.max(ageThirdSon, ageFirstSon, ageSecondSon);
+}

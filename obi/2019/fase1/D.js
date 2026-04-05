@@ -1,43 +1,38 @@
-function wet(a, b) {
-    grid[a][b] = 'o';
-    queue.push([a, b]);
-}
+export default function simulateWaterFlow(grid) {
+    const rows = grid.length;
+    const cols = grid[0].length;
 
-function bfs(i, j) {
-    queue.push([i, j]);
+    const g = grid.map(row => row.split(''));
+    const queue = [];
 
-    while (queue.length > 0) {
-        const [a, b] = queue.shift();
+    function wet(a, b) {
+        g[a][b] = 'o';
+        queue.push([a, b]);
+    }
 
-        if (a === rows - 1) continue;
+    function bfs(i, j) {
+        queue.push([i, j]);
 
-        if (grid[a + 1][b] === '.') wet(a + 1, b);
-        else if (grid[a + 1][b] === '#') {
-            if (grid[a][b - 1] === '.') wet(a, b - 1);
-            if (grid[a][b + 1] === '.') wet(a, b + 1);
+        while (queue.length > 0) {
+            const [a, b] = queue.shift();
+
+            if (a === rows - 1) continue;
+
+            if (g[a + 1][b] === '.') {
+                wet(a + 1, b);
+            } else if (g[a + 1][b] === '#') {
+                if (b - 1 >= 0 && g[a][b - 1] === '.') {
+                    wet(a, b - 1);
+                }
+                if (b + 1 < cols && g[a][b + 1] === '.') {
+                    wet(a, b + 1);
+                }
+            }
         }
     }
-}
 
-const [rows,colums] = prompt()
-    .split(" ")
-    .map((e) => {
-        return parseInt(e);
-    });
+    const startCol = g[0].indexOf('o');
+    bfs(0, startCol);
 
-
-const grid = [];
-
-for (let i = 0; i < rows; i++) {
-    const row = prompt()
-    .split("");
-    grid.push(row);
-}
-
-const queue = [];
-
-bfs(0, grid[0].indexOf('o'));
-
-for (let i = 0; i < rows; i++) {
-    console.log(grid[i].join(""));
+    return g.map(row => row.join(''));
 }

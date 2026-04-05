@@ -1,28 +1,18 @@
-const [size, search] = prompt()
-    .split(" ")
-    .map((e) => {
-        return parseInt(e);
-    });
+export default function countSubarraysWithSum(sequence, target) {
+    let prefixSum = 0;
+    let count = 0;
 
-const sequence = prompt()
-    .split(" ")
-    .slice(0, size)
-    .map((e) => {
-        return parseInt(e);
-    });
+    const prefixMap = { 0: 1 };
 
-let prefixSum = 0;
-let count = 0;
-const prefixMap = { 0: 1 }; 
+    for (const value of sequence) {
+        prefixSum += value;
 
-for (let i = 0; i < size; i++) {
-    prefixSum += sequence[i];
+        if (prefixMap.hasOwnProperty(prefixSum - target)) {
+            count += prefixMap[prefixSum - target];
+        }
 
-    if (prefixMap.hasOwnProperty(prefixSum - search)) {
-        count += prefixMap[prefixSum - search];
+        prefixMap[prefixSum] = (prefixMap[prefixSum] || 0) + 1;
     }
 
-    prefixMap[prefixSum] = (prefixMap[prefixSum] || 0) + 1;
+    return count;
 }
-
-console.log(count);
