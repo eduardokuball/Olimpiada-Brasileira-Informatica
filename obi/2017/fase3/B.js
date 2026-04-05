@@ -1,21 +1,14 @@
-const N = parseInt(prompt());
+export default function classifyHeights(heights) {
+    let replaced = 0;
+    let repaired = 0;
 
-const heights = prompt()
-    .split(" ")
-    .map((e) => {
-        return parseInt(e);
-    });
-
-let replaced = 0;
-let repaired = 0;
-
-for (let i = 0; i < N; i++) {
-    const h = heights[i];
-    if (h < 50) {
-        replaced++;
-    } else if (h < 85) {
-        repaired++;
+    for (const h of heights) {
+        if (h < 50) {
+            replaced++;
+        } else if (h < 85) {
+            repaired++;
+        }
     }
-}
 
-console.log(replaced, repaired);
+    return [replaced, repaired];
+}
