@@ -212,3 +212,25 @@ Caso tenha dúvidas, sugestões ou encontre algum problema:
 Esperamos que este repositório ajude você na sua jornada em programação competitiva.
 
 > 🚀 Bons estudos e boas maratonas!
+
+<div align="center">
+
+<br>
+
+<h2>💭</h2>
+
+<blockquote>
+  <p><em>"Tem coisas que só o Javascript faz por você."</em></p>
+</blockquote>
+
+<br>
+
+<p>
+  <strong>— Fábio Santos</strong><br>
+  <sub>2024</sub>
+</p>
+
+<br>
+
+</div>
+
