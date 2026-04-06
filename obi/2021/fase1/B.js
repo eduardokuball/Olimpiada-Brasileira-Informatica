@@ -1,21 +1,18 @@
-function sum() {
+export default function calculateFinalSum(numbers) {
+    const stack = [];
+
+    for (const number of numbers) {
+        if (number > 0) {
+            stack.push(number);
+        } else {
+            stack.pop();
+        }
+    }
+
     let total = 0;
-    numbers.forEach((n) => {
+    for (const n of stack) {
         total += n;
-    });
+    }
+
     return total;
 }
-
-const quantity = prompt();
-const numbers = [];
-
-for (let i = 0; i < quantity; i++) {
-    const number = Number(prompt());
-    if (number > 0) {
-        numbers.push(number);
-    } else {
-        numbers.pop();
-    }
-}
-
-console.log(sum());
