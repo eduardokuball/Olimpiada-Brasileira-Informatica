@@ -1,4 +1,4 @@
-import getMinimumRouteCost from './A.js';
+import getMinimumRouteCost from '../C.js';
 
 describe('2009 -> Fase 1 -> Caminho das Pontes', () => {
 
