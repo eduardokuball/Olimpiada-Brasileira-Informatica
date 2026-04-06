@@ -1,18 +1,11 @@
-function belongsAlphabet(alienAlphabet,message){
+export default function isMessageValid(alienAlphabet, message) {
+    const allowed = new Set(alienAlphabet);
+
     for (let i = 0; i < message.length; i++) {
-        if (!alienAlphabet.includes(message[i])) {
+        if (!allowed.has(message[i])) {
             return "N";
         }
     }
+
     return "S";
-};
-
-
-const sizes = prompt()
-    .split(' ')
-    .map(e => parseInt(e));
-
-const alienAlphabet = prompt();
-const message = prompt();
-
-console.log(belongsAlphabet(alienAlphabet,message));
+}
