@@ -1,22 +1,15 @@
-function prefixies() {
-    let prefix = 0;
-    for (let i = 0; i < repetitions; i++) {
-        if (firstword[i] === secondword[i]) {
-            prefix++;
+export default function getLongestCommonPrefixLength(word1, word2) {
+    const minLength = Math.min(word1.length, word2.length);
+    let prefixLength = 0;
+
+    for (let i = 0; i < minLength; i++) {
+        if (word1[i] === word2[i]) {
+            prefixLength++;
         } else {
             break;
         }
     }
-    return prefix;
+
+    return prefixLength;
 }
 
-const lenghtfirst = prompt();
-const firstword = prompt().toLowerCase();
-const lenghtsecond = prompt().toLowerCase();
-const secondword = prompt();
-
-const repetitions = secondword.length < firstword.length ? secondword.length : firstword.length;
-
-
-
-console.log(prefixies());

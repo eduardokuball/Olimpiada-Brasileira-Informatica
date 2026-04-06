@@ -1,76 +1,28 @@
-function generateTunnels(num) {
-    const tunnels = [];
+export default function countValidTours(tunnels, tours) {
+    const tunnelSet = new Set();
 
-    for (let i = 1; i <= num; i++) {
-        const tunnel = prompt()
-            .split(' ')
-            .slice(0, 2)
-            .map(e => parseInt(e));
-
-        const lennut = tunnel.toReversed();
-
-        const stringifiedTunnel = JSON.stringify(tunnel);
-        const stringifiedLennut = JSON.stringify(lennut);
-
-        tunnels.push(stringifiedTunnel);
-        tunnels.push(stringifiedLennut);
+    for (const [a, b] of tunnels) {
+        tunnelSet.add(`${a}-${b}`);
+        tunnelSet.add(`${b}-${a}`);
     }
 
-    return tunnels;
-}
+    let validCount = 0;
 
-function generateTours(num) {
-    const tours = [];
+    for (const tour of tours) {
+        let isValid = true;
 
-    for (let i = 1; i <= num; i++) {
-        const tour = prompt()
-            .split(' ')
-            .map(e => parseInt(e));
+        for (let i = 0; i < tour.length - 1; i++) {
+            const key = `${tour[i]}-${tour[i + 1]}`;
 
-        tour.shift();
-        tours.push(tour);
+            if (!tunnelSet.has(key)) {
+                isValid = false;
+                break;
+            }
+        }
+
+        if (isValid) validCount++;
     }
 
-    return tours;
+    return validCount;
 }
 
-function isValirTour(tour, tunnels) {
-    for (let i = 0; i < tour.length; i++) {
-        const room = tour[i];
-        const lastRoomIndex = tour.length - 1;
-
-        if (i === lastRoomIndex) break;
-
-        const sucessor = tour[i + 1];
-
-        const roomPair = [room, sucessor];
-        const stringifiedPair = JSON.stringify(roomPair);
-
-        const invalidTour = !tunnels.includes(stringifiedPair);
-
-        if (invalidTour) return false;
-    }
-
-    return true;
-}
-
-
-const tunnelsData = prompt()
-    .split(' ')
-    .slice(0, 2)
-    .map(e => parseInt(e));
-
-const tunnels = generateTunnels(tunnelsData[1]);
-
-const numTours = parseInt(prompt());
-const tours = generateTours(numTours);
-
-let validTours = 0;
-
-tours.forEach(tour => {
-    const isValid = isValirTour(tour, tunnels);
-
-    if (isValid) validTours++;
-});
-
-console.log(validTours);

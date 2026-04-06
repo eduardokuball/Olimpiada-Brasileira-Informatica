@@ -1,73 +1,41 @@
-import Graph from '../../../utils/Graph.js';
+function getMaxMinCapacity(islands, edges, queries) {
+    const graph = new Map();
 
-const [islands, ships] = prompt()
-    .split(' ', 2)
-    .map(e => parseInt(e));
-
-const vertexes = new Array(islands).fill(0).map((_, i) => i + 1);
-
-const graph = new Graph(true);
-graph.addVertexes(...vertexes);
-
-for (let i = 0; i < ships; i++) {
-    const [vertexA, vertexB, width] = prompt()
-        .split(' ', 3)
-        .map(e => parseInt(e));
-
-    graph.addEdge(vertexA, vertexB, width);
-};
-
-const queriesQuantity = parseInt(prompt());
-const queries = [];
-
-for(let i = 0; i < queriesQuantity; i++) {
-    const [start, end] = prompt()
-        .split(' ', 2)
-        .map(e => parseInt(e));
-    queries.push({
-        start: start,
-        end: end,
-    });
-    
-};
-
-function calcPathWidth(path) {
-    let totalWidth = 0;
-
-    for (let i = 0; i <= path.length - 2; i++) {
-        const current = path[i];
-        const successor = path[i + 1];
-
-        const width = graph.getEdgeWeight(current, successor);
-        totalWidth += width;
+    for (let i = 1; i <= islands; i++) {
+        graph.set(i, []);
     }
 
-    return totalWidth;
-};
+    for (const [u, v, w] of edges) {
+        graph.get(u).push([v, w]);
+        graph.get(v).push([u, w]);
+    }
 
-const results = [];
+    function maxMinPath(start, end) {
+        const best = new Array(islands + 1).fill(0);
+        best[start] = Infinity;
 
-for (const { start, end } of queries) {
-    const pathsAndWidths = [];
-    const paths = graph.allPathsFrom(start, end);
-    paths.forEach((path) => {
-        const quantitys = [];
-        for (let i = 0; i <= path.length - 2; i++) {
-            const current = path[i];
-            const successor = path[i + 1];
-    
-            const width = graph.getEdgeWeight(current, successor);
-            quantitys.push(width);
+        const queue = [[start, Infinity]];
+
+        while (queue.length) {
+            queue.sort((a, b) => b[1] - a[1]);
+            const [node, capacity] = queue.shift();
+
+            if (node === end) return capacity;
+
+            for (const [next, weight] of graph.get(node)) {
+                const newCapacity = Math.min(capacity, weight);
+
+                if (newCapacity > best[next]) {
+                    best[next] = newCapacity;
+                    queue.push([next, newCapacity]);
+                }
+            }
         }
-        pathsAndWidths.push({
-            quantitys: quantitys,
-            width: calcPathWidth(path),
-        });
-    });
-    
-    pathsAndWidths.sort((a, b) => b.width - a.width);
-    const path = pathsAndWidths[0].quantitys;
-    results.push(Math.min(...path));
-};
 
-results.forEach((result) => console.log(result));
+        return 0;
+    }
+
+    return queries.map(([s, e]) => maxMinPath(s, e));
+}
+
+export default getMaxMinCapacity;

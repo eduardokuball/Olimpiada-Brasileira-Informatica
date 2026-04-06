@@ -1,19 +1,16 @@
-const availableMoney = parseFloat(prompt());
-const butcherCheck = parseFloat(prompt());
-const pharmacyCheck = parseFloat(prompt());
-const bakehouseCheck = parseFloat(prompt());
+export default function countBillsPaid(maxMoney, bills) {
+    const sortedBills = [...bills].sort((a, b) => a - b);
 
-const amountsPayable = [butcherCheck, pharmacyCheck, bakehouseCheck];
-amountsPayable.sort((a, b) => a - b);
+    let totalSpent = 0;
+    let paidCount = 0;
 
-let amountToPay = 0;
-let billsPaid = 0;
+    for (const bill of sortedBills) {
+        if (totalSpent + bill > maxMoney) break;
 
-for (const value of amountsPayable) {
-    if (amountToPay + value > availableMoney) break;
+        totalSpent += bill;
+        paidCount++;
+    }
 
-    amountToPay += value;
-    billsPaid++;
+    return paidCount;
 }
 
-console.log(billsPaid);
