@@ -1,53 +1,39 @@
-function isLetter(str) {
-    return /^[A-Z]$/.test(str);
+function isUppercaseLetter(char) {
+    return /^[A-Z]$/.test(char);
 }
 
-function isNumber(str) {
-    return /^\d$/.test(str);
+function isDigit(char) {
+    return /^\d$/.test(char);
 }
 
-function oldPattern(plate){
-    if(plate.length !== 8) {
-        return false;
-    } 
+function isOldPlatePattern(plate) {
+    if (plate.length !== 8) return false;
 
-    const letters = plate.slice(0,3).split('');
-    const numbers = plate.slice(4,8).split('');
-    const allLetters = letters.every(letter => isLetter(letter));
-    const allNumbers = numbers.every(number => isNumber(number));
-    const hifen = plate[3] === "-";  
+    const letters = plate.slice(0, 3).split('');
+    const hyphen = plate[3] === '-';
+    const numbers = plate.slice(4, 8).split('');
 
-    const pattern = allLetters && allNumbers && hifen;
-    return pattern;
-};
+    const allLetters = letters.every(isUppercaseLetter);
+    const allNumbers = numbers.every(isDigit);
 
-function newPattern(plate){
-    if(plate.length!== 7) {
-        return false;
-    }
-    const letters = plate.slice(0,3).split('');
-    const allLetters = letters.every(letter => isLetter(letter));
-    const fourthCharacter = isNumber(plate[3]);
-    const fifthCharacter = isLetter(plate[4]);
-    const lasts = isNumber(plate[5]) && isNumber(plate[6]);
-
-    const pattern = allLetters && fourthCharacter && fifthCharacter && lasts;
-    return pattern;
-
+    return allLetters && hyphen && allNumbers;
 }
 
-function result(plate){
-    if(oldPattern(plate)){
-        return 1;
-    } else if(newPattern(plate)){
-        return 2;
-    } else{
-        return 0;
-    }
-};
+function isNewPlatePattern(plate) {
+    if (plate.length !== 7) return false;
 
-const plate = prompt();
+    const letters = plate.slice(0, 3).split('');
+    const allLetters = letters.every(isUppercaseLetter);
 
-const plateType = result(plate);
+    const fourth = isDigit(plate[3]);
+    const fifth = isUppercaseLetter(plate[4]);
+    const lastTwo = isDigit(plate[5]) && isDigit(plate[6]);
 
-console.log(result(plateType));
+    return allLetters && fourth && fifth && lastTwo;
+}
+
+export default function getPlateType(plate) {
+    if (isOldPlatePattern(plate)) return 1;
+    if (isNewPlatePattern(plate)) return 2;
+    return 0;
+}
