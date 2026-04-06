@@ -1,64 +1,27 @@
-function getSquare(dimension){
-    const square = [];
-    for (let i = 0; i < dimension; i++) {
-        const line = prompt()
-            .split(' ')
-            .map(e => parseInt(e));
-        square.push(line);
+export default function findMissingNumberInSquare(square) {
+    const n = square.length;
+    const expectedNumbers = new Set();
+
+    for (let i = 1; i <= n * n; i++) {
+        expectedNumbers.add(i);
     }
-    return square;
-};
 
-function getNumbersInSquare(dimension){
-    const numbersInSquare = [];
-    for (let i = 1; i <= dimension * dimension; i++) {
-        numbersInSquare.push(i);
-    }
-    return numbersInSquare;
-};
+    let missingNumber = null;
+    let position = null;
 
-function convertToArray(square){
-    const array = [];
-    for(let i = 0; i < square.length; i++){
-        for(let j = 0; j < square.length; j++){
-            array.push(square[i][j]);
-        }
-    }
-    return array;
-};
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j < n; j++) {
+            const value = square[i][j];
 
-function illegibleNumber(numbersInSquare, square) {
-    const array = convertToArray(square);
-    let search = null
-    numbersInSquare.forEach((n) => {
-        if (!array.includes(n)) {
-            search = n;
-        }
-    });
-    return search;
-};
-
-
-function getIndex(square){
-    let index = null;
-    for(let i = 0; i < square.length; i++){
-        for(let j = 0; j < square.length; j++){
-            if(square[i][j] === 0 ){
-                index = [i + 1, j + 1];
+            if (value === 0) {
+                position = [i + 1, j + 1];
+            } else {
+                expectedNumbers.delete(value);
             }
         }
     }
-    return index;
-};
 
-const dimension = parseInt(prompt());
+    missingNumber = [...expectedNumbers][0];
 
-const square = getSquare(dimension);
-
-const numbersInSquare = getNumbersInSquare(dimension);
-
-const index = getIndex(square);
-
-console.log(illegibleNumber(numbersInSquare,square));
-console.log(index[0]);
-console.log(index[1]);
+    return [missingNumber, position[0], position[1]];
+}

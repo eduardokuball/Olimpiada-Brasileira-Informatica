@@ -6,27 +6,12 @@ function sumOfDigits(number) {
         .reduce((a, b) => a + b, 0);
 }
 
-function findNumbers(start, end, search) {
-    const results = [];
-    for (let i = start; i <= end; i++) {
-        if (sumOfDigits(i) === search) {
-            results.push(i);
+export default function findLastNumberWithDigitSumInRange(start, end, targetSum) {
+    for (let i = end; i >= start; i--) {
+        if (sumOfDigits(i) === targetSum) {
+            return i;
         }
     }
-    return results;
+
+    return -1;
 }
-
-function response(array) {
-    if (array.length === 0) {
-        return -1;
-    }
-    return array.at(-1); 
-}
-
-const start = Number(prompt());
-const end = Number(prompt());
-const search = Number(prompt());
-
-const results = findNumbers(start, end, search);
-
-console.log(response(results));
