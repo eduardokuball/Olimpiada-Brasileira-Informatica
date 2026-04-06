@@ -1,5 +1,4 @@
 export default function findFinalPosition(grid) {
-    console.log(grid);
     const rows = grid.length;
     const cols = grid[0].length;
 

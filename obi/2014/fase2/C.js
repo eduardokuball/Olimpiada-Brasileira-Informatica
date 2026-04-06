@@ -1,8 +1,4 @@
 export default function validateSequence(aValues = [], bValues = []) {
-
-    console.log(aValues);
-    console.log(bValues);
-
     const a = new Set(aValues);
     const countedB = new Set();
 

@@ -1,5 +1,4 @@
 export default function maxCajuSum(matrix, submatrixX, submatrixY) {
-    console.log(matrix);
     const matrixX = matrix.length;
     const matrixY = matrix[0].length;
 

@@ -1,7 +1,6 @@
 import Graph from '../../../utils/Graph.js';
 
 export default function getMaxDistance(cities, edges) {
-    console.log(edges);
     const graph = new Graph(true);
 
     for (let i = 1; i <= cities; i++) {

@@ -31,6 +31,5 @@ function floodedSections(heights = []) {
 }
 
 export default function countFloodedSections(heights = []) {
-    console.log(heights);
     return floodedSections(heights);
 }

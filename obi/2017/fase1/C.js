@@ -1,5 +1,4 @@
 export default function countBootPairs(boots) {
-    console.log(boots);
     const sizes = new Set();
     const bootSet = new Set();
 

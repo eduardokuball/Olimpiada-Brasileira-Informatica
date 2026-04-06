@@ -15,6 +15,5 @@ export default function splitTeamsByDislikes(requirements) {
             teamB.push(student.id);
         }
     }
-    console.log([teamA, teamB])
     return [teamA, teamB];
 }

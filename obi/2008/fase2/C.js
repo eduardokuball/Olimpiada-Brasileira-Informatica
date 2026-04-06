@@ -33,6 +33,5 @@ export default function solve(wordsInDic, wordsInAnalisys, dic, words) {
         result.push(r.trim());
     }
 
-    console.log(result);
     return result;
 }

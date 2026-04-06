@@ -1,5 +1,4 @@
 export default function decryptPhrase(words = []) {
-    console.log(words);
     return words
         .map(word => {
             let result = '';

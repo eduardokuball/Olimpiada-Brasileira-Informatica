@@ -15,9 +15,6 @@ function calculateTourTime(graph, tour, roomsWeights) {
 }
 
 export default function minTourTime(roomsQuantity, roomsWeights, edges) {
-    console.log(roomsQuantity);
-    console.log(roomsWeights);
-    console.log(edges);
     const graph = new DirectedGraph(true);
 
     const vertexes = Array.from({ length: roomsQuantity }, (_, i) => i + 1);

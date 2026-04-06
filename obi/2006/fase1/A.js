@@ -31,7 +31,6 @@ function countRoundWinner(adalbertoGame, bernadeteGame) {
 
 export default function gameResult(roundsData) {
 
-    console.log(roundsData);
     let winnersAdalberto = 0;
     let winnersBernadete = 0;
 
