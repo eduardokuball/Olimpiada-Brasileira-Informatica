@@ -1,15 +1,8 @@
-function calculateRequiredFuel(consumptionKmPL, localDistanceKm, remainingFuelL) {
-    const totalRequiredFuel = localDistanceKm / consumptionKmPL;
-    const requiredFuel = totalRequiredFuel - remainingFuelL;
+export default function calculateFuelToBuy(consumptionKmPerLiter, distanceKm, currentFuel) {
+    const totalNeeded = distanceKm / consumptionKmPerLiter;
+    const fuelToBuy = totalNeeded - currentFuel;
 
-    return requiredFuel < 0 ? 0 : requiredFuel;
+    const result = fuelToBuy < 0 ? 0 : fuelToBuy;
+
+    return Number(result.toFixed(1));
 }
-
-const consumptionKmPL = parseInt(prompt());
-const localDistanceKm = parseInt(prompt());
-const remainingFuelL = parseInt(prompt());
-
-
-const requiredFuel = calculateRequiredFuel(consumptionKmPL, localDistanceKm, remainingFuelL);
-
-console.log(requiredFuel.toFixed(1));
