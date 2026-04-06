@@ -1,7 +1,5 @@
-const { abs } = Math;
+export default function juneCelebration(school, market, shop){
 
-// Main Function
-const juneCelebration = (school, market, shop) =>
-    abs(school - market) + abs(market - shop) + abs(shop - school);
-export default juneCelebration;
-
+    return Math.abs(school - market) + Math.abs(market - shop) + Math.abs(shop - school);
+    
+}
