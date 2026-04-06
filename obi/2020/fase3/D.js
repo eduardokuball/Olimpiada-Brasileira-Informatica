@@ -1,91 +1,66 @@
-// Peça branca n pode ter branca adjacente
-// Peça branca precisa ter pelo menos uma preta adjacente
+export default function maximizeWhitePieces(rows, cols, blackPieces) {
 
-const [ matrixX, matrixY ] = prompt()
-    .split(' ', 2)
-    .map(e => parseInt(e));
-
-const board = [];
-
-for (let i = 0; i < matrixX; i++) {
-    board.push([]);
-
-    for (let j = 0; j < matrixY; j++) {
-        board[i].push(0);
+    function createBoard() {
+        return Array.from({ length: rows }, () => Array(cols).fill(0));
     }
+
+    function getAdjacentSquares(matrix, x, y) {
+        return [
+            matrix?.[x + 1]?.[y],
+            matrix?.[x - 1]?.[y],
+            matrix?.[x]?.[y + 1],
+            matrix?.[x]?.[y - 1],
+        ].filter(e => e !== undefined);
+    }
+
+    function getReverseMatrix(matrix) {
+        const reverse = matrix.map(row => [...row]);
+        reverse.forEach((_, i, arr) => arr[i].reverse());
+        reverse.reverse();
+        return reverse;
+    }
+
+    function addPiecesIntoBoard(board) {
+        for (let x = 0; x < rows; x++) {
+            for (let y = 0; y < cols; y++) {
+                if (board[x][y] !== 0) continue;
+
+                const adjacents = getAdjacentSquares(board, x, y);
+
+                const hasBlackAdjacent = adjacents.some(e => e === 1);
+                const hasWhiteAdjacent = adjacents.some(e => e === 2);
+
+                if (!hasBlackAdjacent) continue;
+                if (hasWhiteAdjacent) continue;
+
+                board[x][y] = 2;
+            }
+        }
+    }
+
+    function countWhites(board) {
+        let count = 0;
+        for (const row of board) {
+            for (const cell of row) {
+                if (cell === 2) count++;
+            }
+        }
+        return count;
+    }
+
+    const board = createBoard();
+
+    for (const [x, y] of blackPieces) {
+        board[x - 1][y - 1] = 1;
+    }
+
+    const boardReverse = getReverseMatrix(board);
+
+    addPiecesIntoBoard(board);
+    addPiecesIntoBoard(boardReverse);
+
+    const normal = countWhites(board);
+    const reversed = countWhites(boardReverse);
+
+    return Math.max(normal, reversed);
 }
-
-const pieces = parseInt(prompt());
-
-for (let i = 1; i <= pieces; i++) {
-    const [ x, y ] = prompt()
-        .split(' ', 2)
-        .map(e => parseInt(e));
-
-        board[x-1][y-1] = 1;
-}
-
-function getAdjacentSquares(matrix, x, y) {
-    return [
-        matrix?.[x+1]?.[y],
-        matrix?.[x-1]?.[y],
-        matrix?.[x]?.[y+1],
-        matrix?.[x]?.[y-1],
-    ].filter(e => e !== undefined);
-}
-
-
-function getDiagonalSquares(matrix, x, y) {
-    return [
-        matrix?.[x+1]?.[y+1],
-        matrix?.[x-1]?.[y-1],
-        matrix?.[x-1]?.[y+1],
-        matrix?.[x+1]?.[y-1],
-    ].filter(e => e !== undefined);
-}
-
-const boardReverse = getReverseMatrix(board);
-
-function getReverseMatrix(matrix) {
-    const reverse = matrix.map(row => [...row]);
-
-    reverse.forEach((_, i, arr) => arr[i].reverse());
-    reverse.reverse();
-
-    return reverse;
-}
-
-function addPiecesIntoBoard(board) {
-    board.forEach((row, x, matrix) => {
-        row.forEach((square, y) => {
-            if (square !== 0) return;
-    
-            const adjacents = getAdjacentSquares(board, x, y);
-            const hasBlackAdjacent = adjacents.some(e => e === 1);
-            const hasWhiteAdjacent = adjacents.some(e => e === 2);
-    
-            
-            if (!hasBlackAdjacent) return;
-            if (hasWhiteAdjacent) return;
-            
-            matrix[x][y] = 2;
-        });
-    });
-}
-
-
-addPiecesIntoBoard(board);
-addPiecesIntoBoard(boardReverse);
-
-
-const boardWhites = board
-    .flat()
-    .filter(e => e === 2)
-    .length;
-
-const boardReverseWhites = boardReverse
-    .flat()
-    .filter(e => e === 2)
-    .length;
-
-console.log(Math.max(boardWhites, boardReverseWhites));

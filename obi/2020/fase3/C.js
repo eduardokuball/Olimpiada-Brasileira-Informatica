@@ -1,39 +1,28 @@
-// Inteiro N (Nº de mensagens)
-// Cada uma das N linhas seguintes contem o índice de repostagem (Ri) de cada mensagem
+export default function calculateInfluenceIndex(messageIndexes) {
 
-// Reposta uma mensagem -> Seus seguidores podem ve-la e repostar também.
+    let influenceIndexCounter = 1;
+    let influenceIndex = 0;
 
-Array.prototype.count = function(callback = (e, i, arr) => {}) {
-    let counter = 0;
+    const count = (arr, callback) => {
+        let counter = 0;
+        for (let i = 0; i < arr.length; i++) {
+            if (callback(arr[i], i, arr)) counter++;
+        }
+        return counter;
+    };
 
-    this.forEach((e, i, arr) => {
-        if (callback(e, i, arr)) counter++;
-    });
+    for (const _ of messageIndexes) {
+        const number = count(
+            messageIndexes,
+            (e) => e >= influenceIndexCounter
+        );
 
-    return counter;
+        if (number >= influenceIndexCounter) {
+            influenceIndex = influenceIndexCounter;
+        }
+
+        influenceIndexCounter++;
+    }
+
+    return influenceIndex;
 }
-
-
-const messages = parseInt(prompt());
-
-const messageIndexes = [];
-
-for (let i = 1; i <= messages; i++) {
-    const messageIndex = parseInt(prompt());
-    messageIndexes.push(messageIndex);
-}
-
-let influenceIndexCounter = 1;
-let influenceIndex = null;
-
-messageIndexes.forEach(msg => {
-    const number = messageIndexes
-        .count(e => e >= influenceIndexCounter)
-
-    if (number >=influenceIndexCounter)
-        influenceIndex = influenceIndexCounter;
-
-    influenceIndexCounter++;
-});
-
-console.log(influenceIndex);
