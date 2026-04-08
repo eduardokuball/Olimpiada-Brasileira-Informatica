@@ -26,6 +26,7 @@ O objetivo principal é servir como material de estudo e prática para quem dese
 * [🧪 Como Rodar os Testes](#-como-rodar-os-testes)
 * [🤝 Como Contribuir](#-como-contribuir)
 * [👨‍💻 Sobre](#-sobre)
+* [✅ Nosso Progresso](./PROGRESS.md)
 
 ---
 
