@@ -4,6 +4,10 @@ class Graph {
         this.graph = new Map();
     }
     
+    get size() {
+        return this.graph.size;
+    }
+
     // Gerar grafo:
     addVertexes(...vertexes) {
         vertexes.forEach(vertex => {
